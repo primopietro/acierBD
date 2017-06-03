@@ -5,15 +5,15 @@
 <title>Insert title here</title>
 </head>
 <frameset>
-    <frame>
-    <frame>
-    <noframes>
-    <body>
-    <p>This page uses frames. The current browser you are using does not support frames.</p>
+	<frame>
+	<frame>
+	<noframes>
+		<body>
+			<p>This page uses frames. The current browser you are using does not
+				support frames.</p>
     <?php
-
-	?>
+				?>
     </body>
-    </noframes>
+	</noframes>
 </frameset>
 </html>
