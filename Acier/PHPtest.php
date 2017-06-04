@@ -8,7 +8,7 @@
 <body>
     <?php
 	for($i=1;$i<5;++$i){
-		echo "<h" . $i . "> Test Nb. " . $i . "</h" . $i . "> tedt";
+		echo "<h" . $i . "> Test Nb. " . $i . "</h" . $i . "> tedçàt";
 	}
     require_once 'create_database_environement.php';
     ?>
