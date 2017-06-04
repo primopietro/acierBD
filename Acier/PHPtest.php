@@ -14,6 +14,6 @@
 	
     require_once 'create_database_environement.php';
     ?>
-    </body>
+    </body>x
 https://blackrockdigital.github.io/startbootstrap-sb-admin/index.html  
 </html>
