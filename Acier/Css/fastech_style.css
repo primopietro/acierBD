@@ -1,0 +1,19 @@
+body {
+	background-color: white;
+}
+
+#formLogin {
+	background-color: rgb(37, 51, 112);
+	padding: 30px;
+	border-radius: 5px;
+    overflow: hidden;
+}
+
+#formLogin input[value="Connexion"] {
+	float: right;
+    cursor: pointer;
+}
+
+#error{
+	color:white;
+}
