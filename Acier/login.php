@@ -1,17 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
-<title>Insert title here</title>
+<?php
+require_once 'system/header.php';
+?>
+<title>Connexion</title>
 </head>
-
 <body>
-    <?php
-	for($i=1;$i<5;++$i){
-		echo "<h" . $i . "> Test Nb. " . $i . "</h" . $i . ">";
-	}
-    require_once 'create_database_environement.php';
-    ?>
-    </body>
+	<div>
+		<form id='formLogin'>
+			<input placeholder="Nom d'utilisateur" name="username"></input> <input
+				placeholder="Mot de passe" type="password" name="password"></input>
+			<input type="submit" value="Connexion"></input>
+		</form>
+	</div>
+<?php
+require_once 'system/footer.php';
+?>
+</body>
 
 </html>

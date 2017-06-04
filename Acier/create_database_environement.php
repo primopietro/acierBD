@@ -77,7 +77,7 @@ if (!$result = $conn->query($sql)) {
 	exit;
 }
 else{
-	echo "Data inserted successfully\n";
+	echo "Data inserted successfully into users\n";
 }
 echo "<br>";
 /**********************************************Close db connection**********************************/
