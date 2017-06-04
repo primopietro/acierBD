@@ -54,9 +54,32 @@ echo "<br>";
 
 /***************************Database structuring (tables, primary keys, etc.)***********************/
 
+$sql = 'CREATE TABLE `acier_fastech`.`users` 
+		( `id_user` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(25) NOT NULL , `password` VARCHAR(25) NOT NULL , PRIMARY KEY (`id_user`)) 
+		ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "Could not create table users" ;
+	exit;
+}
+else{
+	echo "table users created successfully\n";
+}
+echo "<br>";
 /********************************************Add data**********************************************/
 
 
+
+$sql = "INSERT INTO `users` (`id_user`, `username`, `password`) VALUES (NULL, 'admin', 'password')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "Could not insert data into users" ;
+	exit;
+}
+else{
+	echo "Data inserted successfully\n";
+}
+echo "<br>";
 /**********************************************Close db connection**********************************/
 $conn->close();
 ?>
