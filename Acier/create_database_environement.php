@@ -3,7 +3,7 @@
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$dbname = 'acier';
+$dbname = 'acier_fastech';
 $conn = new mysqli($dbhost, $dbuser, $dbpass);
 
 // Check connection

@@ -6,13 +6,11 @@
 </head>
 
 <body>
-	<p>This page uses frames. The current browser you are using does not
-		support frames.</p>
     <?php
 	for($i=1;$i<5;++$i){
 		echo "<h" . $i . "> Test Nb. " . $i . "</h" . $i . ">";
 	}
-    
+    require_once 'create_database_environement.php';
     ?>
     </body>
 
