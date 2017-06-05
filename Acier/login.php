@@ -14,6 +14,7 @@ require_once 'system/header.php';
 				<div class="row">
 					<div class="col-lg-3 col-md-6 col-xs-12" style="margin: auto;">
 						<form id='formLogin'>
+						<img src="image/logo.png" alt="logo_fastech" style="width:90%; display: block; margin-left: auto; margin-right: auto; margin-bottom: 15px;">
 						<span id="error"></span>
 							<div class="form-group">
 								<input class="form-control" placeholder="Nom d'utilisateur"
