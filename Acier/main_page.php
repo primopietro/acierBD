@@ -14,7 +14,7 @@
         </button>
         <a class="navbar-brand" href="#">Fastech Inc.</a>
         <div class="collapse navbar-collapse" id="navbarExample">
-            <ul class="sidebar-nav navbar-nav fastechNav">
+            <ul class="sidebar-nav navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="#"><i class="fa fa-fw fa-dashboard"></i> Semaine</a>
                 </li>
