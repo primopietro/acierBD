@@ -168,6 +168,17 @@ else{
 echo "<br>";
 
 
+$sql = "INSERT INTO `states` (`id_state`, `name`) VALUES (null, 'active'), (null, 'disabled')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into states</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into states</span>\n";
+}
+echo "<br>";
+
 
 
 /**********************************************Close db connection**********************************/
