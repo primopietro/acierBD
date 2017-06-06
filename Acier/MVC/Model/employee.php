@@ -4,7 +4,7 @@ class Employee{
 	private $family_name ='';
 	private $state = 1; //1 equals active by default
 	
-	function __construct1($aFirstName, $aFamilyName)
+	function __construct($aFirstName, $aFamilyName)
 	{
 		$this->first_name= $aFirstName;
 		$this->family_name=$aFamilyName;

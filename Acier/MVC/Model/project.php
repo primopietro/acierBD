@@ -5,7 +5,7 @@ class Project {
 	private $start_date = '';
 	private $budget = '';
 	private $state = 1; // 1 equals active by default
-	function __construct1($aName, $aStartDate, $aBudget) {
+	function __construct($aName, $aStartDate, $aBudget) {
 		$this->name = $aName;
 		$this->start_date = $aStartDate;
 		$this->budget = $aBudget;

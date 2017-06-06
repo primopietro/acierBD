@@ -3,7 +3,7 @@ class Departement {
 	private $name = '';
 	private $value = 0;
 	private $state = 1; // 1 equals active by default
-	function __construct1($aName, $aValue) {
+	function __construct($aName, $aValue) {
 		$this->name = $aName;
 		$this->value = $aValue;
 	}
