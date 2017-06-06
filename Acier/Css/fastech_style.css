@@ -21,3 +21,52 @@ body {
 #mainNav .navbar-collapse .navbar-nav.sidebar-nav {
 	margin-top: 54px;
 }
+
+#btnAjoutSemaine{
+	background-color: rgb(37, 51, 112);
+	color: white;
+	float: right
+}
+
+#btnAjoutHeure{
+	background-color: rgb(37, 51, 112);
+	color: white;
+	float: right
+}
+
+#btnImpressionSemaine{
+	background-color: rgb(37, 51, 112);
+	color: white;
+	margin-right: -15px;
+	float: right
+}
+
+.tableHover:hover{
+	background-color: #eaedf8;
+	color: rgb(37, 51, 112);
+}
+
+.formTitleMargin{
+	margin-top: 60px;
+	margin-bottom: 15px;
+}
+
+.inputMarginTop{
+	margin-top: -5px;
+}
+
+.inputSuffixe{
+	height: 42px;
+}
+
+.formLeft{
+	float: left;
+	padding: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.cursor{
+	cursor: pointer;
+}

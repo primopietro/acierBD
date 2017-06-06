@@ -32,64 +32,8 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 		</div>
 	</nav>
 
-	<div id="content" class="content-wrapper py-3">
-
-		<!--<div class="container-fluid">
-
-
-			<h2><u>Liste des semaines</u></h2>
-			<div class="table-responsive">
-				<table class="table table-bordered" width="100%" id="dataTable"
-					cellspacing="0">
-					<thead>
-						<tr>
-							<th>Suffixe</th>
-							<th>Date début</th>
-							<th>Date fin</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<th>Suffixe</th>
-							<th>Date début</th>
-							<th>Date fin</th>
-						</tr>
-					</tfoot>
-					<tbody>
-						<tr>
-							<td>22-avril-2017</td>
-							<td>2017-04-22</td>
-							<td>2017-04-29</td>
-						</tr>
-						<tr>
-							<td>29-avril-2017</td>
-							<td>2017-04-29</td>
-							<td>2017-05-06</td>
-						</tr>
-						<tr>
-							<td>6-mai-2017</td>
-							<td>2017-05-06</td>
-							<td>2017-05-13</td>
-						</tr>
-						<tr>
-							<td>13-mai-2017</td>
-							<td>2017-05-13</td>
-							<td>2017-05-20</td>
-						</tr>
-						<tr>
-							<td>20-mai-2017</td>
-							<td>2017-05-20</td>
-							<td>2017-05-27</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</div>-->
-		<!-- /.container-fluid -->
-
-	</div>
-	<!-- /.content-wrapper -->
+	<div id="content" class="content-wrapper py-3"></div>
+	
 
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fa fa-chevron-up"></i>
@@ -99,6 +43,7 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 	<?php
 		require_once 'system/footer.php';
 	?>
+	
 	<script>fillDiv();</script>
 </body>
 
