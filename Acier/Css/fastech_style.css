@@ -17,3 +17,8 @@ body {
 #error{
 	color:white;
 }
+
+
+#mainNav .navbar-collapse .navbar-nav.sidebar-nav{
+    margin-top: 54px;
+    }
