@@ -20,23 +20,22 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 		<a class="navbar-brand" href="#">Fastech Inc.</a>
 		<div class="collapse navbar-collapse" id="navbarExample">
 			<ul class="sidebar-nav navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="#"><i
+				<li id="classSemaine" class="nav-item active"><a id="ongletSemaine" class="nav-link" href="#"><i
 						class="fa fa-fw fa-dashboard"></i> Semaine</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><i
+				<li id="classEmploye" class="nav-item"><a id="ongletEmploye" class="nav-link" href="#"><i
 						class="fa fa-fw fa-area-chart"></i> Employé</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><i
+				<li id="classProjet" class="nav-item"><a id="ongletProjet" class="nav-link" href="#"><i
 						class="fa fa-fw fa-table"></i> Projet</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><i
+				<li id="classDepartement" class="nav-item"><a id="ongletDepartement" class="nav-link" href="#"><i
 						class="fa fa-fw fa-table"></i> Département</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<div class="content-wrapper py-3">
+	<div id="content" class="content-wrapper py-3">
 
-		<div class="container-fluid">
+		<!--<div class="container-fluid">
 
-			<!-- Example Tables Card -->
 
 			<h2><u>Liste des semaines</u></h2>
 			<div class="table-responsive">
@@ -86,7 +85,7 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 				</table>
 			</div>
 
-		</div>
+		</div>-->
 		<!-- /.container-fluid -->
 
 	</div>
@@ -97,10 +96,10 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 	</a>
 
 
-<?php
-require_once 'system/footer.php';
-?>
-
+	<?php
+		require_once 'system/footer.php';
+	?>
+	<script>fillDiv();</script>
 </body>
 
 
