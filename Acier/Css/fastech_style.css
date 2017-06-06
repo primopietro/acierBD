@@ -6,19 +6,18 @@ body {
 	background-color: rgb(37, 51, 112);
 	padding: 30px;
 	border-radius: 5px;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 #formLogin input[value="Connexion"] {
 	float: right;
-    cursor: pointer;
+	cursor: pointer;
 }
 
-#error{
-	color:white;
+#error {
+	color: white;
 }
 
-
-#mainNav .navbar-collapse .navbar-nav.sidebar-nav{
-    margin-top: 54px;
-    }
+#mainNav .navbar-collapse .navbar-nav.sidebar-nav {
+	margin-top: 54px;
+}
