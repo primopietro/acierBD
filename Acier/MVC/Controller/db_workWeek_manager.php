@@ -116,7 +116,25 @@ function updateWorkWeekByID($aNewWorkWeek, &$oldWorkWeek) {
 	$conn->close ();
 }
 	
+
+function removeWorkWeekByID($id) {
+	$sql = "UPDATE `work_weeks`
+	SET `id_state` = '2'
+	WHERE `work_weeks`.`id_work_week` = '$id' ";
 	
+	//require_once '../database_connect.php';
+	
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	
+	if ($conn->query ( $sql ) === TRUE) {
+		return "success";
+	}else{
+		return"fail";
+	}
+	
+	$conn->close ();
+}
+
 	
 	
 	

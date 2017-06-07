@@ -65,19 +65,24 @@ function ajoutSemaine(){
                   //var nextInsert = table.lenght - 1;
             	  var suffixe = $('#suffixe').val();
             	  var debut = $('#debut').val();
-        		  var fin = "";
+        		
         		  
-            	  var rowContent = "";
-            	  
-            	  rowContent += "<tr class='cursor tableHover'><td>";
-            	  rowContent += suffixe;
-            	  rowContent += "</td><td>";
-            	  rowContent += debut;
-            	  rowContent += "</td><td>";
-            	  rowContent += fin;
-            	  rowContent += "</td></tr>";
-                  
-                  $('#dataTable tbody').append(rowContent);
+            	  $.ajax({
+            		  method: "GET",
+            		  url: "MVC/View/getWeekCalendar.php",
+            		  beforeSend: function() {
+                     //TO INSERT -  loading animation
+                  },
+                  beforeSend: function() {
+                      $('#dataTable tbody').append("<span id='download'>Telechargement..</span>");
+                      },
+                  success: function(response) {
+                	  $('#download').remove();
+                	  $('#dataTable tbody').html("");
+                	   $('#dataTable tbody').append(response);
+                     
+                  }
+              });
               } else {
                   $("#error").fadeIn(3000,
                           function() {
@@ -95,6 +100,37 @@ $(document).on("click", "#ongletSemaine", function() {
 	fillDiv();
 	//TO DO implement same AJAX as window load
 });
+
+$(document).on("click", ".disable", function(e) {
+	var key = $(this).attr( "key" );
+	  var trTobeDeleted = $(this).closest("tr");
+	var urlToSend = "MVC/removeWeek.php?key="+ key;
+	
+		$.ajax({
+			  method: "GET",
+			  data: key,
+			  url: urlToSend,
+			  beforeSend: function() {
+	       //TO INSERT -  loading animation
+	    },
+	    beforeSend: function() {
+	        $('#dataTable tbody').append("<span id='download'>Telechargement..</span>");
+	        },
+	    success: function(response) {
+	    
+	  	  $('#download').remove();
+	  	  if(response == "success"){
+	  		  trTobeDeleted.remove();      
+	  	  }
+	       
+	    }
+	});
+	
+});
+
+
+
+
 
 $(document).on("click", "#ongletEmploye", function() {
 	$("#classSemaine").removeClass("active");
