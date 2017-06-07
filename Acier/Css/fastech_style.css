@@ -18,26 +18,21 @@ body {
 	color: white;
 }
 
+#errorForm {
+	color: rgb(37, 51, 112);
+}
+
 #mainNav .navbar-collapse .navbar-nav.sidebar-nav {
 	margin-top: 54px;
 }
 
-#btnAjoutSemaine{
-	background-color: rgb(37, 51, 112);
-	color: white;
-	float: right
-}
-
-#btnAjoutHeure{
-	background-color: rgb(37, 51, 112);
-	color: white;
-	float: right
-}
-
-#btnImpressionSemaine{
-	background-color: rgb(37, 51, 112);
-	color: white;
+#btnImpressionEmploye{
 	margin-right: -15px;
+}
+
+.btnForm{
+	background-color: rgb(37, 51, 112);
+	color: white;
 	float: right
 }
 
@@ -55,7 +50,7 @@ body {
 	margin-top: -5px;
 }
 
-.inputSuffixe{
+.inputForm{
 	height: 42px;
 }
 
