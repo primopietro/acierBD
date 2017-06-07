@@ -139,6 +139,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`work_weeks` (
   `name` varchar(25) NOT NULL,
   `begin_date` date NOT NULL,
   `begin_day` int(11) NOT NULL,
+  `id_state` int(11) NOT NULL,
 PRIMARY KEY ( `id_work_week`)
 ) ENGINE=InnoDB';
 if (!$result = $conn->query($sql)) {

@@ -1,13 +1,16 @@
-
-<body>
-    <?php
-	for($i=1;$i<5;++$i){
-		echo "<h" . $i . "> Test Nb. " . $i . "</h" . $i . "> tedçàt";
-	}
-	
-	
-    require_once 'create_database_environement.php';
-    ?>
-    </body>x
-https://blackrockdigital.github.io/startbootstrap-sb-admin/index.html  
-</html>
+ <?php
+ 
+ session_start();
+ 
+ //require_once '../MVC/Model/db_workWeek_manager.php';
+ require_once 'MVC/Controller/db_workWeek_manager.php';
+ $aName = htmlspecialchars ( "suffixe" );
+ $aStartDate = htmlspecialchars ( "2017-06-11" );
+ 
+ $aWorkWeek = new WorkWeek ( $aName, $aStartDate );
+ 
+ postWorkWeekInDatabase ( $aWorkWeek );
+ 
+ $_SESSION ["work_weeks"] [$aWorkWeek->id_work_week] = $aWorkWeek;
+				
+?>

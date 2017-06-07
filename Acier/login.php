@@ -17,14 +17,14 @@ require_once 'system/header.php';
 						<img src="image/logo.png" alt="logo_fastech" style="width:90%; display: block; margin-left: auto; margin-right: auto; margin-bottom: 15px;">
 						<span id="error"></span>
 							<div class="form-group">
-								<input class="form-control" placeholder="Nom d'utilisateur"
+								<input class="form-control" value='admin' placeholder="Nom d'utilisateur"
 									name="username"></input>
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Mot de passe"
+								<input class="form-control" value='password' placeholder="Mot de passe"
 									type="password" name="password"></input>
 							</div>
-							<input class="btn btn-default" value="Connexion" id="btnLogin"></input>
+							<input class="btn btn-default" readonly='readonly'  value="Connexion" id="btnLogin"></input>
 						</form>
 					</div>
 				</div>

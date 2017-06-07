@@ -2,6 +2,10 @@
 session_start ();
 require_once 'system/header.php';
 header ( 'Content-Type: text/html; charset=utf-8' );
+if(!isset($_SESSION["work_weeks"])){
+	include 'MVC/Controller/db_workWeek_manager.php';
+	$_SESSION["work_weeks"] = getAllActiveWorkWeeksInDatabase();
+}
 ?>
 <title>Connexion</title>
 </head>
