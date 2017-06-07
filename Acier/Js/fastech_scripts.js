@@ -23,17 +23,17 @@ function fillDiv(){
 	content += "</tr></tfoot><tbody>";
 
 	content += "</tbody></table></div>";
-	content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor' value='Imprimer' id='btnImpressionSemaine'></input></div>";
+	//content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor' value='Imprimer' id='btnImpressionSemaine'></input></div>";
 	
 	content += "<h3 class='formTitleMargin'>Ajout semaine</h3>";
 	content += "<form id='formSemaine'>";
 	content += "<span id='error'></span>";
 	
-	content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+	content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
 	content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputSuffixe' placeholder='Suffixe pour la semaine' id='suffixe'></input>";
 	content += "</div>";
 	
-	content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+	content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
 	content += "<label for='debut'>Début de la semaine</label><input name='debut' class='form-control inputMarginTop' type='date' id='debut'></input>";
 	content += "</div>";
 	
@@ -41,7 +41,7 @@ function fillDiv(){
 	//content += "<label for='fin'>Fin de la semaine</label><input name='fin' class='form-control inputMarginTop' type='date' id='fin'></input>";
 	//content += "</div>";
 	
-	content += "<input class='btn btn-default col-lg-4 col-md-4 col-xs-12 cursor' readonly='readonly' onclick='ajoutSemaine();' value='Ajouter' id='btnAjoutSemaine'></input></form>";
+	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor' readonly='readonly' onclick='ajoutSemaine();' value='Ajouter' id='btnAjoutSemaine'></input></form>";
 	
 	content += "</div>";
 	
