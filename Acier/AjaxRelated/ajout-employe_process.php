@@ -3,17 +3,17 @@ session_start ();
 
 if (isset ( $_GET ["nom"] ) && isset ( $_GET ["prenom"] ) ) {
 
-	//require_once '../MVC/Controller/db_workWeek_manager.php';
-	$nom = htmlspecialchars ( $_GET ["nom"] );
-	$prenom = htmlspecialchars ( $_GET ["prenom"] );
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Controller/db_employees_manager.php';
+	$aFamilyName= htmlspecialchars ( $_GET ["nom"] );
+	  $aFirstName= htmlspecialchars ( $_GET ["prenom"] );
 	
-	echo "success";
-	//$aWorkWeek = new WorkWeek ( $aName, $aStartDate );
+	
+	$aEmploye = new Employee( $aFirstName, $aFamilyName);
 
+	postEmployeInDatabase($aEmploye);
 	
-	//postWorkWeekInDatabase ( $aWorkWeek );
 	
-	//$_SESSION ["work_weeks"] [$aWorkWeek->id_work_week] = $aWorkWeek;
+	$_SESSION ["employees"] [$aEmploye->id_employe] = $aEmploye ;
 
 }
 

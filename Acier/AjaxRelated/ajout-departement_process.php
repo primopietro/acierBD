@@ -2,18 +2,18 @@
 session_start ();
 
 if (isset ( $_GET ["nom"] ) && isset ( $_GET ["taux"] ) ) {
-
-	//require_once '../MVC/Controller/db_workWeek_manager.php';
-	$nom = htmlspecialchars ( $_GET ["nom"] );
-	$taux = htmlspecialchars ( $_GET ["taux"] );
 	
-	echo "success";
-	//$aWorkWeek = new WorkWeek ( $aName, $aStartDate );
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Controller/db_departement_manager.php';
+	$aName = htmlspecialchars ( $_GET ["nom"] );
+	$aValue = htmlspecialchars ( $_GET ["taux"] );
+	
 
 	
-	//postWorkWeekInDatabase ( $aWorkWeek );
+	$aDepartement = new Departement($aName, $aValue);
 	
-	//$_SESSION ["work_weeks"] [$aWorkWeek->id_work_week] = $aWorkWeek;
+	postDepartementInDatabase($aDepartement);
+	$_SESSION["departements"][$aName] = $aDepartement;
+
 
 }
 

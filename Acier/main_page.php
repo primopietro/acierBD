@@ -2,10 +2,12 @@
 session_start ();
 require_once 'system/header.php';
 header ( 'Content-Type: text/html; charset=utf-8' );
-if(!isset($_SESSION["work_weeks"])){
+if(!isset($_SESSION['current_page'])){
 	include 'MVC/Controller/db_workWeek_manager.php';
 	$_SESSION["work_weeks"] = getAllActiveWorkWeeksInDatabase();
+	$_SESSION['current_page'] = "Semaine";
 }
+
 ?>
 <title>Connexion</title>
 </head>
@@ -24,14 +26,22 @@ if(!isset($_SESSION["work_weeks"])){
 		<a class="navbar-brand" href="#">Fastech Inc.</a>
 		<div class="collapse navbar-collapse" id="navbarExample">
 			<ul class="sidebar-nav navbar-nav">
-				<li id="classSemaine" class="nav-item active"><a id="ongletSemaine" class="nav-link" href="#"><i
-						class="fa fa-fw fa-dashboard"></i> Semaine</a></li>
-				<li id="classEmploye" class="nav-item"><a id="ongletEmploye" class="nav-link" href="#"><i
-						class="fa fa-fw fa-area-chart"></i> Employé</a></li>
-				<li id="classProjet" class="nav-item"><a id="ongletProjet" class="nav-link" href="#"><i
-						class="fa fa-fw fa-table"></i> Projet</a></li>
-				<li id="classDepartement" class="nav-item"><a id="ongletDepartement" class="nav-link" href="#"><i
-						class="fa fa-fw fa-table"></i> Département</a></li>
+			<?php 
+			$pages = array("Semaine"=> "Semaine",
+					"Employe"=>"Employé",
+					"Projet"=>" Projet",
+					"Departement"=>"Département");
+			foreach($pages as $key => $value){
+				
+				echo" <li id='class$key' class='nav-item ";
+				if($key == $_SESSION['current_page']){
+					echo " active";
+				}
+				echo "'><a id='onglet$key' class='nav-link' href='javascript:void(0)'><i";
+				echo " class='fa fa-fw fa-dashboard'></i> $value</a></li>";
+			}
+			?>
+				
 			</ul>
 		</div>
 	</nav>

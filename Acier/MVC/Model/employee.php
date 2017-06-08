@@ -1,5 +1,6 @@
 <?php
 class Employee{
+	public $id_employe = 0;
 	private $first_name ='';
 	private $family_name ='';
 	private $state = 1; //1 equals active by default

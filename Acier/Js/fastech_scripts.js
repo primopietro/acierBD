@@ -95,44 +95,6 @@ function ajoutSemaine(){
 	//document.getElementById("formSemaine").reset();
 }
 
-function ajoutEmploye(){
-	var dataToSend = $("#formEmploye").serialize();
-	$.ajax({
-		  method: "GET",
-		  data: dataToSend,
-		  url: "ajaxRelated/ajout-employe_process.php",
-		  beforeSend: function() {
-              $(this).html('<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
-              $(this).prop("disabled", true);
-          },
-          success: function(response) {
-              //response = response.replace(/\s/g, '');
-              if (response == "success") {
-            	  var nom = $('#nom').val();
-            	  var prenom = $('#prenom').val();
-            	  
-            	  var rowContent = "";
-            	  rowContent += "<tr class='cursor tableHover'><td>";
-            	  rowContent += nom;
-            	  rowContent += "</td><td>";
-            	  rowContent += prenom;
-            	  rowContent += "</td></tr>";
-            	  
-            	  $('#tblEmploye tbody').append(rowContent);
-            	  
-            	  document.getElementById("formEmploye").reset();
-        		
-              } else {
-                  $("#errorForm").fadeIn(3000,
-                          function() {
-                              $(this).html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
-                          });
-              }
-             
-              $(this).prop("disabled", false);
-          }
-      });
-}
 
 function ajoutProjet(){
 	var dataToSend = $("#formProjet").serialize();
@@ -176,12 +138,12 @@ function ajoutProjet(){
       });
 }
 
-function ajoutDepartement(){
-	var dataToSend = $("#formDepartement").serialize();
+$(document).on("click","#btnAjoutEmploye",function(){
+	var dataToSend = $("#formEmploye").serialize();
 	$.ajax({
 		  method: "GET",
 		  data: dataToSend,
-		  url: "ajaxRelated/ajout-departement_process.php",
+		  url: "ajaxRelated/ajout-employe_process.php",
 		  beforeSend: function() {
               $(this).html('<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
               $(this).prop("disabled", true);
@@ -190,18 +152,18 @@ function ajoutDepartement(){
               //response = response.replace(/\s/g, '');
               if (response == "success") {
             	  var nom = $('#nom').val();
-            	  var taux = $('#taux').val();
+            	  var prenom = $('#prenom').val();
             	  
             	  var rowContent = "";
             	  rowContent += "<tr class='cursor tableHover'><td>";
             	  rowContent += nom;
             	  rowContent += "</td><td>";
-            	  rowContent += taux;
-            	  rowContent += " $</td></tr>";
+            	  rowContent += prenom;
+            	  rowContent += "</td></tr>";
             	  
-            	  $('#tblDepartement tbody').append(rowContent);
+            	  $('#tblEmploye tbody').append(rowContent);
             	  
-            	  document.getElementById("formDepartement").reset();
+            	  document.getElementById("formEmploye").reset();
         		
               } else {
                   $("#errorForm").fadeIn(3000,
@@ -213,11 +175,28 @@ function ajoutDepartement(){
               $(this).prop("disabled", false);
           }
       });
-}
+});
 
 $(document).on("click", "#ongletSemaine", function() {
 	fillDiv();
-	//TO DO implement same AJAX as window load
+	
+  	  $.ajax({
+  		  method: "GET",
+  		  url: "MVC/View/getWeekCalendar.php",
+  		  beforeSend: function() {
+           //TO INSERT -  loading animation
+        },
+        beforeSend: function() {
+            $('#dataTable tbody').append("<span id='download'>Telechargement..</span>");
+            },
+        success: function(response) {
+      	  $('#download').remove();
+      	  $('#dataTable tbody').html("");
+      	   $('#dataTable tbody').append(response);
+           
+        }
+    });
+
 });
 
 $(document).on("click", ".disable", function(e) {
@@ -289,11 +268,27 @@ $(document).on("click", "#ongletEmploye", function() {
 	
 	content += "<span id='errorForm'></span>";
 	
-	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutEmploye();' value='Ajouter' id='btnAjoutEmploye'></input></form>";
+	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' value='Ajouter' id='btnAjoutEmploye'></input></form>";
 	
 	content+= "</div>";
 	
 	$("#content").html(content);
+	$.ajax({
+		  method: "GET",
+		  url: "MVC/View/getEmployees.php",
+		  beforeSend: function() {
+       //TO INSERT -  loading animation
+    },
+    beforeSend: function() {
+        $('#tblEmploye tbody').append("<span id='download'>Telechargement..</span>");
+        },
+    success: function(response) {
+  	  $('#download').remove();
+  	   $('#tblEmploye tbody').append(response);
+       
+    }
+});
+	
 });
 
 //fill div with form projet
@@ -344,9 +339,92 @@ $(document).on("click", "#ongletProjet", function() {
 	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutProjet();' value='Ajouter' id='btnAjoutProjet'></input></form>";
 	content+= "</div>";
 	
+	$.ajax({
+		  method: "GET",
+		  data: dataToSend,
+		  url: "ajaxRelated/ajout-semaine_process.php",
+		  beforeSend: function() {
+            $(this).html('<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
+            $(this).prop("disabled", true);
+        },
+        success: function(response) {
+            //response = response.replace(/\s/g, '');
+            if (response == "success") {
+                
+                //var nextInsert = table.lenght - 1;
+          	  var suffixe = $('#suffixe').val();
+          	  var debut = $('#debut').val();
+      		
+      		  
+          	  $.ajax({
+          		  method: "GET",
+          		  url: "MVC/View/getDepartements.php",
+          		  beforeSend: function() {
+                   //TO INSERT -  loading animation
+                },
+                beforeSend: function() {
+                    $('#dataTable tbody').append("<span id='download'>Telechargement..</span>");
+                    },
+                success: function(response) {
+              	  $('#download').remove();
+              	  $('#dataTable tbody').html("");
+              	   $('#dataTable tbody').append(response);
+                   
+                }
+            });
+            } else {
+                $("#errorForm").fadeIn(3000,
+                        function() {
+                            $(this).html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
+                        });
+            }
+           
+            $(this).prop("disabled", false);
+            document.getElementById("formSemaine").reset();
+        }
+    });
+	
 	$("#content").html(content);
 });
-
+$(document).on("click", "#btnAjoutDepartement", function(){
+	var dataToSend = $("#formDepartement").serialize();
+	
+	$.ajax({
+		  method: "GET",
+		  data: dataToSend,
+		  url: "ajaxRelated/ajout-departement_process.php",
+		  beforeSend: function() {
+              $(this).html('<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
+              $(this).prop("disabled", true);
+          },
+          success: function(response) {
+              //response = response.replace(/\s/g, '');
+              if (response == "success") {
+            	  var nom = $('#nom').val();
+            	  var taux = $('#taux').val();
+            	  
+            	  var rowContent = "";
+            	  rowContent += "<tr class='cursor tableHover'><td>";
+            	  rowContent += nom;
+            	  rowContent += "</td><td>";
+            	  rowContent += taux;
+            	  rowContent += " $</td></tr>";
+            	  
+            	  $('#tblDepartement tbody').append(rowContent);
+            	  
+            	  document.getElementById("formDepartement").reset();
+        		
+              } else {
+                  $("#errorForm").fadeIn(3000,
+                          function() {
+                              $(this).html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
+                          });
+              }
+             
+              $(this).prop("disabled", false);
+          }
+      });
+});
 //fill div with form departement
 $(document).on("click", "#ongletDepartement", function() {
 	$("#classSemaine").removeClass("active");
@@ -386,10 +464,28 @@ $(document).on("click", "#ongletDepartement", function() {
 
 	content += "<span id='errorForm'></span>";
 	
-	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutDepartement();' value='Ajouter' id='btnAjoutDepartement'></input></form>";
+	content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly'" +
+			"  value='Ajouter' id='btnAjoutDepartement'></input></form>";
 	content+= "</div>";
 	
+	
+	
 	$("#content").html(content);
+	$.ajax({
+		  method: "GET",
+		  url: "MVC/View/getDepartements.php",
+		  beforeSend: function() {
+       //TO INSERT -  loading animation
+    },
+    beforeSend: function() {
+        $('#tblDepartement tbody').append("<span id='download'>Telechargement..</span>");
+        },
+    success: function(response) {
+  	  $('#download').remove();
+  	   $('#tblDepartement tbody').append(response);
+       
+    }
+});
 });
 
 $(document).ready(function(){

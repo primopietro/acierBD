@@ -1,5 +1,5 @@
 <?php
-require_once 'MVC/Model/departement.php';
+require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/departement.php';
 
 // Dep section
 // Add a new departement into database
@@ -16,7 +16,11 @@ function postDepartementInDatabase($aDep) {
 		 	VALUES ('$name', '$value', '$state' )";
 	if (! $result = $conn->query ( $sql )) {
 		// Oh no! The query failed.
+		echo "fail";
 		exit ();
+	}
+	else{
+		echo "success";
 	}
 	
 	$conn->close ();
@@ -35,8 +39,9 @@ function getAllDepartementsInDatabase() {
 		while ( $row = $result->fetch_assoc () ) {
 			$aDepartement = new Departement ( $row ['name'], $row ['amount'] );
 			$aDepartement->setState ( $row ['id_state'] );
-			$departements [$row ['name']] = $departements;
+			$departements [$row ['name']] = $aDepartement;
 		}
+		$conn->close ();
 		return $departements;
 	}
 	$conn->close ();
@@ -45,19 +50,19 @@ function getAllDepartementsInDatabase() {
 
 function getAllActiveDepartementsInDatabase() {
 	
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	$result = $conn->query ( "SELECT * FROM departement
 							WHERE id_state = 1" );
 	
-	//require_once '../../database_connect.php';
 	
-	
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	if ($result->num_rows > 0) {
 		$departements = array ();
 		while ( $row = $result->fetch_assoc () ) {
 			$aDepartement = new Departement ( $row ['name'], $row ['amount'] );
-			$departements [$row ['name']] = $departements;
+			$departements [$row ['name']] = $aDepartement;
+			
 		}
+		$conn->close ();
 		return $departements;
 	}
 	$conn->close ();
