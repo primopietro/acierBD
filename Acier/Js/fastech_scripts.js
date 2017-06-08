@@ -505,9 +505,7 @@ $(document).on("click", "#btnModifEmploye", function() {
 });
 
 // fill div with form projet
-$(document)
-		.on(
-				"click",
+$(document).on("click",
 				"#ongletProjet",
 				function() {
 					$("#classSemaine").removeClass("active");
@@ -554,63 +552,28 @@ $(document)
 
 					content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutProjet();' value='Ajouter' id='btnAjoutProjet'></input></form>";
 					content += "</div>";
+					var dataToSend = "";
 
-					$
-							.ajax({
+					$.ajax({
 								method : "GET",
-								data : dataToSend,
-								url : "ajaxRelated/ajout-semaine_process.php",
+								url : "MVC/View/getDepartements.php",
 								beforeSend : function() {
-									$(this)
-											.html(
-													'<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
-									$(this).prop("disabled", true);
+									// TO INSERT - loading
+									// animation
+								},
+								beforeSend : function() {
+									$('#dataTable tbody')
+											.append(
+													"<span id='download'>Telechargement..</span>");
 								},
 								success : function(response) {
-									// response = response.replace(/\s/g, '');
-									if (response == "success") {
+									$('#download').remove();
+									$('#dataTable tbody')
+											.html("");
+									$('#dataTable tbody')
+											.append(
+													response);
 
-										// var nextInsert = table.lenght - 1;
-										var suffixe = $('#suffixe').val();
-										var debut = $('#debut').val();
-
-										$
-												.ajax({
-													method : "GET",
-													url : "MVC/View/getDepartements.php",
-													beforeSend : function() {
-														// TO INSERT - loading
-														// animation
-													},
-													beforeSend : function() {
-														$('#dataTable tbody')
-																.append(
-																		"<span id='download'>Telechargement..</span>");
-													},
-													success : function(response) {
-														$('#download').remove();
-														$('#dataTable tbody')
-																.html("");
-														$('#dataTable tbody')
-																.append(
-																		response);
-
-													}
-												});
-									} else {
-										$("#errorForm")
-												.fadeIn(
-														3000,
-														function() {
-															$(this)
-																	.html(
-																			'<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
-														});
-									}
-
-									$(this).prop("disabled", false);
-									document.getElementById("formSemaine")
-											.reset();
 								}
 							});
 
