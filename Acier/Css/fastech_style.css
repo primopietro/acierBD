@@ -33,7 +33,7 @@ body {
 .btnForm{
 	background-color: rgb(37, 51, 112);
 	color: white;
-	float: right
+	float: right;
 }
 
 .tableHover:hover{
@@ -42,7 +42,7 @@ body {
 }
 
 .formTitleMargin{
-	margin-top: 15px;
+	margin-top: 30px;
 	margin-bottom: 15px;
 }
 
@@ -64,4 +64,9 @@ body {
 
 .cursor{
 	cursor: pointer;
+}
+
+.formMargin{
+	margin-top: 30px;
+	margin-bottom: 30px;
 }

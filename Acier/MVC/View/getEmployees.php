@@ -10,6 +10,7 @@ if($aListOfEmployees!= null){
 		echo "<tr class='cursor tableHover'>";
 		echo "<td>" . $aEmploye->getFamilyName() . "</td>";
 		echo "<td>" . $aEmploye->getFirstName() . " </td>";
+		echo "<td>Faire requête et update insert</td>";
 		echo "</tr>";
 	}
 }

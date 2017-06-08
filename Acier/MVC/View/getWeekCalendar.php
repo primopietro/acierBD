@@ -7,7 +7,7 @@ $aListOfweeks = getAllActiveWorkWeeksInDatabase();
 
 if($aListOfweeks != null){
 	foreach ($aListOfweeks as $aWeek) {
-		$finishDate = date('Y-m-d', strtotime($aWeek->getStartDate(). ' + 7 days'));
+		$finishDate = date('Y-m-d', strtotime($aWeek->getStartDate(). ' + 5 days'));
 		
 		echo "<tr class='cursor tableHover'>";
 		echo "<td>" . $aWeek->getName() . "</td>";
