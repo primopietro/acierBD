@@ -4,6 +4,7 @@ class WorkWeek {
 	private $beginDay = 3; //Tuesdays (Set up by DEVS)
 	private $name = '';
 	private $start_date = '';
+	private $production_total =0;
 	private $state = 1; // 1 equals active by default
 	function __construct($aName, $aStartDate) {
 		

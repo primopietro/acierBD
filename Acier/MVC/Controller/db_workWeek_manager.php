@@ -100,7 +100,7 @@ function updateWorkWeekByID($aNewWorkWeek, &$oldWorkWeek) {
 			SET `begin_date` = '$newBeginDate',
 			SET `begin_day` = '$newBeginDay',
  			SET `id_state` = '$newState'
- 			WHERE `work_weeks`.`id_work_week` = '$oldDep->id_work_week' ";
+ 			WHERE `work_weeks`.`id_work_week` = '$oldWorkWeek->id_work_week' ";
 	
 	//require_once '../database_connect.php';
 	

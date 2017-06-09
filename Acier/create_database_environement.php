@@ -74,6 +74,8 @@ $sql = 'CREATE TABLE `acier_fastech`.`employees` (
   `id_employe` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(25) NOT NULL,
   `family_name` varchar(25) NOT NULL,
+  `hour_rate` double NOT NULL,
+  `departement` varchar(25) NOT NULL,
   `id_state` int(11) NOT NULL,
 PRIMARY KEY ( `id_employe`)
 ) ENGINE=InnoDB  ';
@@ -91,6 +93,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`projects` (
   `id_project` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `start_date` date NOT NULL,
+  `production_total` int NOT NULL,
   `budget` double NOT NULL,
 `id_state` int NOT NULL,
 PRIMARY KEY ( `id_project`)
