@@ -23,9 +23,9 @@ if ($aListOfEmployees != null) {
 				echo "<option ";
 				if ($selected == $aDepartement->getName ()) {
 					echo " selected ";
-					
-					echo " value=" . $aDepartement->getName () . ">" . $aDepartement->getName () . "</option>";
 				}
+				
+				echo " value=" . $aDepartement->getName () . ">" . $aDepartement->getName () . "</option>";
 			}
 			
 			echo " </select></td>";
