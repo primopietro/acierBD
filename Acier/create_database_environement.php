@@ -155,6 +155,30 @@ else{
 }
 echo "<br>";
 
+/**********************************************INDEXES *******************************************/
+
+$sql = 'ALTER TABLE `acier_fastech`.`employees` ADD INDEX `id_dep_emp` (`departement`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to employees</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in  employees</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `employees` ADD CONSTRAINT `cascade_emp_dep` FOREIGN KEY (`departement`) REFERENCES `departement`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to employees</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in  employees</span>\n";
+}
+echo "<br>";
+
 
 /********************************************Add data**********************************************/
 

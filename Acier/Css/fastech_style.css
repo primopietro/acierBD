@@ -74,3 +74,67 @@ body {
 .inputMarginRight{
 	margin-right: 30px;
 }
+/********************************* ripple ***************************************************/
+:root {
+	/* if u want to change the color of
+	 * the ripple change this value
+	*/
+	--color-ripple: rgba(255,255,255,0.8);
+}
+
+
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 50px;
+	width: 200px;
+	margin: auto;
+}
+*[data-animation="ripple"] {
+	 /*Position relative is required*/
+    position: relative;
+    width: 100%;
+    display: block;
+    outline: none;
+    padding: 20px;
+    color: #fff !important;
+    box-sizing: border-box;
+    line-height: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    font-weight: bold;
+	-webkit-tap-highlight-color: transparent;
+}
+
+*[data-animation="ripple"]:focus {
+	outline: none;
+}
+
+*[data-animation="ripple"]::selection {
+	background: transparent;
+	pointer-events: none;
+}
+td select {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+}
+tr:hover input{
+	background-color:#eaedf8;
+}
+tr input{
+	border:none;
+}
+input:focus{
+	border:none;
+	outline:none;
+}
+form{
+	margin:0px;
+}
+.editDep input{
+	width:100%;
+}

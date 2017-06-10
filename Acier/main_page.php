@@ -37,7 +37,7 @@ if(!isset($_SESSION['current_page'])){
 				if($key == $_SESSION['current_page']){
 					echo " active";
 				}
-				echo "'><a id='onglet$key' class='nav-link' href='javascript:void(0)'><i";
+				echo "'><a  data-animation='ripple' id='onglet$key' class='nav-link' href='javascript:void(0)'><i";
 				echo " class='fa fa-fw fa-dashboard'></i> $value</a></li>";
 			}
 			?>

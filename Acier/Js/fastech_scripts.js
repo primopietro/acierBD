@@ -237,105 +237,11 @@ $(document)
 									$('#dataTable tbody').html("");
 									$('#dataTable tbody').append(response);
 
-									clickWeek();
 								}
 							});
 
 				});
 
-function clickWeek() {
-	$("#dataTable tr")
-			.click(
-					function() {
-						id = $(this).closest('tr').attr('id');
-						if (id != "header" && id != "footer") {
-							content = "";
-
-							content += "<div class='container-fluid'>";
-
-							// ******TABLEAU******
-							content += "<div class='table-responsive'>";
-							content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
-
-							content += "<th>code</th>";
-							content += "<th>semaine cliqué</th>";
-
-							content += "<th>ENTR<br>MÉCAN</th>";
-							content += "<th>AUTRE</th>";
-							content += "<th>TOTAL</th>";
-							content += "<th>PAYÉ</th>";
-							content += "<th>REG.</th>";
-							content += "</tr></thead><tfoot><tr id='footer'>";
-
-							content += "<th>code</th>";
-							content += "<th>semaine cliqué</th>";
-							content += "<th>ENTR<br>MÉCAN</th>";
-							content += "<th>AUTRE</th>";
-							content += "<th>TOTAL</th>";
-							content += "<th>PAYÉ</th>";
-							content += "<th>REG.</th>";
-							content += "</tr></tfoot><tbody>";
-
-							content += "</tbody></table></div>";
-							content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionHeureSemaine'></input></div>";
-
-							// ******AJOUT HEURE*******
-							content += "<div class='formMargin'>";
-							content += "<h3>Ajout heure(s)</h3>";
-							content += "<form id='formHeureSemaine'>";
-
-							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='employe'>Employé</label><select name='employe' class='form-control formLeft inputMarginTop inputForm'><option value='nom1'>nom1</option>";
-							content += "<option value='nom2'>nom2</option>";
-							content += "<option value='nom3'>nom3</option>";
-							content += "<option value='nom4'>nom4</option></select>";
-							content += "</div>";
-
-							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='projet'>Projet</label><select name='projet' class='form-control formLeft inputMarginTop inputForm'><option value='projet1'>projet1</option>";
-							content += "<option value='projet2'>projet2</option>";
-							content += "<option value='projet3'>projet3</option>";
-							content += "<option value='projet4'>projet4</option></select>";
-							content += "</div>";
-
-							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
-							content += "<option value='departement2'>departement2</option>";
-							content += "<option value='departement3'>departement3</option>";
-							content += "<option value='departement4'>departement4</option></select>";
-							content += "</div>";
-
-							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='nbHeure'>Nb. heure(s)</label><input name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)' name='heure'></input>";
-							content += "</div>";
-
-							content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' value='Ajouter' id='btnAjoutHeure'></input></form>";
-							content += "</div>";
-
-							// ******MODIF SEMAINE******
-							content += "<div class='formMargin'>";
-							content += "<h3>Modification semaine</h3>";
-							content += "<form id='formModifSemaine'>";
-
-							content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-							content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputForm' placeholder='Suffixe pour la semaine' value='requete' id='suffixe'></input>";
-							content += "</div>";
-
-							content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-							content += "<label for='debut'>Terminant le</label><input name='debut' class='form-control inputMarginTop' type='date' id='debut'></input>";
-							content += "</div>";
-
-							content += "<span id='errorForm'></span>";
-
-							content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' value='Modifier' id='btnModifSemaine'></input></form>";
-							content += "</div>";
-
-							content += "</div>";
-
-							$("#content").html(content);
-						}
-					});
-}
 
 $(document).on("click", "#btnModifSemaine", function() {
 	// TO DO update database with new form info
@@ -436,8 +342,10 @@ $(document)
 
 					content += "<span id='errorForm'></span>";
 
-					content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' value='Ajouter' id='btnAjoutEmploye'></input></form>";
+					content += "<a data-animation='ripple'  class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm'   id='btnAjoutEmploye'>Ajouter</a></form>";
 
+					
+					
 					content += "</div>";
 
 					$("#content").html(content);
@@ -456,45 +364,7 @@ $(document)
 									$('#download').remove();
 									$('#tblEmploye tbody').append(response);
 
-									$("#tblEmploye tr")
-											.click(
-													function() {
-														id = $(this).closest(
-																'tr')
-																.attr('id');
-														if (id != "header"
-																&& id != "footer") {
-															content = "";
-															content += "<div class='container-fluid'>";
-															content += "<h2><u>Modification employé</u></h2>";
-
-															content += "<form id='formModifEmploye'>";
-
-															content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-															content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm' placeholder='Nom de lemployé' value='requete' id='nom'></input>";
-															content += "</div>";
-
-															content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-															content += "<label for='prenom'>Prénom</label><input name='prenom' class='form-control inputMarginTop inputForm' placeholder='Prénom de lemployé' value='requete' id='prenom'></input>";
-															content += "</div>";
-
-															content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-															content += "<label for='departement'>Département</label><select name='departement' value='requete' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
-															content += "<option value='departement2'>departement2</option>";
-															content += "<option value='departement3'>departement3</option>";
-															content += "<option value='departement4'>departement4</option></select>";
-															content += "</div>";
-
-															content += "<span id='errorForm'></span>";
-
-															content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' value='Modifier' id='btnModifEmploye'></input></form>";
-
-															content += "</div>";
-
-															$("#content").html(
-																	content);
-														}
-													});
+							
 									
 								}
 							});
@@ -614,18 +484,26 @@ $(document)
 								success : function(response) {
 									// response = response.replace(/\s/g, '');
 									if (response == "success") {
-										var nom = $('#nom').val();
-										var taux = $('#taux').val();
+										$
+										.ajax({
+											method : "GET",
+											url : "MVC/View/getDepartements.php",
+											beforeSend : function() {
+												// TO INSERT - loading animation
+											},
+											beforeSend : function() {
+												$('#tblDepartement tbody')
+														.append(
+																"<span id='download'>Telechargement..</span>");
+											},
+											success : function(response) {
+												$('#download').remove();
+												$('#tblDepartement tbody').html("");
+												$('#tblDepartement tbody').append(response);
 
-										var rowContent = "";
-										rowContent += "<tr class='cursor tableHover'><td>";
-										rowContent += nom;
-										rowContent += "</td><td>";
-										rowContent += taux;
-										rowContent += " $</td></tr>";
-
-										$('#tblDepartement tbody').append(
-												rowContent);
+											
+											}
+										});
 
 										document.getElementById(
 												"formDepartement").reset();
@@ -666,10 +544,10 @@ $(document)
 					content += "<table class='table table-bordered' width='100%' id='tblDepartement' cellspacing='0'><thead><tr id='header'>";
 
 					content += "<th>Nom</th>";
-					content += "<th>Taux</th></tr></thead><tfoot><tr id='footer'>";
+					content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
 
 					content += "<th>Nom</th>";
-					content += "<th>Taux</th>";
+					content += "<th>Taux ($/h)</th>";
 					content += "</tr></tfoot><tbody>";
 
 					content += "</tbody></table></div>";
@@ -683,13 +561,13 @@ $(document)
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='taux'>Taux</label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département' id='taux'></input>";
+					content += "<label for='taux'>Taux </label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département' id='taux'></input>";
 					content += "</div>";
 
 					content += "<span id='errorForm'></span>";
 
-					content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly'"
-							+ "  value='Ajouter' id='btnAjoutDepartement'></input></form>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly'"
+							+ "  id='btnAjoutDepartement'>Ajouter</a></form>";
 					content += "</div>";
 
 					$("#content").html(content);
@@ -709,39 +587,7 @@ $(document)
 									$('#download').remove();
 									$('#tblDepartement tbody').append(response);
 
-									$("#tblDepartement tr")
-											.click(
-													function() {
-														id = $(this).closest(
-																'tr')
-																.attr('id');
-														if (id != "header"
-																&& id != "footer") {
-															content = "";
-
-															content += "<div class='container-fluid'>";
-
-															content += "<h2><u>Modification département</u></h2>";
-															content += "<form id='formModifDepartement'>";
-
-															content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-															content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm' placeholder='Nom du département' value='requete' id='nom'></input>";
-															content += "</div>";
-
-															content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-															content += "<label for='taux'>Taux</label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département' value='10' id='taux'></input>";
-															content += "</div>";
-
-															content += "<span id='errorForm'></span>";
-
-															content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly'"
-																	+ "  value='Modifier' id='btnModifDepartement'></input></form>";
-															content += "</div>";
-
-															$("#content").html(
-																	content);
-														}
-													});
+								
 								}
 							});
 				});

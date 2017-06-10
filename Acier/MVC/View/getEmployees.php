@@ -8,15 +8,21 @@ $aListOfDepartements = getAllActiveDepartementsInDatabase ();
 if ($aListOfEmployees != null) {
 	foreach ( $aListOfEmployees as $aEmploye ) {
 		
-		echo "<tr class='cursor tableHover'>";
-		echo "<td>" . $aEmploye->id_employe . "</td>";
-		echo "<td>" . $aEmploye->getFamilyName () . "</td>";
-		echo "<td>" . $aEmploye->getFirstName () . " </td>";
-		echo "<td>" . $aEmploye->getHourRate () . " $/heure</td>";
-		echo "<td><select>";
-		$selected = $aEmploye->departement;
-		// include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/View/getDepartementList.php';
+		echo "<tr class='cursor tableHover editEmploye' >";
+		echo "<td >" . $aEmploye->id_employe . "</td>";
 		
+		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'>";
+		echo "<input name='family_name' value='" . $aEmploye->getFamilyName () . "'></form></td>";
+		
+		echo "<td><form class='editEmp' idemp='$aEmploye->id_employe'>";
+		echo "<input name='first_name' value='". $aEmploye->getFirstName () . "'> </form></td>";
+		
+		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'>";
+		echo "<input name='hour_rate' type='number' value='". $aEmploye->getHourRate () . "'></form></td>";
+		
+		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'><select name='departement'>";
+		$selected = $aEmploye->departement;
+			
 		if ($aListOfDepartements != null) {
 			foreach ( $aListOfDepartements as $aDepartement ) {
 				
@@ -28,7 +34,7 @@ if ($aListOfEmployees != null) {
 				echo " value=" . $aDepartement->getName () . ">" . $aDepartement->getName () . "</option>";
 			}
 			
-			echo " </select></td>";
+			echo " </select></form></td>";
 			echo "</tr>";
 		}
 	}

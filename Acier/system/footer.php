@@ -15,5 +15,5 @@ echo"<script src='Js/jquery.min.js'></script>
 //<script src='js/sb-admin.min.js'></script>
 
 echo"<script src='Js/fastech_scripts.js'></script>";
-echo"<script src='Js/fastech_scripts_boris.js'></script>";
+echo"<script src='Js/fastech_scripts_pietro.js'></script>";
 ?>

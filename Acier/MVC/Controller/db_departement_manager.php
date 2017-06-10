@@ -94,5 +94,22 @@ function updateDepartementByName($aNewDep, &$oldDep) {
 	$conn->close ();
 }
 	
-
+function updateDepartementDynamically($aFieldName, $aValue, $anID) {
+	
+	$sql = "UPDATE `departement`
+	SET `$aFieldName` = '$aValue'
+	WHERE `departement`.`name` = '$anID' ";
+	
+	//require_once '../../database_connect.php';
+	
+	include $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	
+	if ($conn->query ( $sql ) === TRUE) {
+		echo "success";
+	}else{
+		echo "fail";
+	}
+	
+	$conn->close ();
+}
 ?>

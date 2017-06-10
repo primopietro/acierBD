@@ -114,6 +114,24 @@ function updateEmployeByID($aNewEmploye, &$oldEmploye) {
 	$conn->close ();
 }
 	
+function updateEmployeDynamically($aField,$aValue, $anID) {
+	
+	$sql = "UPDATE `employees`
+	SET `$aField` = '$aValue'
+	WHERE `employees`.`id_employe` = '$anID' ";
+	
+	//require_once '../database_connect.php';
+	
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	
+	if ($conn->query ( $sql ) === TRUE) {
+		echo "success";
+	}else{
+		echo "fail";
+	}
+	
+	$conn->close ();
+}
 
 function removeEmployeByID($id) {
 	$sql = "UPDATE `employees`
