@@ -1,5 +1,6 @@
 <?php
-require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/departement.php';
+include  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/departement.php';
+
 
 // Dep section
 // Add a new departement into database
@@ -10,7 +11,7 @@ function postDepartementInDatabase($aDep) {
 	$state = htmlspecialchars_decode ( $aDep->getState () );
 	//require_once '../../database_connect.php';
 	
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	include $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	
 	$sql = "INSERT INTO `departement` (`name`, `amount`, `id_state` ) 
 		 	VALUES ('$name', '$value', '$state' )";
@@ -32,7 +33,7 @@ function getAllDepartementsInDatabase() {
 	
 	//require_once '../../database_connect.php';
 	
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	include $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	
 	if ($result->num_rows > 0) {
 		$departements = array ();
@@ -50,7 +51,8 @@ function getAllDepartementsInDatabase() {
 
 function getAllActiveDepartementsInDatabase() {
 	
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	include $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	
 	$result = $conn->query ( "SELECT * FROM departement
 							WHERE id_state = 1" );
 	
@@ -83,7 +85,7 @@ function updateDepartementByName($aNewDep, &$oldDep) {
 	
 	//require_once '../../database_connect.php';
 	
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	include $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	
 	if ($conn->query ( $sql ) === TRUE) {
 		$oldDep = $aNewDep;
@@ -91,10 +93,6 @@ function updateDepartementByName($aNewDep, &$oldDep) {
 	
 	$conn->close ();
 }
-	
-	
-	
-	
 	
 
 ?>

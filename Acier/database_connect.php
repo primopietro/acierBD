@@ -3,8 +3,8 @@
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$dbname = "acier_fastech";
-
+	$dbname = "acier_fastech"; 
+	
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
 

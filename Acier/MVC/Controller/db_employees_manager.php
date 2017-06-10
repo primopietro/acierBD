@@ -5,6 +5,8 @@ require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/Employee.php
 
 function postEmployeInDatabase(&$aEmploye) {
 	
+	
+	$aIdEmploye = htmlspecialchars_decode ( $aEmploye->id_employe );
 	$aNameFirstName = htmlspecialchars_decode ( $aEmploye->getFirstName() );
 	$aFamilyName= htmlspecialchars_decode ( $aEmploye->getFamilyName() );
 	$aHourRate= htmlspecialchars_decode ( $aEmploye->getHourRate() );
@@ -16,7 +18,7 @@ function postEmployeInDatabase(&$aEmploye) {
 	
 	$sql = "INSERT INTO `employees` 
 			(`id_employe`, `first_name`, `family_name`,`hour_rate`,`departement`,  `id_state`) 
-			VALUES (NULL, '$aNameFirstName', '$aFamilyName','$aHourRate','$aDepartement','$aState');";
+			VALUES ('$aIdEmploye', '$aNameFirstName', '$aFamilyName','$aHourRate','$aDepartement','$aState');";
 	if (! $result = $conn->query ( $sql )) {
 		// Oh no! The query failed.
 		echo "fail";
@@ -24,13 +26,7 @@ function postEmployeInDatabase(&$aEmploye) {
 	}
 	else{
 		echo "success";
-		if($aEmploye->id_employe== 0){
-			$sql = "SELECT MAX(id_employe) as id_employe FROM employees;";
-			$result = $conn->query ($sql);
-			while ( $row = $result->fetch_assoc () ) {
-				$aEmploye->id_employe= $row ['id_employe'];
-			}
-		}
+
 	}
 	
 	$conn->close ();
