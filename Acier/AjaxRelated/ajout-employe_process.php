@@ -7,13 +7,13 @@ if (isset ( $_GET ["nom"] ) && isset ( $_GET ["prenom"] ) ) {
 	$aFamilyName= htmlspecialchars ( $_GET ["nom"] );
 	  $aFirstName= htmlspecialchars ( $_GET ["prenom"] );
 	 $aDepartement= htmlspecialchars ( $_GET ["departement"] );
+	 $anHourlyRate= htmlspecialchars ( $_GET ["taux"] );
 	 
 	
 	$aEmploye = new Employee( $aFirstName, $aFamilyName);
 	$aEmploye->departement = $aDepartement;
-	$aEmploye->setHourRate(0); // to be changed
+	$aEmploye->setHourRate( $anHourlyRate); // to be changed
 	postEmployeInDatabase($aEmploye);
-	
 	
 	$_SESSION ["employees"] [$aEmploye->id_employe] = $aEmploye ;
 

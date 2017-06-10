@@ -253,6 +253,8 @@ function clickWeek() {
 
 							content += "<div class='container-fluid'>";
 
+							content += "<h2><u>Semaine x</u></h2>";
+
 							// ******TABLEAU******
 							content += "<div class='table-responsive'>";
 							content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
@@ -260,6 +262,12 @@ function clickWeek() {
 							content += "<th>code</th>";
 							content += "<th>semaine cliqué</th>";
 
+							// pour le nombre de projet (requete)
+							for (var i = 1; i < 6; i++) {
+								content += "<th>projet";
+								content += i;
+								content += "</th>";
+							}
 							content += "<th>ENTR<br>MÉCAN</th>";
 							content += "<th>AUTRE</th>";
 							content += "<th>TOTAL</th>";
@@ -269,6 +277,13 @@ function clickWeek() {
 
 							content += "<th>code</th>";
 							content += "<th>semaine cliqué</th>";
+
+							// pour le nombre de projet (requete)
+							for (var i = 1; i < 6; i++) {
+								content += "<th>projet";
+								content += i;
+								content += "</th>";
+							}
 							content += "<th>ENTR<br>MÉCAN</th>";
 							content += "<th>AUTRE</th>";
 							content += "<th>TOTAL</th>";
@@ -409,19 +424,15 @@ $(document)
 					content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
 					content += "<form id='formEmploye'>";
 
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
 					content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm' placeholder='Nom de lemployé' id='nom'></input>";
 					content += "</div>";
 
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
 					content += "<label for='prenom'>Prénom</label><input name='prenom' class='form-control inputMarginTop inputForm' placeholder='Prénom de lemployé' id='prenom'></input>";
 					content += "</div>";
-					
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='taux'>Taux horaire</label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux horaire de lemployé' id='taux'></input>";
-					content += "</div>";
 
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
 					content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
 					content += "<option value='departement2'>departement2</option>";
 					content += "<option value='departement3'>departement3</option>";

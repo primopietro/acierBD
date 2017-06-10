@@ -11,7 +11,7 @@ if($aListOfProjects!= null){
 		echo "<td>" . $aProject->getName() . "</td>";
 		echo "<td>" . $aProject->getStartDate() . " </td>";
 		echo "<td>" . $aProject->getBudget(). " $</td>";
-		echo "<td>" . $aProject->getProductionTotal() . " $</td>";
+		echo "<td>" . $aProject->getProductionTotal() . " h</td>";
 		echo "</tr>";
 	}
 }
