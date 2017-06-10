@@ -20,7 +20,7 @@ if ($aListOfEmployees != null) {
 		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'>";
 		echo "<input name='hour_rate' type='number' value='". $aEmploye->getHourRate () . "'></form></td>";
 		
-		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'><select name='departement'>";
+		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'><select class='form-control' name='departement'>";
 		$selected = $aEmploye->departement;
 			
 		if ($aListOfDepartements != null) {
