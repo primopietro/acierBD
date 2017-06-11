@@ -8,10 +8,13 @@ $aListOfEmployees = getAllActiveEmployesInDatabase();
 
 if($aListOfEmployees!= null){
 	foreach ($aListOfEmployees as $anEmployee) {
-		
-		echo "<option ";
-		
-		echo " value=" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName().  ">" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName() ."</option>";
+		echo "<tr><td>" . $anEmployee->id_employe . "</td>";
+		echo "<td>" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName() . "</td>";
+		echo "<td>0</td>";
+		echo "<td>0</td>";
+		echo "<td>0</td>";
+		echo "<td>0</td>";
+		echo "<td>0</td></tr>";
 
 	}
 }

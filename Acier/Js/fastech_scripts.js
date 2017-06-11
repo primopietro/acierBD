@@ -72,10 +72,10 @@ function clickWeek() {
 
 							// ******TABLEAU******
 							content += "<div class='table-responsive'>";
-							content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
+							content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
 
 							content += "<th>code</th>";
-							content += "<th>semaine cliqué</th>";
+							content += "<th>" + $(this).find('td').eq(0).text() + "</th>";
 
 							content += "<th>ENTR<br>MÉCAN</th>";
 							content += "<th>AUTRE</th>";
@@ -85,7 +85,7 @@ function clickWeek() {
 							content += "</tr></thead><tfoot><tr id='footer'>";
 
 							content += "<th>code</th>";
-							content += "<th>semaine cliqué</th>";
+							content += "<th>" + $(this).find('td').eq(0).text() + "</th>";
 							content += "<th>ENTR<br>MÉCAN</th>";
 							content += "<th>AUTRE</th>";
 							content += "<th>TOTAL</th>";
@@ -134,6 +134,17 @@ function clickWeek() {
 								},
 								success : function(response) {
 									$("#selectEmp").html(response);
+									}
+							
+								});
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getEmployeesListTable.php",
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("tbody").html(response);
 									}
 							
 								});

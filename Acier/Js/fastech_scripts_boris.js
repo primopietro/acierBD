@@ -48,3 +48,63 @@ function clickProject(){
 				}
 			});
 }
+
+$(document)
+.on(
+		"click",
+		"#btnAjoutHeure",
+		function() {
+			var dataToSend = $("#formHeureSemaine").serialize();
+			$
+					.ajax({
+						method : "GET",
+						data : dataToSend,
+						url : "ajaxRelated/ajout-heure_process.php",
+						beforeSend : function() {
+							$(this)
+									.html(
+											'<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
+							$(this).prop("disabled", true);
+						},
+						success : function(response) {
+							// response = response.replace(/\s/g, '');
+							if (response == "success") {
+									
+								$
+								.ajax({
+									method : "GET",
+									url : "MVC/View/getEmployees.php",
+									beforeSend : function() {
+										// TO INSERT - loading animation
+									},
+									beforeSend : function() {
+										$('#tblEmploye tbody')
+												.append(
+														"<span id='download'>Telechargement..</span>");
+									},
+									success : function(response) {
+										$('#download').remove();
+										$('#tblHeure tbody').html("");
+										$('#tblHeure tbody').append(response);
+
+									}
+								});
+
+								document.getElementById("formEmploye")
+										.reset();
+
+							} else {
+								$("#errorForm")
+										.fadeIn(
+												3000,
+												function() {
+													$(this)
+															.html(
+																	'<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
+												});
+							}
+
+							$(this).prop("disabled", false);
+						}
+					});
+		});
