@@ -11,4 +11,5 @@
 	
 	echo " <link href='Css/sb-admin.min.css' rel='stylesheet'>";
 	echo " <link href='Css/fastech_style.css' rel='stylesheet'>";
+	echo "<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet'>";
 ?>

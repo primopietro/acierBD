@@ -186,7 +186,7 @@ $(document)
 
 					content += "<div class='container-fluid'>";
 
-					content += "<h2><u>Liste des semaines</u></h2>";
+					content += "<h1> Liste des semaines </h1>";
 					content += "<div class='table-responsive'>";
 					content += "<table class='table table-bordered' width='100%' id='dataTable' cellspacing='0'><thead><tr id='header'>";
 
@@ -295,7 +295,7 @@ $(document)
 					var content = "";
 
 					content += "<div class='container-fluid'>";
-					content += "<h2><u>Liste des employés</u></h2>";
+					content += "<h1> Liste des employés </h1>";
 					content += "<div class='table-responsive'>";
 					content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
 
@@ -402,7 +402,7 @@ $(document)
 					var content = "";
 
 					content += "<div class='container-fluid'>";
-					content += "<h2><u>Liste des projets</u></h2>";
+					content += "<h1> Liste des projets </h1>";
 					content += "<div class='table-responsive'>";
 					content += "<table class='table table-bordered' width='100%' id='tblProjet' cellspacing='0'><thead><tr>";
 
@@ -539,7 +539,7 @@ $(document)
 					var content = "";
 
 					content += "<div class='container-fluid'>";
-					content += "<h2><u>Liste des départements</u></h2>";
+					content += "<h1> Liste des départements </h1>";
 					content += "<div class='table-responsive'>";
 					content += "<table class='table table-bordered' width='100%' id='tblDepartement' cellspacing='0'><thead><tr id='header'>";
 
