@@ -168,7 +168,7 @@ $(document).on("click", '*[data-animation="ripple"]', function(e) {
 											width: ${btnWidth * 2}px;
 											height: ${btnWidth * 2}px;
 											transition: all linear 700ms;
-											transition-timing-function:cubic-bezier(0.250, 0.460, 0.450, 0.940);
+											transition-timing-function:cubic-bezier(0.4, 0.0, 0.2, 1);
 											border-radius: 50%;
 											background: var(--color-ripple);
 											top:${posMouseY - btnWidth}px;
