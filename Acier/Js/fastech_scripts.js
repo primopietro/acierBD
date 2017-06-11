@@ -102,24 +102,18 @@ function clickWeek() {
 							content += "<form id='formHeureSemaine'>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='employe'>Employé</label><select name='employe' class='form-control formLeft inputMarginTop inputForm'><option value='nom1'>nom1</option>";
-							content += "<option value='nom2'>nom2</option>";
-							content += "<option value='nom3'>nom3</option>";
-							content += "<option value='nom4'>nom4</option></select>";
+							content += "<label for='employe'>Employé</label><select id='selectEmp' name='employe' class='form-control formLeft inputMarginTop inputForm'>";
+							content += "</select>";
 							content += "</div>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='projet'>Projet</label><select name='projet' class='form-control formLeft inputMarginTop inputForm'><option value='projet1'>projet1</option>";
-							content += "<option value='projet2'>projet2</option>";
-							content += "<option value='projet3'>projet3</option>";
-							content += "<option value='projet4'>projet4</option></select>";
+							content += "<label for='projet'>Projet</label><select id='selectProjet' name='projet' class='form-control formLeft inputMarginTop inputForm'>";
+							content += "</select>";
 							content += "</div>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
-							content += "<option value='departement2'>departement2</option>";
-							content += "<option value='departement3'>departement3</option>";
-							content += "<option value='departement4'>departement4</option></select>";
+							content += "<label for='departement'>Département</label><select id='selectDep' name='departement' class='form-control formLeft inputMarginTop inputForm'>";
+							content += "</select>";
 							content += "</div>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
@@ -132,6 +126,39 @@ function clickWeek() {
 							content += "</div>";
 
 							$("#content").html(content);
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getEmployeesList.php",
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("#selectEmp").html(response);
+									}
+							
+								});
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getProjetsList.php",
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("#selectProjet").html(response);
+									}
+							
+								});
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getDepartementList.php",
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("#selectDep").html(response);
+									}
+							
+								});
 						}
 					});
 }
