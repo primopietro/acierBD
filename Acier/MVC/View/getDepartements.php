@@ -7,7 +7,7 @@ $aListOfDepartements = getAllActiveDepartementsInDatabase ();
 if ($aListOfDepartements != null) {
 	foreach ( $aListOfDepartements as $aDepartement ) {
 		$name = $aDepartement->getName();
-		echo "<tr class='cursor tableHover'>";
+		echo "<tr class='tableHover'>";
 		
 		echo "<td><form class='editDep' iddep='$name'>";
 		echo "<input name='name' value='" . $aDepartement->getName () . "'> </form></td>";

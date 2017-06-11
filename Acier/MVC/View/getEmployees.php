@@ -8,7 +8,7 @@ $aListOfDepartements = getAllActiveDepartementsInDatabase ();
 if ($aListOfEmployees != null) {
 	foreach ( $aListOfEmployees as $aEmploye ) {
 		
-		echo "<tr class='cursor tableHover editEmploye' >";
+		echo "<tr class='tableHover editEmploye' >";
 		echo "<td >" . $aEmploye->id_employe . "</td>";
 		
 		echo "<td ><form class='editEmp' idemp='$aEmploye->id_employe'>";

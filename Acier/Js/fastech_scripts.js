@@ -60,6 +60,82 @@ function ajoutSemaine() {
 			});
 }
 
+function clickWeek() {
+	$("#dataTable tr")
+			.click(
+					function() {
+						id = $(this).closest('tr').attr('id');
+						if (id != "header" && id != "footer") {
+							content = "";
+
+							content += "<div class='container-fluid'>";
+
+							// ******TABLEAU******
+							content += "<div class='table-responsive'>";
+							content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
+
+							content += "<th>code</th>";
+							content += "<th>semaine cliqué</th>";
+
+							content += "<th>ENTR<br>MÉCAN</th>";
+							content += "<th>AUTRE</th>";
+							content += "<th>TOTAL</th>";
+							content += "<th>PAYÉ</th>";
+							content += "<th>REG.</th>";
+							content += "</tr></thead><tfoot><tr id='footer'>";
+
+							content += "<th>code</th>";
+							content += "<th>semaine cliqué</th>";
+							content += "<th>ENTR<br>MÉCAN</th>";
+							content += "<th>AUTRE</th>";
+							content += "<th>TOTAL</th>";
+							content += "<th>PAYÉ</th>";
+							content += "<th>REG.</th>";
+							content += "</tr></tfoot><tbody>";
+
+							content += "</tbody></table></div>";
+							content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionHeureSemaine'></input></div>";
+
+							// ******AJOUT HEURE*******
+							content += "<div class='formMargin'>";
+							content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
+							content += "<form id='formHeureSemaine'>";
+
+							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+							content += "<label for='employe'>Employé</label><select name='employe' class='form-control formLeft inputMarginTop inputForm'><option value='nom1'>nom1</option>";
+							content += "<option value='nom2'>nom2</option>";
+							content += "<option value='nom3'>nom3</option>";
+							content += "<option value='nom4'>nom4</option></select>";
+							content += "</div>";
+
+							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+							content += "<label for='projet'>Projet</label><select name='projet' class='form-control formLeft inputMarginTop inputForm'><option value='projet1'>projet1</option>";
+							content += "<option value='projet2'>projet2</option>";
+							content += "<option value='projet3'>projet3</option>";
+							content += "<option value='projet4'>projet4</option></select>";
+							content += "</div>";
+
+							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+							content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
+							content += "<option value='departement2'>departement2</option>";
+							content += "<option value='departement3'>departement3</option>";
+							content += "<option value='departement4'>departement4</option></select>";
+							content += "</div>";
+
+							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+							content += "<label for='nbHeure'>Nb. heure(s)</label><input name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)' name='heure'></input>";
+							content += "</div>";
+
+							content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' value='Ajouter' id='btnAjoutHeure'></input></form>";
+							content += "</div>";
+
+							content += "</div>";
+
+							$("#content").html(content);
+						}
+					});
+}
+
 function ajoutProjet() {
 	var dataToSend = $("#formProjet").serialize();
 	$
@@ -87,11 +163,13 @@ function ajoutProjet() {
 						rowContent += date;
 						rowContent += "</td><td>";
 						rowContent += budget;
-						rowContent += " $</td>"
+						rowContent += " h</td>"
 						rowContent += "<td>0 $</td>";
 						"</tr>";
 
 						$('#tblProjet tbody').append(rowContent);
+						
+						clickProject();
 
 						document.getElementById("formProjet").reset();
 
@@ -236,6 +314,8 @@ $(document)
 									$('#download').remove();
 									$('#dataTable tbody').html("");
 									$('#dataTable tbody').append(response);
+									
+									clickWeek();
 
 								}
 							});
@@ -404,11 +484,11 @@ $(document)
 					content += "<div class='container-fluid'>";
 					content += "<h1> Liste des projets </h1>";
 					content += "<div class='table-responsive'>";
-					content += "<table class='table table-bordered' width='100%' id='tblProjet' cellspacing='0'><thead><tr>";
+					content += "<table class='table table-bordered' width='100%' id='tblProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "<th>Suffixe</th>";
 					content += "<th>Date début</th>";
-					content += "<th>Budget</th><th>Cumulatif production</th></tr></thead><tfoot><tr>";
+					content += "<th>Budget</th><th>Cumulatif production</th></tr></thead><tfoot><tr id='footer'>";
 
 					content += "<th>Suffixe</th>";
 					content += "<th>Date début</th>";
@@ -456,6 +536,8 @@ $(document)
 									$('#download').remove();
 									$('#tblProjet tbody').html("");
 									$('#tblProjet tbody').append(response);
+									
+									clickProject();
 
 								}
 							});

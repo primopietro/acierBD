@@ -1,7 +1,7 @@
 <?php
 session_start ();
 
-if (isset ( $_GET ["nom"] ) && isset ( $_GET ["prenom"] ) ) {
+if (isset ( $_GET ["idEmploye"] ) && isset ( $_GET ["nom"] ) && isset ( $_GET ["prenom"] ) && isset ( $_GET ["departement"] ) && isset ( $_GET ["taux"] ) ) {
 
 	require_once $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Controller/db_employees_manager.php';
 	$anId = htmlspecialchars ( $_GET ["idEmploye"] );
