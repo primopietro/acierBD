@@ -94,7 +94,7 @@ function clickWeek() {
 							content += "</tr></tfoot><tbody>";
 
 							content += "</tbody></table></div>";
-							content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionHeureSemaine'></input></div>";
+							content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
 
 							// ******AJOUT HEURE*******
 							content += "<div class='formMargin'>";
@@ -117,10 +117,10 @@ function clickWeek() {
 							content += "</div>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='nbHeure'>Nb. heure(s)</label><input name='nbHeure' class='form-control inputMarginTop inputForm fastechInput' placeholder='Heure(s)' name='heure'></input>";
+							content += "<label for='nbHeure'>Nb. heure(s)</label><input name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)' name='heure'></input>";
 							content += "</div>";
 
-							content += "<input class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' value='Ajouter' id='btnAjoutHeure'></input></form>";
+							content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
 							content += "</div>";
 
 							content += "</div>";
@@ -297,6 +297,7 @@ $(document)
 					$("#classEmploye").removeClass("active");
 					$("#classProjet").removeClass("active");
 					$("#classDepartement").removeClass("active");
+					$("#classPrime").removeClass("active");
 
 					$("#classSemaine").addClass("active");
 
@@ -321,16 +322,16 @@ $(document)
 					content += "<form id='formSemaine'>";
 
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputForm fastechInput' placeholder='Suffixe pour la semaine' id='suffixe'></input>";
+					content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputForm' placeholder='Suffixe pour la semaine' id='suffixe'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='debut'>Terminant le</label><input name='debut' class='form-control inputMarginTop fastechInput' type='date' id='debut'></input>";
+					content += "<label for='debut'>Terminant le</label><input name='debut' class='form-control inputMarginTop' type='date' id='debut'></input>";
 					content += "</div>";
 
 					content += "<span id='errorForm'></span>";
 
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutSemaine();'  id='btnAjoutSemaine'>Ajouter</a></form>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutSemaine();' id='btnAjoutSemaine'>Ajouter</a></form>";
 
 					content += "</div>";
 
@@ -359,13 +360,6 @@ $(document)
 							});
 
 				});
-
-
-$(document).on("click", "#btnModifSemaine", function() {
-	// TO DO update database with new form info
-
-	$("#ongletSemaine").trigger("click");
-});
 
 $(document).on(
 		"click",
@@ -407,6 +401,7 @@ $(document)
 					$("#classSemaine").removeClass("active");
 					$("#classProjet").removeClass("active");
 					$("#classDepartement").removeClass("active");
+					$("#classPrime").removeClass("active");
 
 					$("#classEmploye").addClass("active");
 
@@ -430,29 +425,29 @@ $(document)
 					content += "</tr></tfoot><tbody>";
 
 					content += "</tbody></table></div>";
-					content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionEmploye'></input></div>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionEmploye'>Imprimer</a>";
 
 					content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
 					content += "<form id='formEmploye'>";
 					
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='idEmploye'>Code</label><input name='idEmploye' class='form-control inputMarginTop inputForm fastechInput' type='number' placeholder='Code de lemployé' id='idEmploye'></input>";
+					content += "<label for='idEmploye'>Code</label><input name='idEmploye' class='form-control inputMarginTop inputForm' type='number' placeholder='Code de lemployé' id='idEmploye'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm fastechInput' placeholder='Nom de lemployé' id='nom'></input>";
+					content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm' placeholder='Nom de lemployé' id='nom'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='prenom'>Prénom</label><input name='prenom' class='form-control inputMarginTop inputForm fastechInput' placeholder='Prénom de lemployé' id='prenom'></input>";
+					content += "<label for='prenom'>Prénom</label><input name='prenom' class='form-control inputMarginTop inputForm' placeholder='Prénom de lemployé' id='prenom'></input>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='taux'>Taux horaire</label><input name='taux' class='form-control inputMarginTop inputForm fastechInput' type='number' placeholder='Taux horaire de lemployé' id='taux'></input>";
+					content += "<label for='taux'>Taux horaire</label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux horaire de lemployé' id='taux'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm fastechInput'><option value='departement1'>departement1</option>";
+					content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
 					content += "<option value='departement2'>departement2</option>";
 					content += "<option value='departement3'>departement3</option>";
 					content += "<option value='departement4'>departement4</option></select>";
@@ -499,12 +494,6 @@ $(document)
 						});
 				});
 
-$(document).on("click", "#btnModifEmploye", function() {
-	// TO DO update database with new form info
-
-	$("#ongletEmploye").trigger("click");
-});
-
 // fill div with form projet
 $(document)
 		.on(
@@ -514,6 +503,7 @@ $(document)
 					$("#classSemaine").removeClass("active");
 					$("#classEmploye").removeClass("active");
 					$("#classDepartement").removeClass("active");
+					$("#classPrime").removeClass("active");
 
 					$("#classProjet").addClass("active");
 
@@ -534,26 +524,26 @@ $(document)
 					content += "</tr></tfoot><tbody>";
 
 					content += "</tbody></table></div>";
-					content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionEmploye'></input></div>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionProjet'>Imprimer</a>";
 
 					content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
 					content += "<form id='formProjet'>";
 
 					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-					content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputForm fastechInput' placeholder='Code utilisé pour le projet' id='suffixeProjet'></input>";
+					content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control inputMarginTop inputForm' placeholder='Code utilisé pour le projet' id='suffixeProjet'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-					content += "<label for='debutProjet'>Date début</label><input name='debutProjet' class='form-control inputMarginTop inputForm fastechInput' type='date' id='debutProjet'></input>";
+					content += "<label for='debutProjet'>Date début</label><input name='debutProjet' class='form-control inputMarginTop inputForm' type='date' id='debutProjet'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
-					content += "<label for='budget'>Budget</label><input name='budget' class='form-control inputMarginTop inputForm fastechInput' placeholder='Budget pour le projet' type='number' id='budget'></input>";
+					content += "<label for='budget'>Budget</label><input name='budget' class='form-control inputMarginTop inputForm' placeholder='Budget pour le projet' type='number' id='budget'></input>";
 					content += "</div>";
 
 					content += "<span id='errorForm'></span>";
 
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutProjet();'  id='btnAjoutProjet'>Ajouter</a></form>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm' readonly='readonly' onclick='ajoutProjet();' id='btnAjoutProjet'>Ajouter</a></form>";
 					content += "</div>";
 					var dataToSend = "";
 
@@ -653,6 +643,7 @@ $(document)
 					$("#classSemaine").removeClass("active");
 					$("#classEmploye").removeClass("active");
 					$("#classProjet").removeClass("active");
+					$("#classPrime").removeClass("active");
 
 					$("#classDepartement").addClass("active");
 
@@ -671,17 +662,17 @@ $(document)
 					content += "</tr></tfoot><tbody>";
 
 					content += "</tbody></table></div>";
-					content += "<div class='form-group col-lg-12 col-md-12 col-xs-12'><input class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionDepartement'></input></div>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionDepartement'>Imprimer</a>";
 
 					content += "<h3 class='formTitleMargin'>Ajout département</h3>";
 					content += "<form id='formDepartement'>";
 
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm fastechInput' placeholder='Nom du département' id='nom'></input>";
+					content += "<label for='nom'>Nom</label><input name='nom' class='form-control inputMarginTop inputForm' placeholder='Nom du département' id='nom'></input>";
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='taux'>Taux </label><input name='taux' class='form-control inputMarginTop inputForm fastechInput' type='number' placeholder='Taux du département' id='taux'></input>";
+					content += "<label for='taux'>Taux </label><input name='taux' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département' id='taux'></input>";
 					content += "</div>";
 
 					content += "<span id='errorForm'></span>";
@@ -711,9 +702,3 @@ $(document)
 								}
 							});
 				});
-
-$(document).on("click", "#btnModifDepartement", function() {
-	// TO DO update database with new form info
-
-	$("#ongletDepartement").trigger("click");
-});

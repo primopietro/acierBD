@@ -27,14 +27,12 @@ body {
 	margin-top: 54px;
 }
 
-#btnImpressionEmploye{
-	margin-right: -15px;
-}
-
 .btnForm{
 	background-color: rgb(37, 51, 112);
 	color: white;
 	float: right;
+	height: 42px;
+	padding-top: 13px!important;
 }
 
 .tableHover:hover{
@@ -136,6 +134,9 @@ form{
 	margin:0px;
 }
 .editDep input{
+	width:100%;
+}
+.editPrime input{
 	width:100%;
 }
 li.active{
