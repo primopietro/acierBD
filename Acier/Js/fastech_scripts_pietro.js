@@ -65,9 +65,9 @@ $(document).on("change","input",function(){
 									// TO INSERT - loading animation
 								},
 								beforeSend : function() {
-									$('#tblEmploye tbody')
+									/*$('#tblEmploye tbody')
 											.append(
-													"<span id='download'>Telechargement..</span>");
+													"<span id='download'>Telechargement..</span>");*/
 								},
 								success : function(response) {
 									$('#download').remove();
@@ -108,9 +108,9 @@ $(document.body).on('change',"select",function (e) {
 							// TO INSERT - loading animation
 						},
 						beforeSend : function() {
-							$('#tblEmploye tbody')
+							/*$('#tblEmploye tbody')
 									.append(
-											"<span id='download'>Telechargement..</span>");
+											"<span id='download'>Telechargement..</span>");*/
 						},
 						success : function(response) {
 							$('#download').remove();

@@ -6,6 +6,7 @@ session_start();
 
 $aListOfProjects = getAllActiveProjectsInDatabase();
 
+echo "<option value='Choisissez un projet'>Choisissez un projet</option>";
 if($aListOfProjects!= null){
 	foreach ($aListOfProjects as $aProject) {
 

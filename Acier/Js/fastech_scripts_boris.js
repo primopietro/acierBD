@@ -13,7 +13,7 @@ function clickProject(){
 
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
-					content += "<table class='table table-bordered' width='100%' id='tblEmploye' cellspacing='0'><thead><tr id='header'>";
+					content += "<table class='table table-bordered' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "</tr></thead><tfoot><tr id='footer'>";
 
@@ -83,9 +83,9 @@ $(document)
 										// TO INSERT - loading animation
 									},
 									beforeSend : function() {
-										$('#tblEmploye tbody')
+										/*$('#tblEmploye tbody')
 												.append(
-														"<span id='download'>Telechargement..</span>");
+														"<span id='download'>Telechargement..</span>");*/
 									},
 									success : function(response) {
 										$('#download').remove();

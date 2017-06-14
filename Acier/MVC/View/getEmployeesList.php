@@ -6,6 +6,7 @@ session_start();
 
 $aListOfEmployees = getAllActiveEmployesInDatabase();
 
+echo "<option value='Choisissez un employé'>Choisissez un employé</option>";
 if($aListOfEmployees!= null){
 	foreach ($aListOfEmployees as $anEmployee) {
 		

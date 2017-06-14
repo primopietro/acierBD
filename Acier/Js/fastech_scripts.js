@@ -74,23 +74,16 @@ function clickWeek() {
 							content += "<div class='table-responsive'>";
 							content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
 
-							content += "<th>code</th>";
-							content += "<th>" + $(this).find('td').eq(0).text() + "</th>";
-
-							content += "<th>ENTR<br>MÉCAN</th>";
-							content += "<th>AUTRE</th>";
-							content += "<th>TOTAL</th>";
-							content += "<th>PAYÉ</th>";
-							content += "<th>REG.</th>";
+							
 							content += "</tr></thead><tfoot><tr id='footer'>";
 
-							content += "<th>code</th>";
+							/*content += "<th>code</th>";
 							content += "<th>" + $(this).find('td').eq(0).text() + "</th>";
 							content += "<th>ENTR<br>MÉCAN</th>";
 							content += "<th>AUTRE</th>";
 							content += "<th>TOTAL</th>";
 							content += "<th>PAYÉ</th>";
-							content += "<th>REG.</th>";
+							content += "<th>REG.</th>";*/
 							content += "</tr></tfoot><tbody>";
 
 							content += "</tbody></table></div>";
@@ -126,6 +119,20 @@ function clickWeek() {
 							content += "</div>";
 
 							$("#content").html(content);
+							
+							var semaine = $(this).find('td').eq(0).text();
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getPrimesTable.php",
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("#header").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
+									$("#footer").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
+									}
+							
+								});
 							
 							$.ajax({method : "GET",
 								url : "MVC/View/getEmployeesList.php",
@@ -256,9 +263,9 @@ $(document)
 												// TO INSERT - loading animation
 											},
 											beforeSend : function() {
-												$('#tblEmploye tbody')
+												/*$('#tblEmploye tbody')
 														.append(
-																"<span id='download'>Telechargement..</span>");
+																"<span id='download'>Telechargement..</span>");*/
 											},
 											success : function(response) {
 												$('#download').remove();
@@ -447,7 +454,7 @@ $(document)
 					content += "</div>";
 
 					content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
-					content += "<label for='departement'>Département</label><select name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
+					content += "<label for='departement'>Département</label><select id='departementList' name='departement' class='form-control formLeft inputMarginTop inputForm'><option value='departement1'>departement1</option>";
 					content += "<option value='departement2'>departement2</option>";
 					content += "<option value='departement3'>departement3</option>";
 					content += "<option value='departement4'>departement4</option></select>";
@@ -469,16 +476,13 @@ $(document)
 									// TO INSERT - loading animation
 								},
 								beforeSend : function() {
-									$('#tblEmploye tbody')
+									/*$('#tblEmploye tbody')
 											.append(
-													"<span id='download'>Telechargement..</span>");
+													"<span id='download'>Telechargement..</span>");*/
 								},
 								success : function(response) {
 									$('#download').remove();
 									$('#tblEmploye tbody').append(response);
-
-							
-									
 								}
 							});
 					
@@ -488,7 +492,7 @@ $(document)
 							// TO INSERT - loading animation
 						},
 						success : function(response) {
-							$("select").html(response);
+							$("#departementList").html(response);
 							}
 					
 						});

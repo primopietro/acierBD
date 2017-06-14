@@ -25,7 +25,6 @@ if ($aListOfEmployees != null) {
 			
 		if ($aListOfDepartements != null) {
 			foreach ( $aListOfDepartements as $aDepartement ) {
-				
 				echo "<option ";
 				if ($selected == $aDepartement->getName ()) {
 					echo " selected ";
