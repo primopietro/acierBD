@@ -29,8 +29,9 @@ if(!isset($_SESSION['current_page'])){
 			<?php 
 			$pages = array("Semaine"=> "Semaine",
 					"Employe"=>"Employé",
-					"Projet"=>" Projet",
-					"Departement"=>"Département");
+					"Projet"=> "Projet",
+					"Departement"=>"Département",
+					"Prime"=> "Prime");
 			foreach($pages as $key => $value){
 				
 				echo" <li id='class$key' class='nav-item ";

@@ -6,14 +6,14 @@ session_start();
 
 $aListOfDepartements = getAllActiveDepartementsInDatabase();
 
+echo "<th>Semaine</th>";
 if($aListOfDepartements != null){
-	echo "<th>Semaine</th>";
 	foreach ($aListOfDepartements as $aDepartement) {
 
 		echo "<th>" . $aDepartement->getName() . "</th>";
 
 	}
-	echo "<th>TOTAL HRES</th>";
 }
+echo "<th>TOTAL HRES</th>";
 $_SESSION['current_page']="Departement";
 ?>

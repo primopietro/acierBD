@@ -137,6 +137,21 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`prime` (
+  `name` varchar(25) NOT NULL,
+  `amount` double NOT NULL,
+`id_state` int NOT NULL,
+PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table prime</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table prime created successfully</span>\n";
+}
+echo "<br>";
+
 $sql = 'CREATE TABLE `acier_fastech`.`work_weeks` (
   `id_work_week` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,

@@ -21,8 +21,8 @@ if ($aListOfweeks != null) {
 		echo "</tr>";
 	}
 	
-	echo "<tr><td>Total:</td>";
 	if ($aListOfDepartements != null) {
+		echo "<tr><td>Total:</td>";
 		$i = 1;
 		foreach ( $aListOfDepartements as $aDepartement ) {
 			echo "<td>calcul" . $i . "</td>";
@@ -30,14 +30,14 @@ if ($aListOfweeks != null) {
 		}
 	}
 	
-	echo "<td>0</td></tr><tr><td>Taux:</td>";
 	if ($aListOfDepartements != null) {
+		echo "<td>0</td></tr><tr><td>Taux:</td>";
 		$i = 1;
 		foreach ( $aListOfDepartements as $aDepartement ) {
 			echo "<td>" . $aDepartement->getValue() . "</td>";
 		}
+		echo "<td></td></tr>";
 	}
-	echo "<td></td></tr>";
 }
 $_SESSION ['current_page'] = "Semaine;"
 ?>
