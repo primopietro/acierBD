@@ -125,6 +125,9 @@ tr:hover select{
 	background-color:#eaedf8;
 	transition:0.28s all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
+.selectTable:hover{
+	background-color:#eaedf8;
+}
 tr:hover input{
 	background-color:#eaedf8;
 }
