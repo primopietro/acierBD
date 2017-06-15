@@ -11,8 +11,8 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-else{	
-	echo 'Connected successfully';	
+else{
+	echo 'Connected successfully';
 }
 echo "<br>";
 /******************************************Delete old environement***************************************/
@@ -108,9 +108,9 @@ else{
 }
 echo "<br>";
 
-$sql = 'CREATE TABLE `acier_fastech`.`states` 
+$sql = 'CREATE TABLE `acier_fastech`.`states`
 ( `id_state` INT NOT NULL AUTO_INCREMENT ,
- `name` VARCHAR(25) NOT NULL , 
+ `name` VARCHAR(25) NOT NULL ,
 PRIMARY KEY (`id_state`)) ENGINE = InnoDB;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
@@ -223,9 +223,9 @@ else{
 echo "<br>";
 
 
-$sql = 'ALTER TABLE `detail_week` 
-ADD CONSTRAINT `cascade_dt_emp` FOREIGN KEY (`id_employee`) 
-REFERENCES `employees`(`id_employe`) 
+$sql = 'ALTER TABLE `detail_week`
+ADD CONSTRAINT `cascade_dt_emp` FOREIGN KEY (`id_employee`)
+REFERENCES `employees`(`id_employe`)
 ON DELETE CASCADE ON UPDATE CASCADE;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
