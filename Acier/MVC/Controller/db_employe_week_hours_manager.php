@@ -1,24 +1,21 @@
 <?php
-//require_once '../MVC/Model/work_week.php';
-require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/Employee.php';
+require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/employe_week_hours.php';
 
 
-function postEmployeInDatabase(&$aEmploye) {
+function postEmployeWeekHoursInDatabase(&$aEmployeWeekHours) {
 	
 	
-	$aIdEmploye = htmlspecialchars_decode ( $aEmploye->id_employe );
-	$aNameFirstName = htmlspecialchars_decode ( $aEmploye->getFirstName() );
-	$aFamilyName= htmlspecialchars_decode ( $aEmploye->getFamilyName() );
-	$aHourRate= htmlspecialchars_decode ( $aEmploye->getHourRate() );
-	$aDepartement= htmlspecialchars_decode ( $aEmploye->departement );
-	$aState = htmlspecialchars_decode ( $aEmploye->getState () );
+	$aIdEmploye = htmlspecialchars_decode ( $aEmployeWeekHours->getEmployeeId() );
+	$aIdProject = htmlspecialchars_decode ( $aEmployeWeekHours->getProjectId() );
+	$aDepartement = htmlspecialchars_decode ( $aEmployeWeekHours->departement );
+	$hours= htmlspecialchars_decode ( $aEmployeWeekHours->getHours() );
 	
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	//require_once '../database_connect.php';
 	
-	$sql = "INSERT INTO `employees` 
-			(`id_employe`, `first_name`, `family_name`,`hour_rate`,`departement`,  `id_state`) 
-			VALUES ('$aIdEmploye', '$aNameFirstName', '$aFamilyName','$aHourRate','$aDepartement','$aState');";
+	$sql = "INSERT INTO `employe_week_hours` 
+			(`id_employe_hour`, `id_employee`, `id_project`,`departement`,`hours`) 
+			VALUES (NULL, '$aIdEmploye', '$aIdProject','$aDepartement','$hours');";
 	if (! $result = $conn->query ( $sql )) {
 		// Oh no! The query failed.
 		echo "fail";
@@ -32,36 +29,37 @@ function postEmployeInDatabase(&$aEmploye) {
 	$conn->close ();
 }
 
-function getAllEmployesInDatabase() {
+function getAllEmployesWeekHoursInDatabase() {
 	
-	$result = $conn->query ( "SELECT * FROM employees" );
+	$result = $conn->query ( "SELECT * FROM employe_week_hours" );
 	
 	//require_once '../database_connect.php';
 	
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	
 	if ($result->num_rows > 0) {
-		$Employes = array ();
+		$EmployesWeekHours = array ();
 		while ( $row = $result->fetch_assoc () ) {
-			$aEmploye= new Employee( $row ['first_name'], $row ['family_name']);
-			$aEmploye->setHourRate($row ['hour_rate']);
-			$aEmploye->departement = $row ['departement'] ;
-			$aEmploye->id_employe=  $row ['id_employe'] ;
-			$Employes[$row ['id_employe']] = $aEmploye;
+			$aEmployeWeekHours = new EmployeWeekHours( $row ['id_employee'], $row ['id_project']);
+			$aEmployeWeekHours->id_employe_hour =  $row ['id_employe_hour'] ;
+			$aEmployeWeekHours->departement = $row ['departement'];
+			$aEmployeWeekHours->setHours($row ['hours']);
+			
+			$EmployesWeekHours[$row ['id_employe_hour']] = $aEmployeWeekHours;
 		}
 		$conn->close ();
-		return $Employes;
+		return $EmployesWeekHours;
 	}
 	$conn->close ();
 	return null;
 }
 
-function getAllActiveEmployesInDatabase() {
+/*function getAllActiveEmployesInDatabase() {
 	
 	//require_once '../database_connect.php';
 	
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
-	$result = $conn->query ( "SELECT * FROM employees
+	$result = $conn->query ( "SELECT * FROM employe_week_hours
 							  WHERE id_state = 1" );
 	
 	
@@ -81,7 +79,7 @@ function getAllActiveEmployesInDatabase() {
 	}
 	$conn->close ();
 	return null;
-}
+}*/
 
 //IDS must be the same in order for it to work
 function updateEmployeByID($aNewEmploye, &$oldEmploye) {

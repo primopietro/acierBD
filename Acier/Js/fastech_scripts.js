@@ -72,21 +72,13 @@ function clickWeek() {
 
 							// ******TABLEAU******
 							content += "<div class='table-responsive'>";
-							content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
-
 							
+							content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
 							content += "</tr></thead><tfoot><tr id='footer'>";
-
-							/*content += "<th>code</th>";
-							content += "<th>" + $(this).find('td').eq(0).text() + "</th>";
-							content += "<th>ENTR<br>MÉCAN</th>";
-							content += "<th>AUTRE</th>";
-							content += "<th>TOTAL</th>";
-							content += "<th>PAYÉ</th>";
-							content += "<th>REG.</th>";*/
 							content += "</tr></tfoot><tbody>";
-
 							content += "</tbody></table></div>";
+							
+							
 							content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
 
 							// ******AJOUT HEURE*******
@@ -110,10 +102,11 @@ function clickWeek() {
 							content += "</div>";
 
 							content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-							content += "<label for='nbHeure'>Nb. heure(s)</label><input name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)' name='heure'></input>";
+							content += "<label for='nbHeure'>Nb. heure(s)</label><input id='heure' name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
 							content += "</div>";
 
 							content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
+							content += "<span id='errorForm'></span>";
 							content += "</div>";
 
 							content += "</div>";
@@ -233,66 +226,6 @@ function ajoutProjet() {
 				}
 			});
 }
-
-$(document)
-		.on(
-				"click",
-				"#btnAjoutEmploye",
-				function() {
-					var dataToSend = $("#formEmploye").serialize();
-					$
-							.ajax({
-								method : "GET",
-								data : dataToSend,
-								url : "ajaxRelated/ajout-employe_process.php",
-								beforeSend : function() {
-									$(this)
-											.html(
-													'<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
-									$(this).prop("disabled", true);
-								},
-								success : function(response) {
-									// response = response.replace(/\s/g, '');
-									if (response == "success") {
-											
-										$
-										.ajax({
-											method : "GET",
-											url : "MVC/View/getEmployees.php",
-											beforeSend : function() {
-												// TO INSERT - loading animation
-											},
-											beforeSend : function() {
-												/*$('#tblEmploye tbody')
-														.append(
-																"<span id='download'>Telechargement..</span>");*/
-											},
-											success : function(response) {
-												$('#download').remove();
-												$('#tblEmploye tbody').html("");
-												$('#tblEmploye tbody').append(response);
-
-											}
-										});
-
-										document.getElementById("formEmploye")
-												.reset();
-
-									} else {
-										$("#errorForm")
-												.fadeIn(
-														3000,
-														function() {
-															$(this)
-																	.html(
-																			'<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
-														});
-									}
-
-									$(this).prop("disabled", false);
-								}
-							});
-				});
 
 $(document)
 		.on(

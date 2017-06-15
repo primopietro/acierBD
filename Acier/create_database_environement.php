@@ -186,6 +186,20 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`employe_week_hours`
+ ( `id_employe_hour` INT NOT NULL AUTO_INCREMENT ,
+ `id_employee` INT NOT NULL , `id_project` INT NOT NULL , `departement` varchar(25) NOT NULL , `hours` DOUBLE NOT NULL ,
+ PRIMARY KEY (`id_employe_hour`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table employe_week_hours created successfully</span>\n";
+}
+echo "<br>";
+
 /**********************************************INDEXES *******************************************/
 
 $sql = 'ALTER TABLE `acier_fastech`.`employees` ADD INDEX `id_dep_emp` (`departement`);';

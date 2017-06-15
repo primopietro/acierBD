@@ -12,7 +12,7 @@ if($aListOfEmployees!= null){
 		
 		echo "<option ";
 		
-		echo " value=" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName().  ">" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName() ."</option>";
+		echo " value=" . $anEmployee->getFirstName() . " " . $anEmployee->getFamilyName().  ">" . $anEmployee->getFirstName() . "-" . $anEmployee->getFamilyName() ."</option>";
 
 	}
 }

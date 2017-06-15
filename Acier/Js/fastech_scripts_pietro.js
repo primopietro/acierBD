@@ -38,7 +38,7 @@ $(document).on("change","input",function(){
 						});
 					}
 					else{
-						alert("fail");
+						//alert("fail");
 					}
 				}
 		
@@ -79,7 +79,7 @@ $(document).on("change","input",function(){
 							});
 						}
 						else{
-							alert("fail");
+							//alert("fail");
 						}
 					}
 			
@@ -122,7 +122,7 @@ $(document.body).on('change',"select",function (e) {
 					});
 				}
 				else{
-					alert("fail");
+					//alert("fail");
 				}
 			}
 	

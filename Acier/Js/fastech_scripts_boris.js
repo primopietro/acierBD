@@ -54,12 +54,13 @@ function clickProject(){
 			});
 }
 
+
 $(document)
 .on(
 		"click",
 		"#btnAjoutHeure",
 		function() {
-			var dataToSend = $("#formHeureSemaine").serialize();
+			var dataToSend = encodeURI($("#formHeureSemaine").serialize());
 			$
 					.ajax({
 						method : "GET",
@@ -75,27 +76,7 @@ $(document)
 							// response = response.replace(/\s/g, '');
 							if (response == "success") {
 									
-								$
-								.ajax({
-									method : "GET",
-									url : "MVC/View/getEmployees.php",
-									beforeSend : function() {
-										// TO INSERT - loading animation
-									},
-									beforeSend : function() {
-										/*$('#tblEmploye tbody')
-												.append(
-														"<span id='download'>Telechargement..</span>");*/
-									},
-									success : function(response) {
-										$('#download').remove();
-										$('#tblHeure tbody').html("");
-										$('#tblHeure tbody').append(response);
-
-									}
-								});
-
-								document.getElementById("formEmploye")
+								document.getElementById("formHeureSemaine")
 										.reset();
 
 							} else {
