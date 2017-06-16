@@ -130,6 +130,8 @@ class FastechModel {
 			$fastechObjects = array ();
 			while ( $row = $result->fetch_assoc () ) {
 				$anObject =  Array();
+				$anObject["primary_key"] = $this->primary_key;
+				$anObject["table_name"] = $this->table_name;
 				foreach ( $row as $aRowName => $aValue ) {
 					$anObject[$aRowName] = $aValue;
 				}
@@ -155,6 +157,8 @@ class FastechModel {
 			$fastechObjects = array ();
 			while ( $row = $result->fetch_assoc () ) {
 				$anObject =  Array();
+				$anObject["primary_key"] = $this->primary_key;
+				$anObject["table_name"] = $this->table_name;
 				foreach ( $row as $aRowName => $aValue ) {
 					$anObject[$aRowName] = $aValue;
 				}
