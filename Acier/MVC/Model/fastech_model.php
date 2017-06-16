@@ -59,20 +59,18 @@ class FastechModel {
 		
 		$lastElement = end ( $internalAttributes );
 		foreach ( $internalAttributes as $rowName => $value ) {
-		
-			if ($value!= $this->table_name && $value != $this->primary_key
-					&& $rowName != $this->primary_key) {
+			
+			if ($value != $this->table_name && $value != $this->primary_key && $rowName != $this->primary_key) {
 				
 				$sets .= "  `" . $rowName . "` = " . "'" . $value . "'";
 				
 				if ($value != $lastElement) {
-					$sets.= ", ";
+					$sets .= ", ";
 				}
 			}
 		}
 		
-		$condition = " WHERE  `" . $this->table_name . "`.`" . $this->primary_key . 
-		"` = " . $internalAttributes [$this->primary_key];
+		$condition = " WHERE  `" . $this->table_name . "`.`" . $this->primary_key . "` = " . $internalAttributes [$this->primary_key];
 		
 		$sql = $definition . $sets . $condition;
 		
@@ -82,24 +80,22 @@ class FastechModel {
 		
 		if ($conn->query ( $sql ) === TRUE) {
 			echo "success";
-		}else{
+		} else {
 			echo "fail";
 		}
 		
 		$conn->close ();
 	}
-	
-	function updateEmployeDynamically($aField,$aValue, $anID) {
-		
+	function updateEmployeDynamically($aField, $aValue, $anID) {
 		$sql = "UPDATE `" . $this->table_name . "`
 		SET `$aField` = '$aValue'
 		WHERE `" . $this->table_name . "`.`" . $this->primary_key . "` = '$anID' ";
 		
-		include  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		if ($conn->query ( $sql ) === TRUE) {
 			echo "success";
-		}else{
+		} else {
 			echo "fail";
 		}
 		
@@ -112,20 +108,67 @@ class FastechModel {
 		SET `id_state` = '2'
 		WHERE  `" . $this->table_name . "`.`" . $this->primary_key . "` = '$anID' ";
 		
-		include  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		if ($conn->query ( $sql ) === TRUE) {
 			return "success";
-		}else{
-			return"fail";
+		} else {
+			return "fail";
 		}
 		
 		$conn->close ();
 	}
-	function getListOfActiveBDObjects() {
+	 function getListOfActiveBDObjects() {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		
+		$internalAttributes = get_object_vars ( $this );
+		
+		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1";
+		$result = $conn->query ( $sql );
+		
+		if ($result->num_rows > 0) {
+			$fastechObjects = array ();
+			while ( $row = $result->fetch_assoc () ) {
+				$anObject =  Array();
+				foreach ( $row as $aRowName => $aValue ) {
+					$anObject[$aRowName] = $aValue;
+				}
+				
+				$fastechObjects [$row [$this->primary_key]] = $anObject;
+			}
+			
+			$conn->close ();
+			return $fastechObjects;
+		}
+		$conn->close ();
+		return null;
 	}
 	function getListOfAllDBObjects() {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		
+		$internalAttributes = get_object_vars ( $this );
+		
+		$sql = "SELECT * FROM `" . $this->table_name . "` ";
+		$result = $conn->query ( $sql );
+		
+		if ($result->num_rows > 0) {
+			$fastechObjects = array ();
+			while ( $row = $result->fetch_assoc () ) {
+				$anObject =  Array();
+				foreach ( $row as $aRowName => $aValue ) {
+					$anObject[$aRowName] = $aValue;
+				}
+				
+				$fastechObjects [$row [$this->primary_key]] = $anObject;
+			}
+			
+			$conn->close ();
+			return $fastechObjects;
+		}
+		$conn->close ();
+		return null;
 	}
+	
 }
 
 ?>

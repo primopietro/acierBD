@@ -13,7 +13,7 @@ class FastechEmploye extends FastechModel {
 	protected $departement= " ";
 	protected $id_state= 1;
 	
-	
+
 	function __construct($aFirstName, $aFamilyName)
 	{
 		$this->first_name= $aFirstName;
@@ -132,14 +132,20 @@ class FastechEmploye extends FastechModel {
 
 }
 
-/* EX of use
- $anEmploye = new FastechEmploye("First name", "Family name");
- $anEmploye->setDepartement("Usine");
- $anEmploye->setHour_rate(15);
- $anEmploye->addDBObject();
- $anEmploye->setId_employe(1);
- $anEmploye->setFirst_name("TEST");
- $anEmploye->updateDBObject();
- */
+/*
+for($i=0;$i<5;++$i){
+	$anEmploye = new FastechEmploye("First name $i" , "Family name $i");
+	$anEmploye->setDepartement("Usine");
+	$anEmploye->setHour_rate(15);
+	$anEmploye->addDBObject();
+}
+$employe = new FastechEmploye("","");
+$employes = $employe->getListOfActiveBDObjects(); 
+
+print_r($employes);
+
+*/
+
+
 
 ?>

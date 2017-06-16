@@ -1,23 +1,16 @@
 <?php
-include 'fastech_model.php';
-
-class FastechProject extends FastechModel{
-	protected $table_name = 'projects';
-	protected $primary_key = "id_project";
-	
-	
-	protected $id_project=0;
-	protected $name = '';
-	protected $start_date = '';
-	protected $budget = '';
-	protected $production_total = 0;
-	protected $id_state = 1; // 1 equals active by default
+class Project {
+	public $id_projet=0;
+	private $name = '';
+	private $start_date = '';
+	private $budget = '';
+	private $production_total = 0;
+	private $state = 1; // 1 equals active by default
 	
 	function __construct($aName, $aStartDate, $aBudget) {
 		$this->name = $aName;
 		$this->start_date = $aStartDate;
 		$this->budget = $aBudget;
-		$this->production_total ="0";
 	}
 	
 	function  getProductionTotal(){
@@ -38,7 +31,7 @@ class FastechProject extends FastechModel{
 		return $this->budget;
 	}
 	function getState() {
-		return $this->id_state;
+		return $this->state;
 	}
 	function setName($aName) {
 		$this->name = $aName;
@@ -50,8 +43,7 @@ class FastechProject extends FastechModel{
 		$this->budget = $aBudget;
 	}
 	function setState($aState) {
-		$this->id_state= $aState;
+		$this->state = $aState;
 	}
 }
-
 ?>

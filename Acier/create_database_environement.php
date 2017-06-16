@@ -175,6 +175,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`detail_week`
  `id_employee` INT NOT NULL , `mechanic` DOUBLE NOT NULL ,
  `other` DOUBLE NOT NULL , `total` DOUBLE NOT NULL ,
  `paied` DOUBLE NOT NULL , `regular` DOUBLE NOT NULL ,
+  `id_state` int(11) NOT NULL,
  PRIMARY KEY (`id_detail_week`)) ENGINE = InnoDB;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
@@ -188,7 +189,11 @@ echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`employe_week_hours`
  ( `id_employe_hour` INT NOT NULL AUTO_INCREMENT ,
- `id_employee` INT NOT NULL , `id_project` INT NOT NULL , `departement` varchar(25) NOT NULL , `hours` DOUBLE NOT NULL ,
+ `id_employee` INT NOT NULL , 
+`id_project` INT NOT NULL , 
+`departement` varchar(25) NOT NULL ,
+ `hours` DOUBLE NOT NULL ,
+  `id_state` int(11) NOT NULL,
  PRIMARY KEY (`id_employe_hour`)) ENGINE = InnoDB;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
