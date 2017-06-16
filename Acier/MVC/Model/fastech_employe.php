@@ -11,8 +11,7 @@ class FastechEmploye extends FastechModel {
 	protected $family_name= "";
 	protected $hour_rate= 0;
 	protected $departement= " ";
-	protected $id_state= 1;
-	
+	protected $id_state= 1;	
 
 	function __construct($aFirstName, $aFamilyName)
 	{

@@ -1,6 +1,6 @@
 <?php
 //require_once '../MVC/Model/work_week.php';
-require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/project.php';
+include  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/project.php';
 
 // Dep section
 // Add a new work week into database, set lastest ID as local ID 
