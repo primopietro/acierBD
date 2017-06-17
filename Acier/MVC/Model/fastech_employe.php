@@ -13,10 +13,9 @@ class FastechEmploye extends FastechModel {
 	protected $departement= " ";
 	protected $id_state= 1;	
 
-	function __construct($aFirstName, $aFamilyName)
+	function __construct()
 	{
-		$this->first_name= $aFirstName;
-		$this->family_name=$aFamilyName;
+		//Do nothing
 	}
 	
 

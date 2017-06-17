@@ -172,7 +172,7 @@ echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`detail_week`
  ( `id_detail_week` INT NOT NULL AUTO_INCREMENT ,
- `id_employee` INT NOT NULL , `mechanic` DOUBLE NOT NULL ,
+ `id_employe` INT NOT NULL , `mechanic` DOUBLE NOT NULL ,
  `other` DOUBLE NOT NULL , `total` DOUBLE NOT NULL ,
  `paied` DOUBLE NOT NULL , `regular` DOUBLE NOT NULL ,
   `id_state` int(11) NOT NULL,
@@ -230,7 +230,7 @@ else{
 echo "<br>";
 
 
-$sql = 'ALTER TABLE `acier_fastech`.`detail_week` ADD UNIQUE (`id_employee`);';
+$sql = 'ALTER TABLE `acier_fastech`.`detail_week` ADD UNIQUE (`id_employe`);';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>index created successfully in detail_week</span>" ;
@@ -243,7 +243,7 @@ echo "<br>";
 
 
 $sql = 'ALTER TABLE `detail_week`
-ADD CONSTRAINT `cascade_dt_emp` FOREIGN KEY (`id_employee`)
+ADD CONSTRAINT `cascade_dt_emp` FOREIGN KEY (`id_employe`)
 REFERENCES `employees`(`id_employe`)
 ON DELETE CASCADE ON UPDATE CASCADE;';
 if (!$result = $conn->query($sql)) {
@@ -283,6 +283,82 @@ else{
 	echo "<span style='color:green;'>Data inserted successfully into states</span>\n";
 }
 echo "<br>";
+
+
+$sql = "INSERT INTO `departement` (`name`, `amount`, `id_state`)
+ VALUES ('Usine', '15', '1'), ('Peinture', '11', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into departement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into departement</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `employees` (`id_employe`, `first_name`, `family_name`, `hour_rate`, `departement`, `id_state`)
+VALUES (NULL, 'Bob', 'Marley', '420', 'Peinture', '1'), (NULL, 'The', 'Devil', '666', 'Usine', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into employees</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into employees</span>\n";
+}
+echo "<br>";
+
+
+$sql = "INSERT INTO `prime` (`name`, `amount`, `id_state`) VALUES ('Usine', '1', '1'), ('Peinture', '2', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into prime</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into prime</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `projects` (`id_project`, `name`, `start_date`, `production_total`, `budget`, `id_state`) 
+VALUES (NULL, 'Comi 4 loko', '2017-06-01', '0', '4', '1'),
+(NULL, 'The revolution', '1925-01-17', '0', '134265', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into projects</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into projects</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `work_weeks` (`id_work_week`, `name`, `begin_date`, `begin_day`, `id_state`)
+ VALUES (NULL, '', '2017-06-05', '3', '1'), (NULL, 'REF#22', '2017-06-27', '3', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into work_weeks</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into work_weeks</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO 
+`detail_week` (`id_detail_week`, `id_employe`, `mechanic`, `other`, `total`, `paied`, `regular`, `id_state`) 
+VALUES (NULL, '1', '2', '3', '2', '3', '4', '1'), (NULL, '2', '0', '0', '0', '0', '0', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into detail_week</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into detail_week</span>\n";
+}
+echo "<br>";
+
 
 
 
