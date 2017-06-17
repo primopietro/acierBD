@@ -10,8 +10,8 @@ class FastechModel {
 		
 		$definition = "INSERT INTO `" . $this->table_name . "`";
 		
-		echo "table name : " . $this->table_name . "<br>";
-		echo "primary_key name : " . $this->primary_key . "<br>";
+		//echo "table name : " . $this->table_name . "<br>";
+		//echo "primary_key name : " . $this->primary_key . "<br>";
 		
 		$attributes = " ( ";
 		$values = " VALUES (";
@@ -39,7 +39,7 @@ class FastechModel {
 		
 		$sql = $definition . $attributes . $values;
 		
-		echo $sql;
+		//echo $sql;
 		if (! $result = $conn->query ( $sql )) {
 			// Oh no! The query failed.
 			echo "fail";
@@ -74,7 +74,7 @@ class FastechModel {
 		
 		$sql = $definition . $sets . $condition;
 		
-		echo "<br>" . $sql;
+		//echo "<br>" . $sql;
 		
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		

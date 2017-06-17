@@ -9,9 +9,7 @@ class FastechPrime extends FastechModel {
 	protected $amount = 0;
 	protected $id_state = 1; // 1 equals active by default
 	
-	function __construct($aName, $anAmount) {
-		$this->name = $aName;
-		$this->amount= $anAmount;
+	function __construct() {
 	}
 	function getName() {
 		return $this->name;
@@ -25,7 +23,7 @@ class FastechPrime extends FastechModel {
 	function setName($aName) {
 		$this->name = $aName;
 	}
-	function setValue($anAmount) {
+	function setAmount($anAmount) {
 		$this->amount= $anAmount;
 	}
 	function setid_state($id_state) {

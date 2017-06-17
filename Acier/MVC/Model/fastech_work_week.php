@@ -10,10 +10,8 @@ class FastechWorkWeek extends FastechModel {
 	protected $name = '';
 	protected $begin_date = '';
 	protected $id_state = 1; // 1 equals active by default
-	function __construct($aName, $aStartDate) {
+	function __construct() {
 		
-		$this->name = $aName;
-		$this->begin_date= $aStartDate;
 	}
 	
 	

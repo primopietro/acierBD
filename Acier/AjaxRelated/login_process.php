@@ -1,5 +1,4 @@
 <?php
-
 require_once '../database_connect.php';
 
 if(isset($_GET["username"]) && isset($_GET["password"])){
@@ -13,10 +12,10 @@ if(isset($_GET["username"]) && isset($_GET["password"])){
 		$conn->close();
 		session_start();
 		$_SESSION['username'] = $username;
+		$_SESSION["current_page"] = "ongletSemaine";
 		
 		echo "success";
 	}
-	
 }
 
 ?>
