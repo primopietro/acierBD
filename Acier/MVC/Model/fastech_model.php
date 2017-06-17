@@ -206,6 +206,49 @@ class FastechModel {
 		unset($anObject['primary_key']);
 		return $anObject;
 	}
+	
+	
+	//TODO: create intercation with css classes
+	function getObjectListAsDynamicTable($cssClasses){
+		$aListOfObjects = $this->getListOfActiveBDObjects();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				
+				echo "<tr class=''>";
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						$id_object = $anObject ["primary_key"];
+						$table_name = $anObject ["table_name"];
+						echo "<td><form table='" . $table_name . "' class='edit' iddep='" . $id_object. " '>";
+						echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+					}
+				}
+				
+				echo "</tr>";
+			}
+		}
+	}
+	//TODO: create intercation with css classes
+	function getObjectListAsStaticTable($cssClasses){
+		$aListOfObjects = $this->getListOfActiveBDObjects();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				
+				echo "<tr class=''>";
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						$id_object = $anObject ["primary_key"];
+						$table_name = $anObject ["table_name"];
+						echo "<td>";
+						echo  $value . "</td>";
+					}
+				}
+				
+				echo "</tr>";
+			}
+		}
+	}
+	
 }
 
 ?>
