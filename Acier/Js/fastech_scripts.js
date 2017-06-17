@@ -453,11 +453,11 @@ $(document)
 
 					content += "<th>Suffixe</th>";
 					content += "<th>Date début</th>";
-					content += "<th>Budget</th><th>Cumulatif production</th></tr></thead><tfoot><tr id='footer'>";
+					content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot><tr id='footer'>";
 
 					content += "<th>Suffixe</th>";
 					content += "<th>Date début</th>";
-					content += "<th>Budget</th><th>Cumulatif production</th>";
+					content += "<th>Cumulatif production</th><th>Budget</th>";
 					content += "</tr></tfoot><tbody>";
 
 					content += "</tbody></table></div>";

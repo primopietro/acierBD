@@ -219,7 +219,7 @@ class FastechModel {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
-						echo "<td><form table='" . $table_name . "' class='edit' iddep='" . $anObject [$id_object]. " '>";
+						echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object]. " '>";
 						echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
 					}
 				}
@@ -237,13 +237,28 @@ class FastechModel {
 				echo "<tr class=''>";
 				foreach ( $anObject as $key => $value ) {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
-
+						
 						echo "<td>";
 						echo  $value . "</td>";
 					}
 				}
 				
 				echo "</tr>";
+			}
+		}
+	}
+	
+	function getActiveObjectsAsSelect(){
+		$aListOfObjects= $this->getListOfActiveBDObjects();
+		
+		echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";
+		if($aListOfObjects!= null){
+			foreach ($aListOfObjects as $anObject) {
+				
+				echo "<option ";
+				
+				echo " value=" . $anObject[$this->primary_key].  ">" .  $anObject["name"]."</option>";
+				
 			}
 		}
 	}

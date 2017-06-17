@@ -132,18 +132,20 @@ class FastechEmploye extends FastechModel {
 
 /*
 for($i=0;$i<5;++$i){
-	$anEmploye = new FastechEmploye("First name $i" , "Family name $i");
+	$anEmploye = new FastechEmploye();
+	$anEmploye->setFirst_name("This is name $i");
+	$anEmploye->setFamily_name("This is family name $i");
 	$anEmploye->setDepartement("Usine");
 	$anEmploye->setHour_rate(15);
 	$anEmploye->addDBObject();
 }
-$employe = new FastechEmploye("","");
+$employe = new FastechEmploye();
 $employes = $employe->getListOfActiveBDObjects(); 
-
+echo "<pre>";
 print_r($employes);
+echo "</pre>";
 
 */
-
 
 
 ?>

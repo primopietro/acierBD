@@ -13,10 +13,7 @@ class FastechProject extends FastechModel{
 	protected $production_total = 0;
 	protected $id_state = 1; // 1 equals active by default
 	
-	function __construct($aName, $aStartDate, $aBudget) {
-		$this->name = $aName;
-		$this->start_date = $aStartDate;
-		$this->budget = $aBudget;
+	function __construct() {
 		$this->production_total ="0";
 	}
 	
