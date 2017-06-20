@@ -86,7 +86,7 @@ class FastechModel {
 		
 		$conn->close ();
 	}
-	function updateEmployeDynamically($aField, $aValue, $anID) {
+	function updateObjectDynamically($aField, $aValue, $anID) {
 		$sql = "UPDATE `" . $this->table_name . "`
 		SET `$aField` = '$aValue'
 		WHERE `" . $this->table_name . "`.`" . $this->primary_key . "` = '$anID' ";
@@ -222,12 +222,12 @@ class FastechModel {
 						$table_name = $anObject ["table_name"];
 						
 						if($showPrimaryKey == false &&   preg_replace('/\s+/', '', $anObject["primary_key"]) != preg_replace('/\s+/', '', $key)){
-						echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object]. " '>";
-							echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+						echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object]. " '>";
+							echo "<input class='editable' name='" . $key . "' value='" . $value . "'> </form></td>";
 						}
 						else if($showPrimaryKey == true){
-							echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object]. " '>";
-							echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+							echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object]. " '>";
+							echo "<input class='editable' name='" . $key . "' value='" . $value . "'> </form></td>";
 							
 						}
 					
@@ -271,7 +271,7 @@ class FastechModel {
 				if(preg_replace('/\s+/', '', $selected) ==  preg_replace('/\s+/', '', $anObject[$this->primary_key])){
 					echo " selected='selected' ";
 				}
-				echo " value=" . $anObject[$this->primary_key].  ">" .  $anObject["name"]."</option>";
+				echo " class='editable' value=" . $anObject[$this->primary_key].  ">" .  $anObject["name"]."</option>";
 				
 			}
 		}

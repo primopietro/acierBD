@@ -1,3 +1,4 @@
+//onglet click event
 $(document)
 .on(
 		"click",
@@ -19,6 +20,7 @@ $(document)
 			updateTable(windowName);
 		});
 
+//fill content with onglet
 function getContentHtml(windowName){
 	var content = "";
 	
@@ -227,6 +229,8 @@ function getContentHtml(windowName){
 	return content;
 }
 
+
+//btn ajout event
 $(document)
 .on(
 		"click",
@@ -270,7 +274,6 @@ $(document)
 					});
 		});
 
-
 function updateTable(windowName){
 	$
 	.ajax({
@@ -293,6 +296,32 @@ function updateTable(windowName){
 		}
 	});
 }
+
+
+//on change tbl event
+$(document.body).on('change',".editable",function (e) {
+	
+	var form = $(this).closest(".edit");
+	var windowName = $(".active > a").attr("id");
+	var idObj = $(this).closest(".edit").attr("idObj");
+	var formName = $(this).attr("typename");
+	
+	var data = "name="+$(this).attr("name")+"&value="+$(this).prop("value") +"&id=" +idObj;
+	
+	$.ajax({method : "POST",
+		url : "AjaxRelated/edit-object_process.php?typeName=" + formName,
+		data : data,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		success : function(response) {
+				if(response== "success"){
+					updateTable(windowName);
+				}
+			}
+	
+		});
+});
 
 
 
