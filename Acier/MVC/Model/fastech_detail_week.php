@@ -3,7 +3,7 @@ include 'fastech_employe.php';
 class FastechDetailWeek extends FastechModel {
 	protected $table_name = 'detail_week';
 	protected $primary_key = "id_detail_week";
-	private $employe = null;
+	private $AnEmploye= null;
 	protected $id_detail_week = 0;
 	protected $id_employe = 0;
 	protected $mechanic = 0;
@@ -13,7 +13,7 @@ class FastechDetailWeek extends FastechModel {
 	protected $regular = 0;
 	protected $id_state = 1; // 1 equals active by default
 	function __construct() {
-		$this->employe = new FastechEmploye ();
+		$this->AnEmploye= new FastechEmploye ();
 	}
 	
 	/**
@@ -176,7 +176,7 @@ class FastechDetailWeek extends FastechModel {
 		return $this;
 	}
 	public function getSubObjectsFromDB() {
-		$this->employe->getObjectFromDB($this->id_employe);
+		$this->AnEmploye->getObjectFromDB($this->id_employe);
 	}
 
     /**
@@ -184,7 +184,7 @@ class FastechDetailWeek extends FastechModel {
      * @return FastechEmploye
      */
     public function getEmploye(){
-        return $this->employe;
+    	return $this->AnEmploye;
     }
 
     /**
@@ -192,13 +192,13 @@ class FastechDetailWeek extends FastechModel {
      * @param FastechEmploye $employe
      * @return FastechDetailWeek
      */
-    public function setEmploye($employe){
-        $this->employe = $employe;
+    public function setEmploye($AnEmploye){
+    	$this->AnEmploye = $AnEmploye;
         return $this;
     }
 
 }
-
+/* demo
 $aDetailWeek = new FastechDetailWeek ();
 $aDetailWeek->getObjectFromDB ( 1 );
 $aDetailWeek->getSubObjectsFromDB();
@@ -226,4 +226,5 @@ echo "<br><br><h3 style='text-align:center;'>NORMAL ARRAY EMPLOYE PRINT WITHOUT 
 print "<pre style='margin:auto;display:table;'>";
 print_r ($aDetailWeek->getEmploye()->getObjectAsArrayWithOutMetadata());
 print "</pre>";
+*/
 ?>

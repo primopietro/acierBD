@@ -209,18 +209,28 @@ class FastechModel {
 	
 	
 	//TODO: create intercation with css classes
-	function getObjectListAsDynamicTable($cssClasses){
+	function getObjectListAsDynamicTable($showPrimaryKey = true){
 		$aListOfObjects = $this->getListOfActiveBDObjects();
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				
 				echo "<tr class=''>";
 				foreach ( $anObject as $key => $value ) {
+					
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
+						
+						if($showPrimaryKey == false &&   preg_replace('/\s+/', '', $anObject["primary_key"]) != preg_replace('/\s+/', '', $key)){
 						echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object]. " '>";
-						echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+							echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+						}
+						else if($showPrimaryKey == true){
+							echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object]. " '>";
+							echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+							
+						}
+					
 					}
 				}
 				
@@ -248,20 +258,25 @@ class FastechModel {
 		}
 	}
 	
-	function getActiveObjectsAsSelect(){
+	function getActiveObjectsAsSelect($selected = null){
 		$aListOfObjects= $this->getListOfActiveBDObjects();
-		
-		echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";
+		if($selected == null){
+			echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";
+		}
 		if($aListOfObjects!= null){
 			foreach ($aListOfObjects as $anObject) {
 				
 				echo "<option ";
 				
+				if(preg_replace('/\s+/', '', $selected) ==  preg_replace('/\s+/', '', $anObject[$this->primary_key])){
+					echo " selected='selected' ";
+				}
 				echo " value=" . $anObject[$this->primary_key].  ">" .  $anObject["name"]."</option>";
 				
 			}
 		}
 	}
+	
 	
 }
 
