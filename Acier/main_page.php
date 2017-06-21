@@ -3,9 +3,7 @@ session_start ();
 require_once 'system/header.php';
 header ( 'Content-Type: text/html; charset=utf-8' );
 if(!isset($_SESSION['current_page'])){
-	include 'MVC/Controller/db_workWeek_manager.php';
-	$_SESSION["work_weeks"] = getAllActiveWorkWeeksInDatabase();
-	$_SESSION['current_page'] = "Semaine";
+	header('Location: '. '/AcierBD/Acier/login.php');
 }
 
 ?>
@@ -31,7 +29,9 @@ if(!isset($_SESSION['current_page'])){
 					"Employe"=>"Employé",
 					"Projet"=> "Projet",
 					"Departement"=>"Département",
-					"Prime"=> "Prime");
+					"Prime"=> "Prime",
+					"Compte"=> "Compte"
+			);
 			foreach($pages as $key => $value){
 				
 				echo" <li id='class$key' class='nav-item ";

@@ -16,8 +16,10 @@ $(document)
 			$("#content").html("");
 			$("#content").html(content);
 
-			
 			updateTable(windowName);
+			if(windowName == "ongletSemaine"){
+				setTimeout(function(){addConsultButtons()}, 1);
+			}
 		});
 
 //fill content with onglet
@@ -45,11 +47,11 @@ function getContentHtml(windowName){
 		content += "<form id='formPrime'>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom du département'></input>";
+		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom de la prime'></input>";
 		content += "</div>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département'></input>";
+		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux de la prime'></input>";
 		content += "</div>";
 
 		content += "<span id='errorForm'></span>";
@@ -68,7 +70,8 @@ function getContentHtml(windowName){
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Terminant le</th>";
-		content += "<th>Payable le</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Payable le</th>";
+		content += "</tr></thead><tfoot><tr id='footer'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Terminant le</th>";
@@ -223,6 +226,23 @@ function getContentHtml(windowName){
 				+ "  typeName='departement'>Ajouter</a></form>";
 		content += "</div>";
 		
+	} else if(windowName === "ongletCompte"){
+		
+		content += "<div class='container-fluid'>";
+		content += "<h1> Informations du compte </h1>";
+		
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom d'utilisateur</th>";
+		content += "<th>Mot de passe</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom d'utilisateur</th>";
+		content += "<th>Mot de passe</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "</div>";
+		
 	}
 
 	
@@ -291,12 +311,17 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
-
-		
 		}
 	});
 }
 
+function addConsultButtons(){
+	$('.tblObject thead tr').append("<th></th>");
+	$('.tblObject tbody tr').each(function(){
+		$(this).append("<td><a class='cursor clickWeek'>Consulter</a></td>");
+	});
+	$('.tblObject tfoot tr').append("<th></th>");
+}
 
 //on change tbl event
 $(document.body).on('change',".editable",function (e) {
@@ -358,7 +383,120 @@ function highlightRow(rowIndex, state){
 	
 }
 
+//on click week (stand by)
+/*$(document)
+.on(
+		"click",
+		".clickWeek",
+		function() {
+			id = $(".tblObject").closest('tr').attr('id');
+			if (id != "header" && id != "footer") {
+				content = "";
 
+				content += "<div class='container-fluid'>";
+
+				// ******TABLEAU******
+				content += "<div class='table-responsive'>";
+				
+				content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
+				content += "</tr></thead><tfoot><tr id='footer'>";
+				content += "</tr></tfoot><tbody>";
+				content += "</tbody></table></div>";
+				
+				
+				content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+
+				// ******AJOUT HEURE*******
+				content += "<div class='formMargin'>";
+				content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
+				content += "<form id='formHeureSemaine'>";
+
+				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+				content += "<label for='employe'>Employé</label><select id='selectEmp' name='employe' class='form-control formLeft inputMarginTop inputForm'>";
+				content += "</select>";
+				content += "</div>";
+
+				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+				content += "<label for='projet'>Projet</label><select id='selectProjet' name='projet' class='form-control formLeft inputMarginTop inputForm'>";
+				content += "</select>";
+				content += "</div>";
+
+				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+				content += "<label for='departement'>Département</label><select id='selectDep' name='departement' class='form-control formLeft inputMarginTop inputForm'>";
+				content += "</select>";
+				content += "</div>";
+
+				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+				content += "<label for='nbHeure'>Nb. heure(s)</label><input id='heure' name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
+				content += "</div>";
+
+				content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
+				content += "<span id='errorForm'></span>";
+				content += "</div>";
+
+				content += "</div>";
+
+				$("#content").html(content);
+				
+				var semaine = $(this).find('td').eq(0).text();
+				
+				$.ajax({method : "GET",
+					url : "MVC/View/getPrimesTable.php",
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					success : function(response) {
+						$("#header").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
+						$("#footer").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
+						}
+				
+					});
+				
+				$.ajax({method : "GET",
+					url : "MVC/View/getEmployeesList.php",
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					success : function(response) {
+						$("#selectEmp").html(response);
+						}
+				
+					});
+				
+				$.ajax({method : "GET",
+					url : "MVC/View/getEmployeesListTable.php",
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					success : function(response) {
+						$("tbody").html(response);
+						}
+				
+					});
+				
+				$.ajax({method : "GET",
+					url : "MVC/View/getProjetsList.php",
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					success : function(response) {
+						$("#selectProjet").html(response);
+						}
+				
+					});
+				
+				$.ajax({method : "GET",
+					url : "MVC/View/getDepartementList.php",
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					success : function(response) {
+						$("#selectDep").html(response);
+						}
+				
+					});
+			}
+		});*/
 
 
 

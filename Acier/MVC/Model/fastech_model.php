@@ -214,7 +214,7 @@ class FastechModel {
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				
-				echo "<tr class=''>";
+				echo "<tr class='tableHover'>";
 				foreach ( $anObject as $key => $value ) {
 					
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {

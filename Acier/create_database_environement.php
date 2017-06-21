@@ -58,6 +58,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`users` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
+  `id_state` int(11) NOT NULL,
 PRIMARY KEY ( `id_user`)
 ) ENGINE=InnoDB ';
 if (!$result = $conn->query($sql)) {
@@ -261,7 +262,7 @@ echo "<br>";
 
 
 
-$sql = "INSERT INTO `users` (`id_user`, `username`, `password`) VALUES (null, 'admin', 'password')";
+$sql = "INSERT INTO `users` (`id_user`, `username`, `password`, `id_state`) VALUES (null, 'admin', 'password', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into users</span>" ;
