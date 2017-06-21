@@ -343,7 +343,11 @@ function highlightRow(rowIndex, state){
 	$('.tblObject tr').each(function() {
 		if (compter==rowIndex){
 			$(this).addClass(state).delay(1000).queue(function(){
-				$(this).delay(1000).removeClass(state).dequeue();
+				if(state=="success"){
+					$(this).delay(1000).removeClass(state).dequeue();
+					$(this).delay(1000).removeClass("danger").dequeue();
+				}
+				
 				return null;
 			});
 		}
