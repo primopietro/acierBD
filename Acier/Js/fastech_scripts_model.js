@@ -29,7 +29,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des primes </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
@@ -64,7 +64,7 @@ function getContentHtml(windowName){
 
 		content += "<h1> Liste des semaines </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Terminant le</th>";
@@ -99,7 +99,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des employés </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
@@ -155,7 +155,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des projets </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Date début</th>";
@@ -194,7 +194,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des départements </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
@@ -300,14 +300,18 @@ function updateTable(windowName){
 
 //on change tbl event
 $(document.body).on('change',".editable",function (e) {
+	var self = $(this);
+
 	
-	var form = $(this).closest(".edit");
+	var form = self.closest(".edit");
 	var windowName = $(".active > a").attr("id");
-	var idObj = $(this).closest(".edit").attr("idObj");
-	var formName = $(this).attr("typename");
-	
-	var data = "name="+$(this).attr("name")+"&value="+$(this).prop("value") +"&id=" +idObj;
-	
+	var idObj = self.closest(".edit").attr("idObj");
+	var formName = form.attr("table");
+
+	var data = "name="+ self.attr("name")+"&value="+ self.prop("value") +"&id=" +idObj;
+	var rowIndex = self.closest('tr').prevAll().length; 
+	rowIndex+=2;
+	var state ="";
 	$.ajax({method : "POST",
 		url : "AjaxRelated/edit-object_process.php?typeName=" + formName,
 		data : data,
@@ -315,13 +319,40 @@ $(document.body).on('change',".editable",function (e) {
 			// TO INSERT - loading animation
 		},
 		success : function(response) {
+			
 				if(response== "success"){
 					updateTable(windowName);
+					state = response;
+				}else{
+					state = "danger";
 				}
-			}
+		},
+		complete : function(){
+			setTimeout(function()
+			{
+			highlightRow(rowIndex,state);
+			}, 100);
+		}
 	
 		});
+	
 });
+
+function highlightRow(rowIndex, state){
+	var compter =0;
+	$('.tblObject tr').each(function() {
+		if (compter==rowIndex){
+			$(this).addClass(state).delay(1000).queue(function(){
+				$(this).delay(1000).removeClass(state).dequeue();
+				return null;
+			});
+		}
+	
+		compter++;
+	});
+	
+	
+}
 
 
 

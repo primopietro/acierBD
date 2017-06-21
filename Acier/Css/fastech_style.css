@@ -22,9 +22,24 @@ body {
 #errorForm {
 	color: rgb(37, 51, 112);
 }
-
+tr.success,tr.success >td, tr.success > form,tr.success> form>input {
+	 background-color: #dff0d8 !important;
+}
+tr.danger,tr.danger >td, tr.danger > form,tr.danger>input{
+	 background-color: #f2dede !important;
+}
+input{
+	background-color:transparent !important;
+}
 #mainNav .navbar-collapse .navbar-nav.sidebar-nav {
 	margin-top: 54px;
+}
+.scroll-to-top {
+	display:table;
+	border-radius:0px !important;
+}
+.scroll-to-top > i{
+	line-height:45px;
 }
 
 .btnForm{

@@ -16,9 +16,11 @@ if ($typeName == "prime") {
 	$anObject = new FastechDepartement();
 }
 
+
 $aName = htmlspecialchars ( $_POST ["name"] );
 $aValue = htmlspecialchars ( $_POST ["value"] );
 $anID = htmlspecialchars ( $_POST ["id"] );
+
 
 $anObject->updateObjectDynamically($aName, $aValue, $anID);
 
