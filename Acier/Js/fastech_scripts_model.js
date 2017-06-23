@@ -93,7 +93,7 @@ function getContentHtml(windowName){
 
 		content += "<span id='errorForm'></span>";
 
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly' onclick='ajoutSemaine();' typeName='work_week'>Ajouter</a></form>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly' typeName='work_weeks'>Ajouter</a></form>";
 
 		content += "</div>";
 		
@@ -276,7 +276,7 @@ $(document)
 							if (response == "success") {
 								updateTable(windowName);
 
-								form.reset();
+								$(document).find("form").find("input").val("");
 
 							} else {
 								$("#errorForm")
@@ -325,6 +325,7 @@ function addConsultButtons(){
 
 //on change tbl event
 $(document.body).on('change',".editable",function (e) {
+	
 	var self = $(this);
 
 	
@@ -337,6 +338,7 @@ $(document.body).on('change',".editable",function (e) {
 	var rowIndex = self.closest('tr').prevAll().length; 
 	rowIndex+=2;
 	var state ="";
+	console.log(data);
 	$.ajax({method : "POST",
 		url : "AjaxRelated/edit-object_process.php?typeName=" + formName,
 		data : data,
@@ -548,7 +550,7 @@ $(document).on("click", '*[data-animation="ripple"]', function(e) {
 											top:${posMouseY - btnWidth}px;
 											left:${posMouseX - btnWidth}px;
 											pointer-events: none;
-											transform:scale(0)`
+											transform:scale(0)`;
 		
 		var rippleEffect = document.createElement("span");
 		rippleEffect.style.cssText = baseCSS;

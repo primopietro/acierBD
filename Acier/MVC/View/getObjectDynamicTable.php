@@ -11,16 +11,16 @@ if($windowName== "ongletPrime"){
 	$anObject->getObjectListAsDynamicTable(true);
 	
 } else if($windowName == "ongletSemaine"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_week.php';
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
 	$anObject = new FastechWorkWeek();
 	$anObject->getObjectListAsDynamicTable(false);
 	
 } else if($windowName == "ongletEmploye"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe.php';
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
 	$anObject = new FastechEmploye();
 	$anObject->getObjectListAsDynamicTable(true);
 } else if($windowName == "ongletProjet"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_project.php';
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
 	$anObject = new FastechProject();
 	$anObject->getObjectListAsDynamicTable(false);
 } else if($windowName == "ongletDepartement"){
@@ -28,9 +28,9 @@ if($windowName== "ongletPrime"){
 	$anObject = new FastechDepartement();
 	$anObject->getObjectListAsDynamicTable(true);
 } else if($windowName == "ongletCompte"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_user.php';
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_users.php';
 	$anObject = new FastechUser();
-	$anObject->getObjectListAsDynamicTable(true);
+	$anObject->getObjectListAsDynamicTable(false);
 } 
 
 $_SESSION['current_page'] = $windowName;

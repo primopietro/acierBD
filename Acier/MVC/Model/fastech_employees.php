@@ -146,13 +146,13 @@ class FastechEmploye extends FastechModel {
 						if($key != "departement"){
 							if ($key != "departement") {
 								echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
-								echo "<input name='" . $key . "' value='" . $value . "'> </form></td>";
+								echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
 							}
 						}else{
 							$aDepartement = new FastechDepartement();
 							
 							echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
-							echo "<select name='" . $key . "'>";
+							echo "<select class='editable' name='" . $key . "'>";
 							$aDepartementName = $anObject ["departement"];
 							$aListOfDepartements = $aDepartement->getActiveObjectsAsSelect($aDepartementName);
 							echo "</select></form></td>";

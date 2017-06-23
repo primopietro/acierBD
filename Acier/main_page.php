@@ -7,7 +7,7 @@ if(!isset($_SESSION['current_page'])){
 }
 
 ?>
-<title>Connexion</title>
+<title>Dashboard</title>
 </head>
 
 <body id="page-top">
@@ -32,14 +32,20 @@ if(!isset($_SESSION['current_page'])){
 					"Prime"=> "Prime",
 					"Compte"=> "Compte"
 			);
+			$icons = array("Semaine"=> "<i class='fa fa-calendar' aria-hidden='true'></i>",
+					"Employe"=>"<i class='fa fa-users' aria-hidden='true'></i>",
+					"Projet"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
+					"Departement"=>"<i class='fa fa-industry' aria-hidden='true'></i>",
+					"Prime"=> "<i class='fa fa-file-powerpoint-o' aria-hidden='true'></i>",
+					"Compte"=> "<i class='fa fa-address-card-o' aria-hidden='true'></i>");
 			foreach($pages as $key => $value){
 				
 				echo" <li id='class$key' class='nav-item ";
 				if($key == $_SESSION['current_page']){
 					echo " active";
 				}
-				echo "'><a  data-animation='ripple' id='onglet$key' class='nav-link changeOnglet' href='javascript:void(0)'><i";
-				echo " class='fa fa-fw fa-dashboard'></i> $value</a></li>";
+				echo "'><a  data-animation='ripple' id='onglet$key' class='nav-link changeOnglet' href='javascript:void(0)'>";
+				echo $icons[$key] . "&nbsp;" . $value . "</a></li>";
 			}
 			?>
 				

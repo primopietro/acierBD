@@ -1,5 +1,5 @@
 <?php
-include 'fastech_employe.php';
+include 'fastech_employees.php';
 class FastechDetailWeek extends FastechModel {
 	protected $table_name = 'detail_week';
 	protected $primary_key = "id_detail_week";
