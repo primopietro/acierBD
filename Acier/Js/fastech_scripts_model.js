@@ -17,9 +17,7 @@ $(document)
 			$("#content").html(content);
 
 			updateTable(windowName);
-			if(windowName == "ongletSemaine"){
-				setTimeout(function(){addConsultButtons()}, 1);
-			}
+			
 		});
 
 //fill content with onglet
@@ -311,8 +309,12 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
+			if(windowName == "ongletSemaine"){
+				addConsultButtons();
+			}
 		}
 	});
+	
 }
 
 function addConsultButtons(){
