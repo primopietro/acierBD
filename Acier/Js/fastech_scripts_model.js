@@ -293,6 +293,7 @@ $(document)
 		});
 
 function updateTable(windowName){
+	
 	$
 	.ajax({
 		method : "GET",
