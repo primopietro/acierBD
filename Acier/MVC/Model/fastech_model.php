@@ -252,6 +252,22 @@ class FastechModel {
 			}
 		}
 	}
+	
+	function getObjectListAsDynamicHeader($showPrimaryKey = true) {
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						if(!is_numeric($value))
+							echo "<th>". $value . "</th>";
+					}
+				}
+				
+			}
+		}
+	}
+	
 	function getActiveObjectsAsSelect($selected = null) {
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($selected == null) {

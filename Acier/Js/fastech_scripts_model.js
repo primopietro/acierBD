@@ -325,8 +325,9 @@ function updateTable(windowName){
 
 function addConsultButtons(){
 	$('.tblObject thead tr').append("<th></th>");
-	$('.tblObject tbody tr').each(function(){
-		$(this).append("<td><a class='cursor clickWeek'>Consulter</a></td>");
+	$('.tblObject > tbody > tr').each(function(){
+		var id = $(this).find("input:first").val();
+		$(this).append("<td><a class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
 	});
 	$('.tblObject tfoot tr').append("<th></th>");
 }
@@ -398,120 +399,166 @@ function highlightRow(rowIndex, state){
 }
 
 //on click week (stand by)
-/*$(document)
+$(document)
 .on(
 		"click",
 		".clickWeek",
 		function() {
+			var windowName = $(".active > a").attr("id");
 			id = $(".tblObject").closest('tr').attr('id');
 			if (id != "header" && id != "footer") {
 				content = "";
 
-				content += "<div class='container-fluid'>";
+				if(windowName == "ongletSemaine"){
+					content += "<div class='container-fluid'>";
+	
+					// ******TABLEAU******
+					content += "<div class='table-responsive'>";
+					
+					content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
+					content += "</tr></thead><tfoot><tr id='footer'>";
+					content += "</tr></tfoot><tbody>";
+					content += "</tbody></table></div>";
+					
+					
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+	
+					// ******AJOUT HEURE*******
+					content += "<div class='formMargin'>";
+					content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
+					content += "<form id='formHeureSemaine'>";
+	
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='employe'>Employé</label><select id='selectEmp' name='employe' class='form-control formLeft inputMarginTop inputForm'>";
+					content += "</select>";
+					content += "</div>";
+	
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='projet'>Projet</label><select id='selectProjet' name='projet' class='form-control formLeft inputMarginTop inputForm'>";
+					content += "</select>";
+					content += "</div>";
+	
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='departement'>Département</label><select id='selectDep' name='departement' class='form-control formLeft inputMarginTop inputForm'>";
+					content += "</select>";
+					content += "</div>";
+	
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='nbHeure'>Nb. heure(s)</label><input id='heure' name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
+					content += "</div>";
+	
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
+					content += "<span id='errorForm'></span>";
+					content += "</div>";
+	
+					content += "</div>";
+					
+					var semaine = $(this).attr('id');
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#header").html("<th>code</th><th>" + semaine + "</th>" + response + "<th>BANQUE</th>");
+							$("#footer").html("<th>code</th><th>" + semaine + "</th>" + response + "<th>BANQUE</th>");
+							}
+					
+						});
+					
+					/*$.ajax({method : "GET",
+						url : "MVC/View/getEmployeesList.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#selectEmp").html(response);
+							}
+					
+						});
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getEmployeesListTable.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("tbody").html(response);
+							}
+					
+						});
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getProjetsList.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#selectProjet").html(response);
+							}
+					
+						});
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getDepartementList.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#selectDep").html(response);
+							}
+					
+						});*/
+				} else if(windowName == "ongletProjet"){
+					content += "<div class='container-fluid'>";
+					
+					content += "<h2 style='margin-bottom: 2px;'>Projet: " + $(this).find('td').eq(0).text() + "</h2>";
+					content += "<h5 style='margin-bottom: 10px;'>" + $(this).find('td').eq(2).text() + "</h5>";
 
-				// ******TABLEAU******
-				content += "<div class='table-responsive'>";
-				
-				content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
-				content += "</tr></thead><tfoot><tr id='footer'>";
-				content += "</tr></tfoot><tbody>";
-				content += "</tbody></table></div>";
-				
-				
-				content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+					// ******TABLEAU******
+					content += "<div class='table-responsive'>";
+					content += "<table class='table table-bordered' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
-				// ******AJOUT HEURE*******
-				content += "<div class='formMargin'>";
-				content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
-				content += "<form id='formHeureSemaine'>";
+					content += "</tr></thead><tfoot><tr id='footer'>";
 
-				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-				content += "<label for='employe'>Employé</label><select id='selectEmp' name='employe' class='form-control formLeft inputMarginTop inputForm'>";
-				content += "</select>";
-				content += "</div>";
-
-				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-				content += "<label for='projet'>Projet</label><select id='selectProjet' name='projet' class='form-control formLeft inputMarginTop inputForm'>";
-				content += "</select>";
-				content += "</div>";
-
-				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-				content += "<label for='departement'>Département</label><select id='selectDep' name='departement' class='form-control formLeft inputMarginTop inputForm'>";
-				content += "</select>";
-				content += "</div>";
-
-				content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-				content += "<label for='nbHeure'>Nb. heure(s)</label><input id='heure' name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
-				content += "</div>";
-
-				content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
-				content += "<span id='errorForm'></span>";
-				content += "</div>";
-
-				content += "</div>";
+					content += "</tr></tfoot><tbody>";
+					
+					
+					content += "<td></td></tr>";
+					content += "</tbody></table></div>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionHeureSemaine'></a>";
+					
+					content += "</div>";
+					
+					/*$.ajax({method : "GET",
+						url : "MVC/View/getDepartementListTable.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#header").html(response);
+							$("#footer").html(response);
+							}
+					
+						});
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getProjectWeeks.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("tbody").html(response);
+							}
+					
+						});*/
+				}
 
 				$("#content").html(content);
 				
-				var semaine = $(this).find('td').eq(0).text();
-				
-				$.ajax({method : "GET",
-					url : "MVC/View/getPrimesTable.php",
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					success : function(response) {
-						$("#header").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
-						$("#footer").html("<th>code</th>" + "<th>" + semaine + "</th>" + response);
-						}
-				
-					});
-				
-				$.ajax({method : "GET",
-					url : "MVC/View/getEmployeesList.php",
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					success : function(response) {
-						$("#selectEmp").html(response);
-						}
-				
-					});
-				
-				$.ajax({method : "GET",
-					url : "MVC/View/getEmployeesListTable.php",
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					success : function(response) {
-						$("tbody").html(response);
-						}
-				
-					});
-				
-				$.ajax({method : "GET",
-					url : "MVC/View/getProjetsList.php",
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					success : function(response) {
-						$("#selectProjet").html(response);
-						}
-				
-					});
-				
-				$.ajax({method : "GET",
-					url : "MVC/View/getDepartementList.php",
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					success : function(response) {
-						$("#selectDep").html(response);
-						}
-				
-					});
 			}
-		});*/
-
+		});
 
 
 
