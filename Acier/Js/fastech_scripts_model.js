@@ -467,19 +467,8 @@ $(document)
 					
 						});
 					
-					/*$.ajax({method : "GET",
-						url : "MVC/View/getEmployeesList.php",
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("#selectEmp").html(response);
-							}
-					
-						});
-					
 					$.ajax({method : "GET",
-						url : "MVC/View/getEmployeesListTable.php",
+						url : "MVC/View/getEmployeList.php?objectName=" + windowName,
 						beforeSend : function() {
 							// TO INSERT - loading animation
 						},
@@ -489,27 +478,6 @@ $(document)
 					
 						});
 					
-					$.ajax({method : "GET",
-						url : "MVC/View/getProjetsList.php",
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("#selectProjet").html(response);
-							}
-					
-						});
-					
-					$.ajax({method : "GET",
-						url : "MVC/View/getDepartementList.php",
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("#selectDep").html(response);
-							}
-					
-						});*/
 				} else if(windowName == "ongletProjet"){
 					content += "<div class='container-fluid'>";
 					
@@ -556,6 +524,11 @@ $(document)
 				}
 
 				$("#content").html(content);
+				
+
+				$("#selectEmp").load("MVC/view/getEmpSelect.php");
+				$("#selectDep").load("MVC/view/getDepSelect.php");
+				$("#selectProjet").load("MVC/view/getProjetSelect.php");
 				
 			}
 		});

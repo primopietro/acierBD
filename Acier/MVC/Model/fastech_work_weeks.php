@@ -106,12 +106,12 @@ class FastechWorkWeek extends FastechModel {
         return $this;
     }
     
-    public function getListOfAllDBObjects() {
+    public function getListOfActiveBDObjects() {
     	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
     	
     	$internalAttributes = get_object_vars ( $this );
     	
-    	$sql = "SELECT * FROM `" . $this->table_name . "` ";
+    	$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1";
     	$result = $conn->query ( $sql );
     	
     	if ($result->num_rows > 0) {
@@ -123,8 +123,10 @@ class FastechWorkWeek extends FastechModel {
     			foreach ( $row as $aRowName => $aValue ) {
     				if($aRowName != "begin_day"){
     					$anObject[$aRowName] = $aValue;
-	    				if($aRowName == "begin_date")
+	    				if($aRowName == "begin_date"){
 	    					$anObject["payable"] = date('Y-m-d', strtotime($aValue . " + 4 days"));
+	    					echo $anObject["payable"];
+	    				}
     				}
     			}
     			$fastechObjects [$row [$this->primary_key]] = $anObject;
@@ -139,8 +141,8 @@ class FastechWorkWeek extends FastechModel {
 
 }
 
-
+/*
 $aWorkWeek = new FastechWorkWeek();
-$aWorkWeek->getListOfAllDBObjects();
+$aWorkWeek->getListOfAllDBObjects();*/
 
 ?>

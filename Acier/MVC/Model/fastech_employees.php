@@ -165,6 +165,39 @@ class FastechEmploye extends FastechModel {
 			}
 		}
 	}
+	
+	function getEmployeListAsDynamicTable(){
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				echo "<tr>";
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						echo "<td>" . $value . "</td>";
+					}
+				}
+				echo "</tr>";
+			}
+		}
+	}
+	
+	public function getActiveObjectsAsSelect($selected = null) {
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($selected == null) {
+			echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";
+		}
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				
+				echo "<option ";
+				
+				if (preg_replace ( '/\s+/', '', $selected ) == preg_replace ( '/\s+/', '', $anObject [$this->primary_key] )) {
+					echo " selected='selected' ";
+				}
+				echo " class='editable' value=" . $anObject [$this->primary_key] . ">" . $anObject ["first_name"] . " " . $anObject ["family_name"] . "</option>";
+			}
+		}
+	}
 }
 
 /*
