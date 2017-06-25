@@ -106,7 +106,7 @@ class FastechWorkWeek extends FastechModel {
         return $this;
     }
     
-    function getListOfAllDBObjects() {
+    public function getListOfAllDBObjects() {
     	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
     	
     	$internalAttributes = get_object_vars ( $this );
@@ -124,7 +124,7 @@ class FastechWorkWeek extends FastechModel {
     				if($aRowName != "begin_day"){
     					$anObject[$aRowName] = $aValue;
 	    				if($aRowName == "begin_date")
-	    					$anObject["payable"] = $aValue('Y-m-d', strtotime("+4 days"));
+	    					$anObject["payable"] = date('Y-m-d', strtotime($aValue . " + 4 days"));
     				}
     			}
     			$fastechObjects [$row [$this->primary_key]] = $anObject;
@@ -139,8 +139,8 @@ class FastechWorkWeek extends FastechModel {
 
 }
 
-/*
-$aWorkWeek = new FastechWorkWeek("ALLO", "2017-02-02");
-$aWorkWeek->addDBObject();
-*/
+
+$aWorkWeek = new FastechWorkWeek();
+$aWorkWeek->getListOfAllDBObjects();
+
 ?>

@@ -315,7 +315,7 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
-			if(windowName == "ongletSemaine"){
+			if(windowName == "ongletSemaine" || windowName == "ongletProjet"){
 				addConsultButtons();
 			}
 		}
