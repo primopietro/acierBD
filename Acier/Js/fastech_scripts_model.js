@@ -357,7 +357,7 @@ $(document.body).on('change',".editable",function (e) {
 		},
 		success : function(response) {
 			
-				if(response== "success"){
+				if(response== "success" || response =="Wsuccess"){
 					updateTable(windowName);
 					state = response;
 				}else{

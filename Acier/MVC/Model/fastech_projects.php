@@ -19,8 +19,6 @@ class FastechProject extends FastechModel{
 	}
 	
 
-
-
     /**
      * id_project
      * @return unkown
