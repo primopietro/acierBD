@@ -26,6 +26,9 @@ body {
 tr.success, tr.success>td, tr.success>form, tr.success>form>input {
 	background-color: #dff0d8 !important;
 }
+tr.Wsuccess, tr.Wsuccess>td, tr.Wsuccess>form, tr.Wsuccess>form>input {
+	background-color: #dff0d8 !important;
+}
 
 tr.danger, tr.danger>td, tr.danger>form, tr.danger>input {
 	background-color: #f2dede !important;

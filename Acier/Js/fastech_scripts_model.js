@@ -380,8 +380,9 @@ function highlightRow(rowIndex, state){
 	$('.tblObject tr').each(function() {
 		if (compter==rowIndex){
 			$(this).addClass(state).delay(1000).queue(function(){
-				if(state=="success"){
+				if(state=="success" || state=="Wsuccess"){
 					$(this).delay(1000).removeClass(state).dequeue();
+					$(this).delay(1000).removeClass("Wsuccess").dequeue();
 					$(this).delay(1000).removeClass("danger").dequeue();
 				}
 				
