@@ -10,8 +10,8 @@ class FastechModel {
 		
 		$definition = "INSERT INTO `" . $this->table_name . "`";
 		
-		//echo "table name : " . $this->table_name . "<br>";
-		//echo "primary_key name : " . $this->primary_key . "<br>";
+		// echo "table name : " . $this->table_name . "<br>";
+		// echo "primary_key name : " . $this->primary_key . "<br>";
 		
 		$attributes = " ( ";
 		$values = " VALUES (";
@@ -39,7 +39,7 @@ class FastechModel {
 		
 		$sql = $definition . $attributes . $values;
 		
-		//echo $sql;
+		// echo $sql;
 		if (! $result = $conn->query ( $sql )) {
 			// Oh no! The query failed.
 			echo "fail";
@@ -74,7 +74,7 @@ class FastechModel {
 		
 		$sql = $definition . $sets . $condition;
 		
-		//echo "<br>" . $sql;
+		// echo "<br>" . $sql;
 		
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
@@ -118,7 +118,7 @@ class FastechModel {
 		
 		$conn->close ();
 	}
-	 function getListOfActiveBDObjects() {
+	function getListOfActiveBDObjects() {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		$internalAttributes = get_object_vars ( $this );
@@ -129,11 +129,11 @@ class FastechModel {
 		if ($result->num_rows > 0) {
 			$fastechObjects = array ();
 			while ( $row = $result->fetch_assoc () ) {
-				$anObject =  Array();
-				$anObject["primary_key"] = $this->primary_key;
-				$anObject["table_name"] = $this->table_name;
+				$anObject = Array ();
+				$anObject ["primary_key"] = $this->primary_key;
+				$anObject ["table_name"] = $this->table_name;
 				foreach ( $row as $aRowName => $aValue ) {
-					$anObject[$aRowName] = $aValue;
+					$anObject [$aRowName] = $aValue;
 				}
 				
 				$fastechObjects [$row [$this->primary_key]] = $anObject;
@@ -156,11 +156,11 @@ class FastechModel {
 		if ($result->num_rows > 0) {
 			$fastechObjects = array ();
 			while ( $row = $result->fetch_assoc () ) {
-				$anObject =  Array();
-				$anObject["primary_key"] = $this->primary_key;
-				$anObject["table_name"] = $this->table_name;
+				$anObject = Array ();
+				$anObject ["primary_key"] = $this->primary_key;
+				$anObject ["table_name"] = $this->table_name;
 				foreach ( $row as $aRowName => $aValue ) {
-					$anObject[$aRowName] = $aValue;
+					$anObject [$aRowName] = $aValue;
 				}
 				
 				$fastechObjects [$row [$this->primary_key]] = $anObject;
@@ -181,12 +181,12 @@ class FastechModel {
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {
-			$anObject =  Array();
+			$anObject = Array ();
 			while ( $row = $result->fetch_assoc () ) {
-				$anObject["primary_key"] = $this->primary_key;
-				$anObject["table_name"] = $this->table_name;
+				$anObject ["primary_key"] = $this->primary_key;
+				$anObject ["table_name"] = $this->table_name;
 				foreach ( $row as $aRowName => $aValue ) {
-					$anObject[$aRowName] = $aValue;
+					$anObject [$aRowName] = $aValue;
 					$this->$aRowName = $aValue;
 				}
 			}
@@ -196,21 +196,19 @@ class FastechModel {
 		$conn->close ();
 		return null;
 	}
-	
-	function getObjectAsArrayWithMetadata(){
+	function getObjectAsArrayWithMetadata() {
 		return get_object_vars ( $this );
 	}
-	function getObjectAsArrayWithOutMetadata(){
-		$anObject =  get_object_vars ( $this );
-		unset($anObject['table_name']);
-		unset($anObject['primary_key']);
+	function getObjectAsArrayWithOutMetadata() {
+		$anObject = get_object_vars ( $this );
+		unset ( $anObject ['table_name'] );
+		unset ( $anObject ['primary_key'] );
 		return $anObject;
 	}
 	
-	
-	//TODO: create intercation with css classes
-	function getObjectListAsDynamicTable($showPrimaryKey = true){
-		$aListOfObjects = $this->getListOfActiveBDObjects();
+	// TODO: create intercation with css classes
+	function getObjectListAsDynamicTable($showPrimaryKey = true) {
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				
@@ -221,16 +219,13 @@ class FastechModel {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
 						
-						if($showPrimaryKey == false &&   preg_replace('/\s+/', '', $anObject["primary_key"]) != preg_replace('/\s+/', '', $key)){
-						echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object]. " '>";
+						if ($showPrimaryKey == false && preg_replace ( '/\s+/', '', $anObject ["primary_key"] ) != preg_replace ( '/\s+/', '', $key )) {
+							echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object] . " '>";
+							echo "<input class='editable' name='" . $key . "' value='" . $value . "'> </form></td>";
+						} else if ($showPrimaryKey == true) {
+							echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object] . " '>";
 							echo "<input class='editable' name='" . $key . "' value='" . $value . "'> </form></td>";
 						}
-						else if($showPrimaryKey == true){
-							echo "<td><form table='" . $table_name . "' class='edit' idObj='" . $anObject [$id_object]. " '>";
-							echo "<input class='editable' name='" . $key . "' value='" . $value . "'> </form></td>";
-							
-						}
-					
 					}
 				}
 				
@@ -238,9 +233,9 @@ class FastechModel {
 			}
 		}
 	}
-	//TODO: create intercation with css classes
-	function getObjectListAsStaticTable($cssClasses){
-		$aListOfObjects = $this->getListOfActiveBDObjects();
+	// TODO: create intercation with css classes
+	function getObjectListAsStaticTable($cssClasses) {
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				
@@ -249,7 +244,7 @@ class FastechModel {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						
 						echo "<td>";
-						echo  $value . "</td>";
+						echo $value . "</td>";
 					}
 				}
 				
@@ -257,27 +252,24 @@ class FastechModel {
 			}
 		}
 	}
-	
-	function getActiveObjectsAsSelect($selected = null){
-		$aListOfObjects= $this->getListOfActiveBDObjects();
-		if($selected == null){
+	function getActiveObjectsAsSelect($selected = null) {
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($selected == null) {
 			echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";
 		}
-		if($aListOfObjects!= null){
-			foreach ($aListOfObjects as $anObject) {
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
 				
 				echo "<option ";
 				
-				if(preg_replace('/\s+/', '', $selected) ==  preg_replace('/\s+/', '', $anObject[$this->primary_key])){
+				if (preg_replace ( '/\s+/', '', $selected ) == preg_replace ( '/\s+/', '', $anObject [$this->primary_key] )) {
 					echo " selected='selected' ";
 				}
-				echo " class='editable' value=" . $anObject[$this->primary_key].  ">" .  $anObject["name"]."</option>";
-				
+				echo " class='editable' value=" . $anObject [$this->primary_key] . ">" . $anObject ["name"] . "</option>";
 			}
 		}
 	}
-	
-	
+
 }
 
 ?>

@@ -15,9 +15,10 @@ $(document)
 			var content = getContentHtml(windowName);
 			$("#content").html("");
 			$("#content").html(content);
-
-			updateTable(windowName);
 			
+			updateTable(windowName);
+			if(windowName == "ongletEmploye")
+				$("#departementList").load("MVC/view/getDepSelect.php");
 		});
 
 //fill content with onglet
@@ -145,11 +146,12 @@ function getContentHtml(windowName){
 
 		content += "<span id='errorForm'></span>";
 
-		content += "<a data-animation='ripple'  class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo'   typeName='employe'>Ajouter</a></form>";
+		content += "<a data-animation='ripple'  class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo'   typeName='employees'>Ajouter</a></form>";
 
 		
 		
 		content += "</div>";
+	   
 		
 	} else if(windowName === "ongletProjet"){
 		
@@ -187,7 +189,7 @@ function getContentHtml(windowName){
 
 		content += "<span id='errorForm'></span>";
 
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'  typeName='project'>Ajouter</a></form>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'  typeName='projects'>Ajouter</a></form>";
 		content += "</div>";
 		
 	} else if(windowName === "ongletDepartement"){
@@ -258,6 +260,9 @@ $(document)
 			var dataToSend = form.serialize();
 			var windowName = $(".active > a").attr("id");
 			var formName = $(this).attr("typename");
+			console.log(dataToSend);
+			console.log(formName);
+			console.log(windowName);
 			$
 					.ajax({
 						method : "POST",
@@ -271,7 +276,7 @@ $(document)
 						},
 						success : function(response) {
 							// response = response.replace(/\s/g, '');
-							if (response == "success") {
+							if (response == "success" || response =="Wsuccess") {
 								updateTable(windowName);
 
 								$(document).find("form").find("input").val("");
@@ -325,6 +330,8 @@ function addConsultButtons(){
 	});
 	$('.tblObject tfoot tr').append("<th></th>");
 }
+
+
 
 //on change tbl event
 $(document.body).on('change',".editable",function (e) {

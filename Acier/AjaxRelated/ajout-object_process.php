@@ -7,12 +7,14 @@ require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_' . 
 
 if ($typeName == "prime") {
 	$anObject = new FastechPrime ();
-} else if ($typeName == "work_week") {
+} else if ($typeName == "work_weeks") {
 	$anObject = new FastechWorkWeek();
-} else if ($typeName == "employe") {
+} else if ($typeName == "employees") {
 	$anObject = new FastechEmploye();
-} else if ($typeName == "project") {
+} else if ($typeName == "projects") {
 	$anObject = new FastechProject();
+	$anObject->setProduction_total("0");
+	$anObject->setId_project(null);
 } else if ($typeName == "departement") {
 	$anObject = new FastechDepartement();
 }
@@ -26,7 +28,6 @@ foreach ( $valuesToBeAdded as $key => $value ) {
 	$attributeName = "set" . ucfirst ( $key );
 	$anObject->$attributeName ( $value );
 }
-
 $anObject->addDBObject ();
 
 ?>

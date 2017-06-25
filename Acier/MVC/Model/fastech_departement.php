@@ -11,24 +11,61 @@ class FastechDepartement extends FastechModel {
 	
 	function __construct() {
 	}
-	function getName() {
-		return $this->name;
-	}
-	function getAmount() {
-		return $this->amount;
-	}
-	function getid_state() {
-		return $this->id_state;
-	}
-	function setName($aName) {
-		$this->name = $aName;
-	}
-	function setValue($anAmount) {
-		$this->amount= $anAmount;
-	}
-	function setid_state($id_state) {
-		$this->id_state = $id_state;
-	}
+
+    /**
+     * name
+     * @return unkown
+     */
+    public function getName(){
+        return $this->name;
+    }
+
+    /**
+     * name
+     * @param unkown $name
+     * @return FastechDepartement
+     */
+    public function setName($name){
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * amount
+     * @return unkown
+     */
+    public function getAmount(){
+        return $this->amount;
+    }
+
+    /**
+     * amount
+     * @param unkown $amount
+     * @return FastechDepartement
+     */
+    public function setAmount($amount){
+        $this->amount = $amount;
+        return $this;
+    }
+
+    /**
+     * id_state
+     * @return unkown
+     */
+    public function getId_state(){
+        return $this->id_state;
+    }
+
+    /**
+     * id_state
+     * @param unkown $id_state
+     * @return FastechDepartement
+     */
+    public function setId_state($id_state){
+        $this->id_state = $id_state;
+        return $this;
+    }
+
 }
 
 ?>
