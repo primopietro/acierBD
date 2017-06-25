@@ -373,6 +373,7 @@ $(document.body).on('change',".editable",function (e) {
 	
 		});
 	
+	
 });
 
 function highlightRow(rowIndex, state){
