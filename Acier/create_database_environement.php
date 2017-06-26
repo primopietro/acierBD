@@ -190,7 +190,8 @@ echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`employe_week_hours`
  ( `id_employe_hour` INT NOT NULL AUTO_INCREMENT ,
- `id_employee` INT NOT NULL , 
+`id_work_week` INT NOT NULL ,
+ `id_employe` INT NOT NULL , 
 `id_project` INT NOT NULL , 
 `departement` varchar(25) NOT NULL ,
  `hours` DOUBLE NOT NULL ,

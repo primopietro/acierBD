@@ -172,7 +172,7 @@ function getContentHtml(windowName){
 		content += "</tbody></table></div>";
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionProjet'>Imprimer</a>";
 
-		content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
+		content += "<h3 class='formTitleMargin'>Ajout projet</h3>";
 		content += "<form id='formProjet'>";
 
 		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
@@ -326,7 +326,7 @@ function updateTable(windowName){
 function addConsultButtons(windowName){
 	$('.tblObject thead tr').append("<th></th>");
 	$('.tblObject > tbody > tr').each(function(){
-		var id = $(this).find("input:first").val();
+		var id = $(this).find("input").eq(1).val();
 		if(windowName == "ongletProjet"){
 			id += "_" + $(this).find("input").eq(3).val();
 		}
@@ -413,6 +413,10 @@ $(document)
 				content = "";
 
 				if(windowName == "ongletSemaine"){
+					
+					var semaine = $(this).attr('id');
+					$id_work_week = 3;
+					
 					content += "<div class='container-fluid'>";
 	
 					// ******TABLEAU******
@@ -431,13 +435,18 @@ $(document)
 					content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
 					content += "<form id='formHeureSemaine'>";
 	
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12' style='display:none'>";
+					content += "<label for='id_work_week'>id_work_week</label><input id='inputWorkWeek' name='id_work_week' class='form-control formLeft inputMarginTop inputForm' value='" + $id_work_week + "'>";
+					content += "</input>";
+					content += "</div>";
+					
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='employe'>Employé</label><select id='selectEmp' name='employe' class='form-control formLeft inputMarginTop inputForm'>";
+					content += "<label for='id_employe'>Employé</label><select id='selectEmp' name='id_employe' class='form-control formLeft inputMarginTop inputForm'>";
 					content += "</select>";
 					content += "</div>";
 	
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='projet'>Projet</label><select id='selectProjet' name='projet' class='form-control formLeft inputMarginTop inputForm'>";
+					content += "<label for='id_project'>Projet</label><select id='selectProjet' name='id_project' class='form-control formLeft inputMarginTop inputForm'>";
 					content += "</select>";
 					content += "</div>";
 	
@@ -447,16 +456,14 @@ $(document)
 					content += "</div>";
 	
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='nbHeure'>Nb. heure(s)</label><input id='heure' name='nbHeure' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
+					content += "<label for='hours'>Nb. heure(s)</label><input id='heure' name='hours' class='form-control inputMarginTop inputForm' placeholder='Heure(s)'></input>";
 					content += "</div>";
 	
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm' id='btnAjoutHeure'>Ajouter</a></form>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm addInfo' typeName='employe_week_hours'>Ajouter</a></form>";
 					content += "<span id='errorForm'></span>";
 					content += "</div>";
 	
 					content += "</div>";
-					
-					var semaine = $(this).attr('id');
 					
 					$.ajax({method : "GET",
 						url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,

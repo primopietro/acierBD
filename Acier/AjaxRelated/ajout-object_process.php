@@ -17,6 +17,9 @@ if ($typeName == "prime") {
 	$anObject->setId_project(null);
 } else if ($typeName == "departement") {
 	$anObject = new FastechDepartement();
+} else if ($typeName == "employe_week_hours"){
+	$anObject = new FastechEmployekWeekHours();
+	$anObject->setId_employe_hour(null);
 }
 
 $attributes = $anObject->getObjectAsArrayWithOutMetadata ();

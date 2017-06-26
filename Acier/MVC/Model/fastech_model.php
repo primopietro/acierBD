@@ -10,15 +10,16 @@ class FastechModel {
 		
 		$definition = "INSERT INTO `" . $this->table_name . "`";
 		
-		// echo "table name : " . $this->table_name . "<br>";
-		// echo "primary_key name : " . $this->primary_key . "<br>";
+		//echo "table name : " . $this->table_name . "<br>";
+		//echo "primary_key name : " . $this->primary_key . "<br>";
 		
 		$attributes = " ( ";
 		$values = " VALUES (";
 		$lastElement = end ( $internalAttributes );
+		//echo "last: " . $lastElement . "<br>";
 		foreach ( $internalAttributes as $rowName => $value ) {
-			
 			if ($rowName != "table_name" && $rowName != "primary_key") {
+				//echo $rowName . ": " . $value . "<br>";
 				
 				$attributes .= "`" . $rowName . "`";
 				if ($value == null) {
@@ -38,6 +39,8 @@ class FastechModel {
 		$values .= " ) ";
 		
 		$sql = $definition . $attributes . $values;
+		
+		//echo $sql . "<br>";
 		
 		// echo $sql;
 		if (! $result = $conn->query ( $sql )) {
