@@ -326,9 +326,11 @@ function updateTable(windowName){
 function addConsultButtons(windowName){
 	$('.tblObject thead tr').append("<th></th>");
 	$('.tblObject > tbody > tr').each(function(){
-		var id = $(this).find("input").eq(1).val();
+		var id = $(this).find("input").eq(0).val();
 		if(windowName == "ongletProjet"){
 			id += "_" + $(this).find("input").eq(3).val();
+		} else if (windowName == "ongletSemaine"){
+			id += "_" + $(this).find("input").eq(1).val();
 		}
 		$(this).append("<td><a class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
 	});
@@ -415,7 +417,7 @@ $(document)
 				if(windowName == "ongletSemaine"){
 					
 					var semaine = $(this).attr('id');
-					$id_work_week = 3;
+					var arr = semaine.split('_');
 					
 					content += "<div class='container-fluid'>";
 	
@@ -436,7 +438,7 @@ $(document)
 					content += "<form id='formHeureSemaine'>";
 	
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12' style='display:none'>";
-					content += "<label for='id_work_week'>id_work_week</label><input id='inputWorkWeek' name='id_work_week' class='form-control formLeft inputMarginTop inputForm' value='" + $id_work_week + "'>";
+					content += "<label for='id_work_week'>id_work_week</label><input id='inputWorkWeek' name='id_work_week' class='form-control formLeft inputMarginTop inputForm' value='" + arr[0] + "'>";
 					content += "</input>";
 					content += "</div>";
 					
@@ -471,8 +473,8 @@ $(document)
 							// TO INSERT - loading animation
 						},
 						success : function(response) {
-							$("#header").html("<th>code</th><th>" + semaine + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
-							$("#footer").html("<th>code</th><th>" + semaine + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
+							$("#header").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
+							$("#footer").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
 							}
 					
 						});
