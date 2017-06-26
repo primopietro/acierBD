@@ -316,17 +316,20 @@ function updateTable(windowName){
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
 			if(windowName == "ongletSemaine" || windowName == "ongletProjet"){
-				addConsultButtons();
+				addConsultButtons(windowName);
 			}
 		}
 	});
 	
 }
 
-function addConsultButtons(){
+function addConsultButtons(windowName){
 	$('.tblObject thead tr').append("<th></th>");
 	$('.tblObject > tbody > tr').each(function(){
 		var id = $(this).find("input:first").val();
+		if(windowName == "ongletProjet"){
+			id += "_" + $(this).find("input").eq(3).val();
+		}
 		$(this).append("<td><a class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
 	});
 	$('.tblObject tfoot tr').append("<th></th>");
@@ -461,8 +464,8 @@ $(document)
 							// TO INSERT - loading animation
 						},
 						success : function(response) {
-							$("#header").html("<th>code</th><th>" + semaine + "</th>" + response + "<th>BANQUE</th>");
-							$("#footer").html("<th>code</th><th>" + semaine + "</th>" + response + "<th>BANQUE</th>");
+							$("#header").html("<th>code</th><th>" + semaine + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
+							$("#footer").html("<th>code</th><th>" + semaine + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
 							}
 					
 						});
@@ -478,11 +481,23 @@ $(document)
 					
 						});
 					
+
+					$("#content").html(content);
+					
+
+					$("#selectEmp").load("MVC/view/getEmpSelect.php");
+					$("#selectDep").load("MVC/view/getDepSelect.php");
+					$("#selectProjet").load("MVC/view/getProjetSelect.php");
+					
 				} else if(windowName == "ongletProjet"){
+					
+					var toSplit = $(this).attr('id');
+					var arr = toSplit.split('_');
+					
 					content += "<div class='container-fluid'>";
 					
-					content += "<h2 style='margin-bottom: 2px;'>Projet: " + $(this).find('td').eq(0).text() + "</h2>";
-					content += "<h5 style='margin-bottom: 10px;'>" + $(this).find('td').eq(2).text() + "</h5>";
+					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[0] + "</h2>";
+					content += "<h5 style='margin-bottom: 10px;'>" + arr[1] + "$</h5>";
 
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
@@ -495,12 +510,13 @@ $(document)
 					
 					content += "<td></td></tr>";
 					content += "</tbody></table></div>";
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' value='Imprimer' id='btnImpressionHeureSemaine'></a>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
 					
 					content += "</div>";
 					
-					/*$.ajax({method : "GET",
-						url : "MVC/View/getDepartementListTable.php",
+					$.ajax({method : "GET",
+						url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,
 						beforeSend : function() {
 							// TO INSERT - loading animation
 						},
@@ -510,7 +526,7 @@ $(document)
 							}
 					
 						});
-					
+					/*
 					$.ajax({method : "GET",
 						url : "MVC/View/getProjectWeeks.php",
 						beforeSend : function() {
@@ -521,14 +537,10 @@ $(document)
 							}
 					
 						});*/
+					
+
+					$("#content").html(content);
 				}
-
-				$("#content").html(content);
-				
-
-				$("#selectEmp").load("MVC/view/getEmpSelect.php");
-				$("#selectDep").load("MVC/view/getDepSelect.php");
-				$("#selectProjet").load("MVC/view/getProjetSelect.php");
 				
 			}
 		});

@@ -59,6 +59,14 @@ input {
 	padding-top: 13px !important;
 }
 
+.btnRevient{
+	background-color: rgb(37, 51, 112);
+	color: white;
+	float: left;
+	height: 42px;
+	padding-top: 13px !important;
+}
+
 .tableHover:hover {
 	background-color: #eaedf8;
 	color: rgb(37, 51, 112);
@@ -146,12 +154,6 @@ input {
 	background: transparent;
 	pointer-events: none;
 }
-
-td {
-	width: 100%;
-	min-width: 250px;
-}
-
 
 td select {
 	margin: 0;
