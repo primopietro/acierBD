@@ -167,13 +167,28 @@ class FastechEmploye extends FastechModel {
 	}
 	
 	function getEmployeListAsDynamicTable(){
+		$full_name = "";
+		$counter = 0;
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				echo "<tr>";
 				foreach ( $anObject as $key => $value ) {
+					//kinda ghetto
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
-						echo "<td>" . $value . "</td>";
+						if($key == "id_employe"){
+							echo "<td>" . $value. "</td>";
+						}
+						if($key == "first_name" || $key == "family_name"){
+							$full_name .= $value . " ";
+							$counter++;
+						}
+						if($counter == 2){
+							echo "<td>" . $full_name. "</td>";
+							$full_name = "";
+							$counter = 0;
+						}
+						
 					}
 				}
 				echo "</tr>";

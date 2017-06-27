@@ -19,9 +19,6 @@ $(document)
 			updateTable(windowName);
 			if(windowName == "ongletEmploye")
 				$("#departementList").load("MVC/view/getDepSelect.php");
-			if(windowName == "ongletSemaine" || windowName == "ongletProjet"){
-				setTimeout(function(){addConsultButtons(windowName);}, 50);
-			}
 		});
 
 //fill content with onglet
@@ -322,7 +319,9 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
-			
+			if(windowName == "ongletSemaine" || windowName == "ongletProjet"){
+				addConsultButtons(windowName);
+			}
 		}
 	});
 	
@@ -495,6 +494,17 @@ $(document)
 							}
 					
 						});
+					
+					/*$.ajax({method : "GET",
+						url : "MVC/View/getEmployeHoursAsTable.php",
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("tbody").html(response);
+							}
+					
+						});*/
 					
 
 					$("#content").html(content);
