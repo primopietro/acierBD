@@ -262,7 +262,11 @@ $(document)
 			var form = $(this).closest("form");
 			var dataToSend = form.serialize();
 			var windowName = $(".active > a").attr("id");
+			var originalId = $("table").attr('idweek');
 			var formName = $(this).attr("typename");
+			if($(this).attr("typename") == 'work_weeks'){
+				dataToSend+="&id_work_week="+originalId ;
+			}
 			console.log(dataToSend);
 			console.log(formName);
 			console.log(windowName);
@@ -328,12 +332,13 @@ function addConsultButtons(windowName){
 	$('.tblObject thead tr').append("<th></th>");
 	$('.tblObject > tbody > tr').each(function(){
 		var id = $(this).find("input").eq(0).val();
+		var idInitial = id;
 		if(windowName == "ongletProjet"){
 			id += "_" + $(this).find("input").eq(3).val();
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
 		}
-		$(this).append("<td><a class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
+		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
 	});
 	$('.tblObject tfoot tr').append("<th></th>");
 }
@@ -410,6 +415,7 @@ $(document)
 		"click",
 		".clickWeek",
 		function() {
+			var idOriginal = $(this).attr('idweek');
 			var windowName = $(".active > a").attr("id");
 			id = $(".tblObject").closest('tr').attr('id');
 			if (id != "header" && id != "footer") {
@@ -419,13 +425,12 @@ $(document)
 					
 					var semaine = $(this).attr('id');
 					var arr = semaine.split('_');
-					
 					content += "<div class='container-fluid'>";
 	
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
 					
-					content += "<table class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
+					content += "<table idweek='"+arr[0]+"' class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
 					content += "</tr></thead><tfoot><tr id='footer'>";
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";

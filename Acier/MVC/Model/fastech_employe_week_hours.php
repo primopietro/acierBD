@@ -6,11 +6,11 @@ class FastechEmployekWeekHours extends FastechModel {
 	protected $primary_key = "id_employe_hour";
 	
 	protected $id_employe_hour=0;
-	protected $id_work_week=0;
-	protected $id_employe = 0;
-	protected $id_project = 0;
+	protected $id_work_week='0';
+	protected $id_employe = '0';
+	protected $id_project = '0';
 	protected $departement = '';
-	protected $hours = 0;
+	protected $hours = '0';
 	protected $id_state = 1; // 1 equals active by default
 	function __construct() {
 		
@@ -145,6 +145,7 @@ class FastechEmployekWeekHours extends FastechModel {
     }
 
 }
+
 
 /*for($i=2;$i<5;++$i){
  $anEmploye = new FastechEmployekWeekHours();

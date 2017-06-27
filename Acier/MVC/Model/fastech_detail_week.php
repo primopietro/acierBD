@@ -198,6 +198,8 @@ class FastechDetailWeek extends FastechModel {
     }
 
 }
+
+
 /* demo
 $aDetailWeek = new FastechDetailWeek ();
 $aDetailWeek->getObjectFromDB ( 1 );

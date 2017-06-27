@@ -258,7 +258,85 @@ else{
 }
 echo "<br>";
 
+$sql = 'ALTER TABLE `acier_fastech`.`employe_week_hours` ADD INDEX `ewh_ww` (`id_work_week`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
 
+$sql = 'ALTER TABLE `acier_fastech`.`employe_week_hours` ADD INDEX `ewh_e` (`id_employe`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `acier_fastech`.`employe_week_hours` ADD INDEX `ewh_p` (`id_project`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `acier_fastech`.`employe_week_hours` ADD INDEX `ewh_d` (`departement`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `employe_week_hours` ADD CONSTRAINT `ewh_ww_fk` FOREIGN KEY (`id_work_week`) REFERENCES `work_weeks`(`id_work_week`) ON DELETE CASCADE ON UPDATE CASCADE';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to detail_week</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in detail_week</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `employe_week_hours` ADD CONSTRAINT `ewh_p_fk` FOREIGN KEY (`id_project`) REFERENCES `projects`(`id_project`) ON DELETE CASCADE ON UPDATE CASCADE';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to detail_week</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in detail_week</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `employe_week_hours` ADD CONSTRAINT `ewh_d_fk` FOREIGN KEY (`departement`) REFERENCES `departement`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to detail_week</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in detail_week</span>\n";
+}
+echo "<br>";
 /********************************************Add data**********************************************/
 
 

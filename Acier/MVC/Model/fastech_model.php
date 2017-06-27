@@ -28,7 +28,7 @@ class FastechModel {
 					$values .= "'" . $value . "'";
 				}
 				
-				if ($value != $lastElement) {
+				if ($value != $lastElement  || $rowName != "id_state") {
 					$attributes .= ",";
 					$values .= ",";
 				}
