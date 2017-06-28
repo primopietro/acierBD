@@ -261,9 +261,9 @@ $(document)
 			var windowName = $(".active > a").attr("id");
 			var originalId = $("table").attr('idweek');
 			var formName = $(this).attr("typename");
-			if($(this).attr("typename") == 'work_weeks'){
+			/*if($(this).attr("typename") == 'employe_week_hours'){
 				dataToSend+="&id_work_week="+originalId ;
-			}
+			}*/
 			console.log(dataToSend);
 			console.log(formName);
 			console.log(windowName);
