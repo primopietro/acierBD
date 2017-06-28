@@ -281,7 +281,11 @@ $(document)
 						success : function(response) {
 							// response = response.replace(/\s/g, '');
 							if (response == "success" || response =="Wsuccess") {
-								updateTable(windowName);
+								if(formName == "employe_week_hours"){
+									updateTableHour(originalId);
+								} else{
+									updateTable(windowName);
+								}
 
 								$(document).find("form").find("input").val("");
 
@@ -325,6 +329,27 @@ function updateTable(windowName){
 		}
 	});
 	
+}
+
+function updateTableHour(id){
+	$
+	.ajax({
+		method : "GET",
+		url : "MVC/View/getObjectDynamicTable.php?objectName=ongletHeure&weekId=" + id,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		beforeSend : function() {
+			/*$('.tblObject tbody')
+					.append(
+							"<span id='download'>Telechargement..</span>");*/
+		},
+		success : function(response) {
+			//$('#download').remove();
+			$('.tblObject tbody').html("");
+			$('.tblObject tbody').append(response);
+		}
+	});
 }
 
 function addConsultButtons(windowName){
@@ -429,7 +454,7 @@ $(document)
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
 					
-					content += "<table idweek='"+arr[0]+"' class='table table-bordered' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
+					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
 					content += "</tr></thead><tfoot><tr id='footer'>";
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
@@ -484,19 +509,8 @@ $(document)
 					
 						});
 					
-					$.ajax({method : "GET",
-						url : "MVC/View/getEmployeList.php?objectName=" + windowName,
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("tbody").html(response);
-							}
-					
-						});
-					
 					/*$.ajax({method : "GET",
-						url : "MVC/View/getEmployeHoursAsTable.php",
+						url : "MVC/View/getEmployeList.php?objectName=" + windowName,
 						beforeSend : function() {
 							// TO INSERT - loading animation
 						},
@@ -506,7 +520,8 @@ $(document)
 					
 						});*/
 					
-
+					updateTableHour(arr[0]);
+					
 					$("#content").html(content);
 					
 

@@ -166,13 +166,14 @@ class FastechEmploye extends FastechModel {
 		}
 	}
 	
-	function getEmployeListAsDynamicTable(){
+	//merged in fastech_employe_week_hours (see getObjectList($weekId))
+	/*function getEmployeListAsDynamicTable(){
 		$full_name = "";
 		$counter = 0;
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
-				echo "<tr>";
+				echo "<tr class='tableHover cursorDefault'>";
 				foreach ( $anObject as $key => $value ) {
 					//kinda ghetto
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
@@ -194,7 +195,7 @@ class FastechEmploye extends FastechModel {
 				echo "</tr>";
 			}
 		}
-	}
+	}*/
 	
 	public function getActiveObjectsAsSelect($selected = null) {
 		$aListOfObjects = $this->getListOfActiveBDObjects ();

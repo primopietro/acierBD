@@ -99,6 +99,10 @@ input {
 	font-weight: 900;
 }
 
+.cursorDefault{
+	cursor: default;'
+}
+
 .cursor:hover{
 	text-decoration: underline!important;
 }
