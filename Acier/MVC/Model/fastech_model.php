@@ -256,14 +256,24 @@ class FastechModel {
 		}
 	}
 	
-	function getObjectListAsDynamicHeader($showPrimaryKey = true) {
+	function getObjectListAsDynamicHeaderFooter($showPrimaryKey = true) {
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		$onlyOnce = 0;
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
 				foreach ( $anObject as $key => $value ) {
+					if($key == "table_name" && $value == "departement" && $onlyOnce == 0){
+						echo "<th></th>";
+						$onlyOnce++;
+					}
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
-						if(!is_numeric($value))
-							echo "<th>". $value . "</th>";
+						if($showPrimaryKey == true){
+							if(!is_numeric($value))
+								echo "<th class='alignRight'>". $value . "</th>";
+						} else {
+							if(is_numeric($value))
+								echo "<th class='alignRight'>". $value . " $/h</th>";
+						}
 					}
 				}
 				

@@ -33,10 +33,15 @@ if($windowName== "ongletPrime"){
 	$anObject->getObjectListAsDynamicTable(false);
 } else if($windowName == "ongletHeure"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
-	$weekId = $_GET["weekId"];
+	$weekId = $_GET["id"];
 	$anObject = new FastechEmployekWeekHours();
 	$anObject->getObjectList($weekId);
-} 
+} else if($windowName == "ongletProjetHeure"){
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
+	$projectId = $_GET["id"];
+	$anObject = new FastechEmployekWeekHours();
+	$anObject->getProjectHourList($projectId);
+}
 
 $_SESSION['current_page'] = $windowName;
 

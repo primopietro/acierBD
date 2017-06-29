@@ -284,7 +284,7 @@ $(document)
 							if (response == "success" || response =="Wsuccess") {
 								if(formName == "employe_week_hours"){
 									 originalId = $("table").attr('idweek');
-									updateTableHour(originalId);
+									updateTableHour(originalId, "ongletHeure");
 								} else{
 									updateTable(windowName);
 								}
@@ -333,11 +333,11 @@ function updateTable(windowName){
 	
 }
 
-function updateTableHour(id){
+function updateTableHour(id, windowName){
 	$
 	.ajax({
 		method : "GET",
-		url : "MVC/View/getObjectDynamicTable.php?objectName=ongletHeure&weekId=" + id,
+		url : "MVC/View/getObjectDynamicTable.php?objectName=" + windowName + "&id=" + id,
 		beforeSend : function() {
 			// TO INSERT - loading animation
 		},
@@ -360,7 +360,8 @@ function addConsultButtons(windowName){
 		var id = $(this).find("input").eq(0).val();
 		var idInitial = id;
 		if(windowName == "ongletProjet"){
-			id += "_" + $(this).find("input").eq(3).val();
+			id += "_" + $(this).find("input").eq(1).val();
+			id += "_" + $(this).find("input").eq(4).val();
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
 		}
@@ -511,18 +512,7 @@ $(document)
 					
 						});
 					
-					/*$.ajax({method : "GET",
-						url : "MVC/View/getEmployeList.php?objectName=" + windowName,
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("tbody").html(response);
-							}
-					
-						});*/
-					
-					updateTableHour(arr[0]);
+					updateTableHour(arr[0], "ongletHeure");
 					
 					$("#content").html(content);
 					
@@ -538,48 +528,26 @@ $(document)
 					
 					content += "<div class='container-fluid'>";
 					
-					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[0] + "</h2>";
-					content += "<h5 style='margin-bottom: 10px;'>" + arr[1] + "$</h5>";
+					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[1] + "</h2>";
+					content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
 
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
-					content += "<table class='table table-bordered' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
+					content += "<table class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "</tr></thead><tfoot><tr id='footer'>";
 
 					content += "</tr></tfoot><tbody>";
-					
-					
-					content += "<td></td></tr>";
 					content += "</tbody></table></div>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
 					
 					content += "</div>";
 					
-					$.ajax({method : "GET",
-						url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("#header").html(response);
-							$("#footer").html(response);
-							}
+					updateHeaderFooter(windowName);
 					
-						});
-					/*
-					$.ajax({method : "GET",
-						url : "MVC/View/getProjectWeeks.php",
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("tbody").html(response);
-							}
-					
-						});*/
-					
+					updateTableHour(arr[0], "ongletProjetHeure");
+
 
 					$("#content").html(content);
 				}
@@ -587,6 +555,31 @@ $(document)
 			}
 		});
 
+function updateHeaderFooter(windowName){
+	$.ajax({method : "GET",
+		url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		success : function(response) {
+			$("#header").html(response + "<th class='alignRight'>TOTAL</th>");
+
+			}
+	
+		});
+	
+	$.ajax({method : "GET",
+		url : "MVC/View/getObjectDynamicFooter.php?objectName=" + windowName,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		success : function(response) {
+			$("#footer").html(response + "<th class='alignRight'>TOTAL</th>");
+
+			}
+	
+		});
+}
 
 
 
