@@ -190,43 +190,61 @@ class FastechEmployekWeekHours extends FastechModel {
 	function getProjectHourList($projectId) {
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
-		$aListOfWeeks = $this->getWeeksAfterDate ( "2017-06-05" );
+		$sql = "SELECT start_date FROM projects WHERE id_project = " . $projectId;
+		$result = $conn->query ( $sql );
+		
+		if ($result->num_rows > 0) {
+			while ( $row = $result->fetch_assoc () ) {
+				foreach ( $row as $aRowName => $aValue ) {
+					$date = $aValue;
+				}
+			}
+			$conn->close ();
+		}
+		
+		$aListOfWeeks = $this->getWeeksAfterDate ( "'" . $aValue . "'" );
 		$totalHours = 0;
-		$i= array ();
+		$i = array ();
 		$counter1 = 0;
 		
-		foreach ( $aListOfWeeks as $aWeek ) {
-			$weekTotalHours = 0;
-			echo "<tr class='tableHover cursorDefault'><td>" . $aWeek ['name'] . "</td>";
-			$departement = new FastechDepartement ();
-			$aListOfDepartements = $departement->getListOfActiveBDObjects ();
-			if ($aListOfDepartements != null) {
-				$counter = 0;
-				foreach ( $aListOfDepartements as $aDepartement ) {
-					foreach ( $aDepartement as $key1 => $value1 ) {
-						if ($key1 == "name") {
-							$hours = $this->getWeekProjectDepartementHours ( $projectId, $aWeek ['id_work_week'], $value1 );
-							echo "<td class='alignRight'>" . $hours . "</td>";
-							if ($counter1 == 0) {
-								$departementTotalHours [$counter] = 0;
+		if ($aListOfWeeks != null) {
+			foreach ( $aListOfWeeks as $aWeek ) {
+				// echo "<br>";
+				$weekTotalHours = 0;
+				echo "<tr class='tableHover cursorDefault'><td>" . $aWeek ['name'] . "</td>";
+				$departement = new FastechDepartement ();
+				$aListOfDepartements = $departement->getListOfActiveBDObjects ();
+				if ($aListOfDepartements != null) {
+					$counter = 0;
+					foreach ( $aListOfDepartements as $aDepartement ) {
+						foreach ( $aDepartement as $key1 => $value1 ) {
+							if ($key1 == "name") {
+								$hours = $this->getWeekProjectDepartementHours ( $projectId, $aWeek ['id_work_week'], $value1 );
+								echo "<td class='alignRight'>" . $hours . "</td>";
+								if ($counter1 == 0) {
+									$departementTotalHours [$counter] = 0;
+								}
+								$departementTotalHours [$counter] += $hours;
+								$counter ++;
+								$weekTotalHours += $hours;
 							}
-							$departementTotalHours [$counter] += $hours;
-							$counter ++;
-							$weekTotalHours += $hours;
 						}
 					}
 				}
+				$counter1 ++;
+				$totalHours += $weekTotalHours;
+				echo "<td class='alignRight'>$weekTotalHours</td></tr>";
 			}
-			$counter1++;
-			$totalHours += $weekTotalHours;
-			echo "<td class='alignRight'>$weekTotalHours</td></tr>";
+			echo "<tr><td>TOTAL:</td>";
+			for($i = 0; $i < $counter; $i ++) {
+				echo "<td class='alignRight'>$departementTotalHours[$i]</td>";
+			}
+			echo "<td class='alignRight'>$totalHours</td></tr>";
+		} else {
+			echo "<tr><td>Aucune semaine n'a été trouvé</td></tr>";
 		}
-		echo "<tr><td>TOTAL:</td>";
-		for ($i = 0; $i < $counter; $i++){
-			echo "<td class='alignRight'>$departementTotalHours[$i]</td>";
-		}
-		echo "<td class='alignRight'>$totalHours</td></tr>";
 	}
 	function getEmployeHours($id_employe, $id_work_week) {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
@@ -252,6 +270,7 @@ class FastechEmployekWeekHours extends FastechModel {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		$sql = "SELECT id_work_week, name FROM work_weeks WHERE begin_date >= " . $date;
+		// echo $sql . "<br>";
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {
@@ -260,6 +279,7 @@ class FastechEmployekWeekHours extends FastechModel {
 			while ( $row = $result->fetch_assoc () ) {
 				$anObject = Array ();
 				foreach ( $row as $aRowName => $aValue ) {
+					//echo $aValue . "<br>";
 					$anObject [$aRowName] = $aValue;
 				}
 				$aListOfWeeks [$counter] = $anObject;
@@ -276,7 +296,6 @@ class FastechEmployekWeekHours extends FastechModel {
 		
 		$sql = "SELECT hours FROM `" . $this->table_name . "` WHERE id_project = " . $id_project . " AND id_work_week = " . $id_work_week . " AND departement = '" . $departement . "'";
 		$result = $conn->query ( $sql );
-		
 		if ($result->num_rows > 0) {
 			$hoursTotal = 0;
 			while ( $row = $result->fetch_assoc () ) {
@@ -314,7 +333,7 @@ class FastechEmployekWeekHours extends FastechModel {
  * echo "</pre>";
  *
  * $employe = new FastechEmployekWeekHours();
- * $employe->getProjectHourList(1);
+ * $employe->getWeeksAfterDate("'2017-07-01'");
  */
 
 ?>
