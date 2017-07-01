@@ -17,5 +17,4 @@ if($windowName == "ongletSemaine"){
 }
 
 $_SESSION['current_page'] = $windowName;
-
 ?>

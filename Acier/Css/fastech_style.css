@@ -22,6 +22,12 @@ body {
 #errorForm {
 	color: rgb(37, 51, 112);
 }
+.editable:hover {
+    text-decoration: underline;
+}
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover{
+	text-decoration:none !important;
+}
 
 tr.success, tr.success>td, tr.success>form, tr.success>form>input {
 	background-color: #dff0d8 !important;

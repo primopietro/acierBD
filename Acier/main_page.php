@@ -66,7 +66,11 @@ if(!isset($_SESSION['current_page'])){
 	?>
 	
 	<script>
-	$("#<?php echo $_SESSION['current_page'];?>").trigger("click");
+
+	
+	$("#<?php 
+		echo $_SESSION['current_page'];
+	?>").trigger("click");
 	</script>
 </body>
 

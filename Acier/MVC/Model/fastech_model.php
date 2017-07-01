@@ -180,7 +180,7 @@ class FastechModel {
 		
 		$internalAttributes = get_object_vars ( $this );
 		
-		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE " . $this->primary_key . " = $primary_key";
+		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE " . $this->primary_key . " = '" .$primary_key ."'";
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {
@@ -269,10 +269,22 @@ class FastechModel {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						if($showPrimaryKey == true){
 							if(!is_numeric($value))
-								echo "<th class='alignRight'>". $value . "</th>";
+								
+								if($this->table_name == "prime"){
+									echo "<th attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'  >". $value ." " .$anObject["amount"].  "$/h</th>";
+								}else{
+									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight' >". $value . "</th>";
+								}
+							
 						} else {
 							if(is_numeric($value))
-								echo "<th class='alignRight'>". $value . " $/h</th>";
+								
+							
+								if($this->table_name == "prime"){
+									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'>". $value ." " .$anObject["amount"].  "$/h</th>";
+								}else{
+									echo "<th   attrval='$value' class='alignRight'>". $value . " $/h</th>";
+								}
 						}
 					}
 				}

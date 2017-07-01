@@ -1,5 +1,5 @@
 <?php
-include 'fastech_model.php';
+require_once'fastech_model.php';
 
 class FastechPrime extends FastechModel {
 	protected $table_name = 'prime';

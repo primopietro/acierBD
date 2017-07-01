@@ -17,7 +17,11 @@ if ($typeName == "prime") {
 }
 else if ($typeName == "users") {
 	$anObject = new FastechUser();
-}
+} else if ($typeName == "payements") {
+	$anObject = new FastechPayements();
+} else if ($typeName == "prime_payement") {
+	$anObject = new FastechPrimePayement();
+} 
 
 $aName = htmlspecialchars ( $_POST ["name"] );
 $aName =  str_replace(' ', '&nbsp;', $aName);

@@ -207,6 +207,39 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`payements` 
+( `id_payement` INT NOT NULL AUTO_INCREMENT ,
+ `payed` DOUBLE NOT NULL ,
+ `regular` DOUBLE NOT NULL ,
+  `id_state` int(11) NOT NULL,
+PRIMARY KEY (`id_payement`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table payements</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table payements created successfully</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'CREATE TABLE `acier_fastech`.`prime_payement`
+ ( `id_prime_payement` INT NOT NULL AUTO_INCREMENT , 
+`id_payement` INT NOT NULL , `prime` varchar(25) NOT NULL,
+`amount` DOUBLE NOT NULL , `id_state` INT NOT NULL ,
+ PRIMARY KEY (`id_prime_payement`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table prime_payement created successfully</span>\n";
+}
+echo "<br>";
+
+
 /**********************************************INDEXES *******************************************/
 
 $sql = 'ALTER TABLE `acier_fastech`.`employees` ADD INDEX `id_dep_emp` (`departement`);';
@@ -337,6 +370,100 @@ else{
 	echo "<span style='color:green;'>Delete/upload cascade created successfully in detail_week</span>\n";
 }
 echo "<br>";
+
+
+$sql = 'ALTER TABLE `payements` ADD `id_work_week` INT NOT NULL AFTER `regular`, 
+ADD `id_employe` INT NOT NULL AFTER `id_work_week`, 
+ADD INDEX `payement_ww` (`id_work_week`), ADD INDEX `payement_e` (`id_employe`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to payements</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in payements</span>\n";
+}
+echo "<br>";
+
+
+
+$sql = 'ALTER TABLE `payements` ADD CONSTRAINT `payement_e_fk` FOREIGN KEY (`id_employe`) 
+REFERENCES `employees`(`id_employe`) ON DELETE CASCADE ON UPDATE CASCADE; ';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to payements</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in payements</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `payements`
+ADD CONSTRAINT `payement_ww_fk` FOREIGN KEY (`id_work_week`)
+REFERENCES `work_weeks`(`id_work_week`) ON DELETE CASCADE ON UPDATE CASCADE;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to payements</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in payements</span>\n";
+}
+echo "<br>";
+
+
+
+$sql = 'ALTER TABLE `acier_fastech`.`prime_payement` ADD INDEX `prime_payement_p` (`id_payement`) USING BTREE;;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `acier_fastech`.`prime_payement` ADD INDEX `prime_payement_pr` (`prime`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+
+$sql = 'ALTER TABLE `prime_payement` ADD CONSTRAINT `prime_payement_p_fk` FOREIGN KEY (`id_payement`) 
+REFERENCES `payements`(`id_payement`) ON DELETE CASCADE ON UPDATE CASCADE; ';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `prime_payement` ADD CONSTRAINT `prime_payement_pr_fk` FOREIGN KEY (`prime`) REFERENCES `prime`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+
+
 /********************************************Add data**********************************************/
 
 
@@ -390,7 +517,7 @@ else{
 echo "<br>";
 
 
-$sql = "INSERT INTO `prime` (`name`, `amount`, `id_state`) VALUES ('Usine', '1', '1'), ('Peinture', '2', '1')";
+$sql = "INSERT INTO `prime` (`name`, `amount`, `id_state`) VALUES ('Nuit', '1', '1'), ('Soir', '2', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into prime</span>" ;
@@ -415,7 +542,7 @@ else{
 echo "<br>";
 
 $sql = "INSERT INTO `work_weeks` (`id_work_week`, `name`, `begin_date`, `begin_day`, `id_state`)
- VALUES (NULL, '', '2017-06-05', '3', '1'), (NULL, 'REF#22', '2017-06-27', '3', '1')";
+ VALUES (NULL, '5-juin-2017', '2017-06-05', '3', '1'), (NULL, '27-juin-2017', '2017-06-27', '3', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into work_weeks</span>" ;

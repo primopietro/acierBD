@@ -36,11 +36,13 @@ if($windowName== "ongletPrime"){
 	$weekId = $_GET["id"];
 	$anObject = new FastechEmployekWeekHours();
 	$anObject->getObjectList($weekId);
+	$windowName = "ongletSemaine";
 } else if($windowName == "ongletProjetHeure"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
 	$projectId = $_GET["id"];
 	$anObject = new FastechEmployekWeekHours();
 	$anObject->getProjectHourList($projectId);
+	$windowName = "ongletProjet";
 }
 
 $_SESSION['current_page'] = $windowName;

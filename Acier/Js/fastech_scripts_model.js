@@ -350,6 +350,73 @@ function updateTableHour(id, windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
+			
+			if(windowName == "ongletHeure"){
+			var idWeek = $("#tblHeure").attr("idWeek");
+			var employes = $("td:first-child");
+			var employesArray = new Array();
+			
+			employes.each(function( index ) {
+				var id_employe = $(this).text();
+				var tr = $( this ).closest("tr");
+				$
+				.ajax({
+					method : "GET",
+					url : "MVC/View/getPayedTimes.php?id_work_week=" + idWeek+"&id_employe="+id_employe,
+				beforeSend : function() {
+					// TO INSERT - loading animation
+				},
+				beforeSend : function() {
+					/*$('.tblObject tbody')
+							.append(
+									"<span id='download'>Telechargement..</span>");*/
+				},
+				success : function(response) {
+					//$('#download').remove();
+					tr.append(response);
+					
+				
+					var primes = $("thead [typeheader = 'prime']");
+					
+
+					primes.each(function( index ) {
+						var prime = $(this).attr("attrval");
+						var id_payement= tr.find("[table='payements']").first().attr("idobj");
+						console.log(tr.find("[table='payements']").first().attr("idobj"));
+						$
+						.ajax({
+							method : "GET",
+							url : "MVC/View/getPayedPrime.php?prime=" + prime+"&id_payement="+ id_payement,
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						beforeSend : function() {
+							/*$('.tblObject tbody')
+									.append(
+											"<span id='download'>Telechargement..</span>");*/
+						},
+						success : function(response) {
+							//$('#download').remove();
+							tr.append(response);}
+						
+							
+						
+						});	
+						
+					});
+					
+					
+				
+				
+				}
+				
+					
+				
+				});
+			});
+			
+			
+			}
 		}
 	});
 }
@@ -382,6 +449,7 @@ $(document.body).on('change',".editable",function (e) {
 	var windowName = $(".active > a").attr("id");
 	var idObj = self.closest(".edit").attr("idObj");
 	var formName = form.attr("table");
+	
 
 	var data = "name="+ self.attr("name")+"&value="+ self.prop("value") +"&id=" +idObj;
 	var rowIndex = self.closest('tr').prevAll().length; 
@@ -397,7 +465,14 @@ $(document.body).on('change',".editable",function (e) {
 		success : function(response) {
 			
 				if(response== "success" || response =="Wsuccess"){
-					updateTable(windowName);
+					
+					if(formName=="payements" || formName == "prime_payement"){
+						var idOriginal = $("#tblHeure").attr('idweek');
+						updateTableHour(idOriginal ,"ongletHeure");
+					}
+					else{
+						updateTable(windowName);
+					}
 					state = response;
 				}else{
 					state = "danger";
@@ -625,7 +700,7 @@ $(document).on("click", '*[data-animation="ripple"]', function(e) {
 											transition: all linear 700ms;
 											transition-timing-function:cubic-bezier(0.4, 0.0, 0.2, 1);
 											border-radius: 50%;
-											background: var(--color-ripple);
+											background: rgba(255,255,255,0.7);
 											top:${posMouseY - btnWidth}px;
 											left:${posMouseX - btnWidth}px;
 											pointer-events: none;

@@ -168,7 +168,7 @@ class FastechEmployekWeekHours extends FastechModel {
 					// ghetto?
 					if ($key == "id_employe") {
 						array_push ( $totalHours, $this->getEmployeHours ( $value, $weekId ) );
-						echo "<td>" . $value . "</td>";
+						echo "<td class='cursorDefault'>" . $value . "</td>";
 					}
 					if ($key == "first_name" || $key == "family_name") {
 						$full_name .= $value . " ";
@@ -176,7 +176,7 @@ class FastechEmployekWeekHours extends FastechModel {
 					}
 					if ($counter == 2) {
 						// zero's are temporary
-						echo "<td>" . $full_name . "</td><td>0</td><td>0</td><td class='alignRight'>" . $totalHours [$counter1] . "</td>";
+						echo "<td class='cursorDefault'>" . $full_name . "</td><td class='cursorDefault'>0</td><td class='cursorDefault'>0</td><td class='alignRight cursorDefault'>" . $totalHours [$counter1] . "</td>";
 						$full_name = "";
 						$counter = 0;
 						$counter1 ++;
