@@ -1,6 +1,7 @@
 <?php
 require_once 'system/header.php';
 ?>
+<link rel="stylesheet" type="text/css" href="Css/fastech_style_login.css">
 <title>Connexion</title>
 </head>
 <body>
