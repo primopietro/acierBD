@@ -40,7 +40,7 @@ function getContentHtml(windowName){
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionDepartement'>Imprimer</a>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 
 		content += "<h3 class='formTitleMargin'>Ajout prime</h3>";
 		content += "<form id='formPrime'>";
@@ -116,7 +116,7 @@ function getContentHtml(windowName){
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionEmploye'>Imprimer</a>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 
 		content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
 		content += "<form id='formEmploye'>";
@@ -170,7 +170,7 @@ function getContentHtml(windowName){
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionProjet'>Imprimer</a>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 
 		content += "<h3 class='formTitleMargin'>Ajout projet</h3>";
 		content += "<form id='formProjet'>";
@@ -207,7 +207,7 @@ function getContentHtml(windowName){
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionDepartement'>Imprimer</a>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 
 		content += "<h3 class='formTitleMargin'>Ajout département</h3>";
 		content += "<form id='formDepartement'>";
@@ -538,7 +538,7 @@ $(document)
 					content += "</tbody></table></div>";
 					
 					
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 	
 					// ******AJOUT HEURE*******
 					content += "<div class='formMargin'>";
@@ -614,7 +614,7 @@ $(document)
 
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpressionHeureSemaine'>Imprimer</a>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
 					
 					content += "</div>";
@@ -663,7 +663,14 @@ function updateHeaderFooter(windowName){
 
 
 
+$(document).on("click","#btnImpression",function(){
+	
+	var windowName = $(".active > a").attr("id");
+	
 
+  window.open("pdfRelated/createPdf.php?"+"objectName="+windowName);
+  
+});
 
 
 

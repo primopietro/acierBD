@@ -256,6 +256,29 @@ class FastechModel {
 		}
 	}
 	
+	
+	// TODO: create intercation with css classes
+	function  getObjectListAsStaticTableString() {
+		$table ="";
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				
+				$table  .= "<tr class=''>";
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						
+						$table  .= "<td>";
+						$table .= $value . "</td>";
+					}
+				}
+				
+				$table  .= "</tr>";
+			}
+		}
+		return $table;
+	}
+	
 	function getObjectListAsDynamicHeaderFooter($showPrimaryKey = true) {
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		$onlyOnce = 0;
