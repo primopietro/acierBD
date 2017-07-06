@@ -14,14 +14,15 @@ if ($typeName == "prime") {
 	$anObject = new FastechProject();
 } else if ($typeName == "departement") {
 	$anObject = new FastechDepartement();
-}
-else if ($typeName == "users") {
+} else if ($typeName == "users") {
 	$anObject = new FastechUser();
 } else if ($typeName == "payements") {
 	$anObject = new FastechPayements();
 } else if ($typeName == "prime_payement") {
 	$anObject = new FastechPrimePayement();
-} 
+} else if ($typeName == "ccq") {
+	$anObject = new FastechCCQ();
+}
 
 $aName = htmlspecialchars ( $_POST ["name"] );
 $aName =  str_replace(' ', '&nbsp;', $aName);

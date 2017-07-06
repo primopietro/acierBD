@@ -43,6 +43,11 @@ if($windowName== "ongletPrime"){
 	$anObject = new FastechEmployekWeekHours();
 	$anObject->getProjectHourList($projectId);
 	$windowName = "ongletProjet";
+} else if($windowName== "ongletCCQ"){
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq.php';
+	$anObject = new FastechCCQ();
+	$anObject->getObjectListAsDynamicTable(true);
+	
 }
 
 $_SESSION['current_page'] = $windowName;

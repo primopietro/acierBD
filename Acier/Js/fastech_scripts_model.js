@@ -30,7 +30,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des primes </h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
@@ -231,7 +231,7 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Informations du compte </h1>";
 		
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom d'utilisateur</th>";
 		content += "<th>Mot de passe</th></tr></thead><tfoot><tr id='footer'>";
@@ -241,6 +241,40 @@ function getContentHtml(windowName){
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
+		content += "</div>";
+		
+	} else if(windowName === "ongletCCQ"){
+		
+		content += "<div class='container-fluid'>";
+		content += "<h1> Liste des primes CCQ </h1>";
+		content += "<div class='table-responsive'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm' readonly='readonly' id='btnImpression'>Imprimer</a>";
+
+		content += "<h3 class='formTitleMargin'>Ajout prime CCQ</h3>";
+		content += "<form id='formCCQ'>";
+
+		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom de la prime CCQ'></input>";
+		content += "</div>";
+
+		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux de la prime CCQ'></input>";
+		content += "</div>";
+
+		content += "<span id='errorForm'></span>";
+
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
+				+ "   typeName='ccq'>Ajouter</a></form>";
 		content += "</div>";
 		
 	}
@@ -397,7 +431,8 @@ function updateTableHour(id, windowName){
 						},
 						success : function(response) {
 							//$('#download').remove();
-							tr.append(response);}
+							tr.append(response);
+						}
 						
 							
 						
@@ -405,7 +440,8 @@ function updateTableHour(id, windowName){
 						
 					});
 					
-					
+
+					setTimeout(function(){tr.append("<td><a class='cursor clickConge'>Congé</a></td>");}, 50);
 				
 				
 				}
@@ -413,10 +449,13 @@ function updateTableHour(id, windowName){
 					
 				
 				});
+				
 			});
 			
-			
+			$('.tblObject thead tr').append("<th></th>");
+			$('.tblObject tfoot tr').append("<th></th>");
 			}
+			
 		}
 	});
 }
@@ -581,13 +620,14 @@ $(document)
 							// TO INSERT - loading animation
 						},
 						success : function(response) {
-							$("#header").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
-							$("#footer").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>BANQUE</th>");
+							$("#header").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>Congé</th><th>BANQUE</th>");
+							$("#footer").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>Congé</th><th>BANQUE</th>");
 							}
 					
 						});
 					
 					updateTableHour(arr[0], "ongletHeure");
+					
 					
 					$("#content").html(content);
 					

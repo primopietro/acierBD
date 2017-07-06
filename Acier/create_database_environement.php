@@ -153,6 +153,21 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`CCQ` (
+  `name` varchar(25) NOT NULL,
+  `amount` double NOT NULL,
+`id_state` int NOT NULL,
+PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table CCQ</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table CCQ created successfully</span>\n";
+}
+echo "<br>";
+
 $sql = 'CREATE TABLE `acier_fastech`.`work_weeks` (
   `id_work_week` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
@@ -525,6 +540,17 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Data inserted successfully into prime</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `CCQ` (`name`, `amount`, `id_state`) VALUES ('CCQx', '20', '1'), ('CCQy', '10', '1')";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into CCQ</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into CCQ</span>\n";
 }
 echo "<br>";
 

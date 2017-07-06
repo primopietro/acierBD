@@ -21,6 +21,8 @@ if ($typeName == "prime") {
 } else if ($typeName == "employe_week_hours"){
 	$anObject = new FastechEmployekWeekHours();
 	$anObject->setId_state(1);
+} else if ($typeName == "ccq"){
+	$anObject = new FastechCCQ();
 }
 
 $attributes = $anObject->getObjectAsArrayWithOutMetadata ();
