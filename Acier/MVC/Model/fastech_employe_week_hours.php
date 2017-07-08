@@ -8,7 +8,7 @@ class FastechEmployekWeekHours extends FastechModel {
 	protected $id_employe = '0';
 	protected $id_project = '0';
 	protected $departement = '';
-	protected $hours = '0';
+	protected $hours = 0;
 	protected $id_state = 1; // 1 equals active by default
 	function __construct() {
 	}
@@ -308,7 +308,7 @@ class FastechEmployekWeekHours extends FastechModel {
 			return $hoursTotal;
 		}
 		$conn->close ();
-		return 0;
+		return null;
 	}
 }
 

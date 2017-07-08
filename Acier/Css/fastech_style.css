@@ -26,7 +26,7 @@ body {
     text-decoration: underline;
 }
 a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover{
-	text-decoration:none !important;
+	text-decoration:none;
 }
 
 tr.success, tr.success>td, tr.success>form, tr.success>form>input {
@@ -51,6 +51,10 @@ input {
 .scroll-to-top {
 	display: table;
 	border-radius: 0px !important;
+}
+
+.underlineBtn:hover{
+	text-decoration: underline!important;
 }
 
 .scroll-to-top>i {
@@ -107,10 +111,6 @@ input {
 
 .cursorDefault{
 	cursor: default;'
-}
-
-.cursor:hover{
-	text-decoration: underline!important;
 }
 
 .formMargin {

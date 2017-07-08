@@ -412,7 +412,8 @@ function updateTableHour(id, windowName){
 				
 					var primes = $("thead [typeheader = 'prime']");
 					
-
+					var lengthPrimes = primes.length;
+					var counter = 1;
 					primes.each(function( index ) {
 						var prime = $(this).attr("attrval");
 						var id_payement= tr.find("[table='payements']").first().attr("idobj");
@@ -430,8 +431,12 @@ function updateTableHour(id, windowName){
 											"<span id='download'>Telechargement..</span>");*/
 						},
 						success : function(response) {
-							//$('#download').remove();
 							tr.append(response);
+							//$('#download').remove();
+							if(lengthPrimes == counter){
+								tr.append("<td><a class='cursor clickConge underlineBtn'>Calcul congé</a></td>");
+							} 
+							counter++;
 						}
 						
 							
@@ -439,10 +444,6 @@ function updateTableHour(id, windowName){
 						});	
 						
 					});
-					
-
-					setTimeout(function(){tr.append("<td><a class='cursor clickConge'>Congé</a></td>");}, 50);
-				
 				
 				}
 				
@@ -471,7 +472,7 @@ function addConsultButtons(windowName){
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
 		}
-		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek' id='" + id + "'>Consulter</a></td>");
+		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
 	});
 	$('.tblObject tfoot tr').append("<th></th>");
 }
