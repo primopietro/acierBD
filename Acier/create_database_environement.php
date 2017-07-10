@@ -76,7 +76,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`employees` (
   `first_name` varchar(25) NOT NULL,
   `family_name` varchar(25) NOT NULL,
   `hour_rate` double NOT NULL,
-  `departement` varchar(25) NOT NULL,
+  `departement` varchar(50) NOT NULL,
   `id_state` int(11) NOT NULL,
 PRIMARY KEY ( `id_employe`)
 ) ENGINE=InnoDB  ';
@@ -124,7 +124,7 @@ else{
 echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`departement` (
-  `name` varchar(25) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `amount` double NOT NULL,
 `id_state` int NOT NULL,
 PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
@@ -208,7 +208,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`employe_week_hours`
 `id_work_week` INT NOT NULL ,
  `id_employe` INT NOT NULL , 
 `id_project` INT NOT NULL , 
-`departement` varchar(25) NOT NULL ,
+`departement` varchar(50) NOT NULL ,
  `hours` DOUBLE NOT NULL ,
   `id_state` int(11) NOT NULL,
  PRIMARY KEY (`id_employe_hour`)) ENGINE = InnoDB;';
@@ -251,6 +251,21 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Table prime_payement created successfully</span>\n";
+}
+echo "<br>";
+
+$sql = 'CREATE TABLE `acier_fastech`.`bankholiday_payement`
+ ( `id_bankholiday_payement` INT NOT NULL AUTO_INCREMENT ,
+`id_payement` INT NOT NULL , `holiday` DOUBLE NOT NULL,
+`bank` DOUBLE NOT NULL , `id_state` INT NOT NULL ,
+ PRIMARY KEY (`id_bankholiday_payement`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table bankholiday_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table bankholiday_payement created successfully</span>\n";
 }
 echo "<br>";
 
@@ -441,6 +456,17 @@ else{
 }
 echo "<br>";
 
+$sql = 'ALTER TABLE `acier_fastech`.`bankholiday_payement` ADD INDEX `bankholiday_payement_p` (`id_payement`) USING BTREE;;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to prime_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in bankholiday_payement</span>\n";
+}
+echo "<br>";
+
 
 $sql = 'ALTER TABLE `acier_fastech`.`prime_payement` ADD INDEX `prime_payement_pr` (`prime`);';
 if (!$result = $conn->query($sql)) {
@@ -466,6 +492,18 @@ else{
 }
 echo "<br>";
 
+$sql = 'ALTER TABLE `bankholiday_payement` ADD CONSTRAINT `bankholiday_payement_p_fk` FOREIGN KEY (`id_payement`)
+REFERENCES `payements`(`id_payement`) ON DELETE CASCADE ON UPDATE CASCADE; ';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to bankholiday_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in bankholiday_payement</span>\n";
+}
+echo "<br>";
+
 $sql = 'ALTER TABLE `prime_payement` ADD CONSTRAINT `prime_payement_pr_fk` FOREIGN KEY (`prime`) REFERENCES `prime`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
@@ -483,7 +521,7 @@ echo "<br>";
 
 
 
-$sql = "INSERT INTO `users` (`id_user`, `username`, `password`, `id_state`) VALUES (null, 'admin', 'password', '1')";
+$sql = "INSERT INTO `users` (`id_user`, `username`, `password`, `id_state`) VALUES (null, 'admin', 'password', '1'), (null, 'Nancy', 'password', '1'), (null, 'Lyne', 'password', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into users</span>" ;
@@ -508,7 +546,9 @@ echo "<br>";
 
 
 $sql = "INSERT INTO `departement` (`name`, `amount`, `id_state`)
- VALUES ('Usine', '15', '1'), ('Peinture', '11', '1')";
+ VALUES ('Usine', '26.35', '1'), ('Temps 1/2 usine', '37.34', '1'), ('Peinture', '29.09', '1'), ('Temps 1/2 peinture', '42.98', '1'),
+ ('Usine chiffre nuit', '22.84', '1'), ('Peinture chiffre nuit', '22.84', '1'), ('Peinture chiffre nuit T1/2', '33.85', '1'),
+ ('Emballage', '27.02', '1'), ('Emballage Temps 1/2', '40.06', '1'), ('Chargé projet dessin', '29.53', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into departement</span>" ;
@@ -520,7 +560,27 @@ else{
 echo "<br>";
 
 $sql = "INSERT INTO `employees` (`id_employe`, `first_name`, `family_name`, `hour_rate`, `departement`, `id_state`)
-VALUES (NULL, 'Bob', 'Marley', '420', 'Peinture', '1'), (NULL, 'The', 'Devil', '666', 'Usine', '1')";
+VALUES (231, 'Lyne', 'Audet', '10', 'Peinture', '1'), (357, 'Marie-Eve', 'B.Drouin', '25', 'Usine', '1'),
+(12, 'Michel', 'Boulet', '15', 'Peinture', '1'), (31, 'Frédéric', 'Isabel', '23', 'Usine', '1'),
+(88, 'Steeve', 'Bussières', '16', 'Peinture', '1'), (91, 'Sylvaine', 'Therrien', '28', 'Usine', '1'),
+(92, 'Berthier', 'Poulin', '19', 'Peinture', '1'), (94, 'Vincent', 'Maheux', '22', 'Usine', '1'),
+(108, 'André', 'Veilleux', '15', 'Peinture', '1'), (159, 'François', 'Therrien', '23', 'Usine', '1'),
+(180, 'Vincent', 'Fortin', '17', 'Peinture', '1'), (198, 'Alex', 'Fillion Audet', '23', 'Usine', '1'),
+(202, 'Jean-François', 'Poulin', '11', 'Peinture', '1'), (221, 'Jimmy', 'G.L Fortier', '29', 'Usine', '1'),
+(235, 'Lucas', 'Therrien', '26', 'Peinture', '1'), (265, 'François', 'Gilbert', '23.7', 'Usine', '1'),
+(286, 'Cédric', 'Huot', '36', 'Peinture', '1'), (295, 'Paulin', 'Hallé', '23', 'Usine', '1'),
+(310, 'Jacob', 'Therrien', '26', 'Peinture', '1'), (342, 'Alain', 'Richard', '20', 'Usine', '1'),
+(345, 'Yannick', 'Rosa', '3', 'Peinture', '1'), (347, 'Joey', 'G.Veilleux', '23', 'Usine', '1'),
+(353, 'Serge', 'Veilleux', '15.75', 'Peinture', '1'), (354, 'Jean-Pascal', 'Grenier', '23.2', 'Usine', '1'),
+(355, 'Pier-Luc', 'Bouchard', '15', 'Peinture', '1'), (359, 'Cédrick', 'Breton', '22.6', 'Usine', '1'),
+(360, 'Maxime', 'Grégoire', '15.3', 'Peinture', '1'), (362, 'Jason', 'Couture', '21.9', 'Usine', '1'),
+(363, 'Jason', 'Parent', '14.6', 'Peinture', '1'), (364, 'Nancy', 'Bernier', '22.85', 'Usine', '1'),
+(90, 'Branislava', 'Bojanic', '26.3', 'Peinture', '1'), (291, 'Étienne', 'Landry', '20.2', 'Usine', '1'),
+(293, 'David', 'Roy', '22.6', 'Peinture', '1'), (331, 'Kathleen', 'Duquette', '21.56', 'Usine', '1'),
+(348, 'Keven', 'Landry', '15', 'Peinture', '1'), (365, 'M-Antoine', 'Roussin', '23', 'Usine', '1'),
+(133, 'Jacques', 'Dupuis', '15', 'Peinture', '1'), (25, 'Éric', 'Therrien', '23', 'Usine', '1'),
+(33, 'Sylvio', 'Therrien', '15', 'Peinture', '1'), (135, 'Steve', 'Begin', '23', 'Usine', '1'),
+(188, 'Yannick', 'Therrien', '15', 'Peinture', '1'), (241, 'Gaétan', 'Marcotte', '23', 'Usine', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into employees</span>" ;
@@ -581,7 +641,7 @@ echo "<br>";
 
 $sql = "INSERT INTO 
 `detail_week` (`id_detail_week`, `id_employe`, `mechanic`, `other`, `total`, `paied`, `regular`, `id_state`) 
-VALUES (NULL, '1', '2', '3', '2', '3', '4', '1'), (NULL, '2', '0', '0', '0', '0', '0', '1')";
+VALUES (NULL, '90', '2', '3', '2', '3', '4', '1'), (NULL, '133', '0', '0', '0', '0', '0', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into detail_week</span>" ;

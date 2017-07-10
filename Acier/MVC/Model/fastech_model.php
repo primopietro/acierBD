@@ -77,7 +77,7 @@ class FastechModel {
 		
 		$sql = $definition . $sets . $condition;
 		
-		// echo "<br>" . $sql;
+		//echo "<br>" . $sql;
 		
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
@@ -93,6 +93,8 @@ class FastechModel {
 		$sql = "UPDATE `" . $this->table_name . "`
 		SET `$aField` = '$aValue'
 		WHERE `" . $this->table_name . "`.`" . $this->primary_key . "` = '$anID' ";
+		
+		//echo "<br>" . $sql;
 		
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		

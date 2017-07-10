@@ -417,7 +417,7 @@ function updateTableHour(id, windowName){
 					primes.each(function( index ) {
 						var prime = $(this).attr("attrval");
 						var id_payement= tr.find("[table='payements']").first().attr("idobj");
-						console.log(tr.find("[table='payements']").first().attr("idobj"));
+						//console.log(tr.find("[table='payements']").first().attr("idobj"));
 						$
 						.ajax({
 							method : "GET",
@@ -434,7 +434,23 @@ function updateTableHour(id, windowName){
 							tr.append(response);
 							//$('#download').remove();
 							if(lengthPrimes == counter){
-								tr.append("<td><a class='cursor clickConge underlineBtn'>Calcul congé</a></td>");
+								
+								$
+								.ajax({
+									method : "GET",
+									url : "MVC/View/getBankHoliday.php?id_payement="+ id_payement,
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								beforeSend : function() {
+									/*$('.tblObject tbody')
+											.append(
+													"<span id='download'>Telechargement..</span>");*/
+								},
+								success : function(response) {
+									tr.append(response + "<td><a class='cursor clickConge underlineBtn'>Calcul congé</a></td>");
+								}
+								});	
 							} 
 							counter++;
 						}
