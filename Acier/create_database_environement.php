@@ -515,7 +515,25 @@ else{
 }
 echo "<br>";
 
+/*********************************************CREATE VIEW**********************************************/
 
+
+$sql = 'CREATE VIEW banqueHeures as
+SELECT CONCAT(  e.first_name," ",e.family_name ) AS `nom`,   SUM(bank) as heures
+FROM `bankholiday_payement` as b_p
+JOIN payements p on p.id_payement = b_p.id_payement
+JOIN employees e on p.id_employe = e.id_employe
+GROUP BY p.id_employe
+ORDER BY  p.id_employe';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create view banqueHeures</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>View banqueHeures created successfully </span>\n";
+}
+echo "<br>";
 
 /********************************************Add data**********************************************/
 
