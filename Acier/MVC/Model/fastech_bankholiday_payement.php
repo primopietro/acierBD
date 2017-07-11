@@ -146,7 +146,7 @@ class FastechBankHolidayPayement extends FastechModel {
     				$table_name = $anObject ["table_name"];
     				
     				
-    				echo "<td class='cursorDefault'>$value</td>";
+    				echo "<td class='cursorDefault'>$value $</td>";
     			} else if ($key == "bank"){
     				$id_object = $anObject ["primary_key"];
     				$table_name = $anObject ["table_name"];
@@ -234,10 +234,100 @@ class FastechBankHolidayPayement extends FastechModel {
     	$conn->close ();
     	return null;
     }
+    
+    function getBankAsDynamicTable(){
+    	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+    	
+    	$sql = "SELECT * FROM `banqueheures`";
+    	$result = $conn->query ( $sql );
+    	
+    	if ($result->num_rows > 0) {
+    		$anObject = Array ();
+    		while ( $row = $result->fetch_assoc () ) {
+    			echo "<tr class='tableHover'>";
+    			foreach ( $row as $aRowName => $aValue ) {
+    				if($aRowName == "heures"){
+    					echo "<td style='text-align:center'>$aValue</td>";
+    				} else {
+    					echo "<td>$aValue</td>";
+    				}
+    				//echo $aRowName . " " . $aValue . "<br>";
+    			}
+    			echo "</tr>";
+    		}
+    		$conn->close ();
+    		return $anObject;
+    	}
+    	$conn->close ();
+    	return null;
+    }
+    
+    function updateHoliday($id_payement, $id_week, $id_employe){
+    	require_once 'fastech_employe_week_hours.php';
+    	
+    	$lastMonthId = $this->getPastWeeks($id_week);
+    	$employeHours = new FastechEmployekWeekHours();
+    	$totalHoursPastMonth = 0;
+    	$montantConge = 0;
+    	
+    	foreach ($lastMonthId as $id){
+    		//echo $id . "<br>";
+    		$totalHoursPastMonth += $employeHours->getEmployeHours($id_employe, $id);
+    	}
+    	$hour_rate = $this->getEmployeHourRate($id_employe);
+    	
+    	$montantConge = 0.05*$totalHoursPastMonth*$hour_rate;
+    	
+    	$id_bankholiday_payement = $this->getPrimaryKeyFromDB($id_payement);
+    	$this->updateObjectDynamically("holiday", $montantConge, $id_bankholiday_payement);
+    }
+    
+    function getPastWeeks($id_week){
+    	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+    	$counter = 0;
+    	
+    	$sql = "SELECT id_work_week FROM `work_weeks` WHERE id_work_week < " . $id_week . " ORDER BY id_work_week DESC";
+    	$result = $conn->query ( $sql );
+    	
+    	if ($result->num_rows > 0) {
+    		$lastMonthId = Array ();
+    		while ( $row = $result->fetch_assoc () ) {
+    			foreach ( $row as $aRowName => $aValue ) {
+    				if ($counter != 4){
+    					$lastMonthId[$counter] = $aValue;
+    					$counter++;
+    				}
+    			}
+    		}
+    		return $lastMonthId;
+    		$conn->close ();
+    	}
+    	$conn->close ();
+    	return null;
+    }
+    
+    function getEmployeHourRate($id_employe){
+    	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+    	$sql = "SELECT hour_rate FROM `employees` WHERE id_employe = " . $id_employe;
+    	$result = $conn->query ( $sql );
+    	
+    	if ($result->num_rows > 0) {
+    		$hourRate = 0;
+    		while ( $row = $result->fetch_assoc () ) {
+    			foreach ( $row as $aRowName => $aValue ) {
+    				$hourRate = $aValue;
+    			}
+    		}
+    		return $hourRate;
+    		$conn->close ();
+    	}
+    	$conn->close ();
+    	return null;
+    }
 
 }
 
-/*$payement = new FastechBankHolidayPayement();
-$payement->getObjectListAsDynamicTableTableForWeek(24);*/
+$payement = new FastechBankHolidayPayement();
+$payement->updateHoliday(43, 2, 12);
 
 ?>

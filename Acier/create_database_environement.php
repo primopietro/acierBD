@@ -646,7 +646,8 @@ else{
 echo "<br>";
 
 $sql = "INSERT INTO `work_weeks` (`id_work_week`, `name`, `begin_date`, `begin_day`, `id_state`)
- VALUES (NULL, '5-juin-2017', '2017-06-05', '3', '1'), (NULL, '27-juin-2017', '2017-06-27', '3', '1')";
+ VALUES (NULL, '8-juin-2017', '2017-06-08', '6', '1'), (NULL, '15-juin-2017', '2017-06-15', '6', '1'),
+(NULL, '22-juin-2017', '2017-06-22', '6', '1'), (NULL, '29-juin-2017', '2017-06-29', '6', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into work_weeks</span>" ;

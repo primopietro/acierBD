@@ -53,7 +53,10 @@ if($tableName== "ongletPrime"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq.php';
 	$anObject = new FastechCCQ();
 	$anObject->getObjectListAsDynamicTable(true);
-	
+} else if($tableName == "ongletBanque"){
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_bankholiday_payement.php';
+	$anObject = new FastechBankHolidayPayement();
+	$anObject->getBankAsDynamicTable();
 }
 
 $_SESSION['current_page'] = $tableName;

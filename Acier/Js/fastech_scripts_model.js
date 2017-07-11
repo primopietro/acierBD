@@ -277,6 +277,25 @@ function getContentHtml(windowName){
 				+ "   typeName='ccq'>Ajouter</a></form>";
 		content += "</div>";
 		
+	} else if(windowName === "ongletBanque"){
+		
+		content += "<div class='container-fluid'>";
+		content += "<h1> Liste des heures en banques</h1>";
+		content += "<div class='table-responsive'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom</th>";
+		content += "<th style='text-align:center'>Heures en banques</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom</th>";
+		content += "<th style='text-align:center'>Heures en banques</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printPrimeCCQ'>Imprimer</a>";
+
+		content += "</div>";
+		
 	}
 
 	
@@ -448,7 +467,7 @@ function updateTableHour(id, windowName){
 													"<span id='download'>Telechargement..</span>");*/
 								},
 								success : function(response) {
-									tr.append(response + "<td><a class='cursor clickConge underlineBtn'>Calcul congé</a></td>");
+									tr.append(response + "<td><a class='cursor clickConge underlineBtn' idpayement='" + id_payement + "' idemploye='" + id_employe + "'>Calcul congé</a></td>");
 								}
 								});	
 							} 
@@ -468,9 +487,6 @@ function updateTableHour(id, windowName){
 				});
 				
 			});
-			
-			$('.tblObject thead tr').append("<th></th>");
-			$('.tblObject tfoot tr').append("<th></th>");
 			}
 			
 		}
@@ -478,7 +494,7 @@ function updateTableHour(id, windowName){
 }
 
 function addConsultButtons(windowName){
-	$('.tblObject thead tr').append("<th></th>");
+	//$('.tblObject thead tr').append("<th></th>");
 	$('.tblObject > tbody > tr').each(function(){
 		var id = $(this).find("input").eq(0).val();
 		var idInitial = id;
@@ -490,7 +506,7 @@ function addConsultButtons(windowName){
 		}
 		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
 	});
-	$('.tblObject tfoot tr').append("<th></th>");
+	//$('.tblObject tfoot tr').append("<th></th>");
 }
 
 
@@ -713,7 +729,24 @@ function updateHeaderFooter(windowName){
 		});
 }
 
+$(document).on("click",".clickConge",function(){
+	var idWeek = $("#tblHeure").attr("idWeek");
+	var id_payement = $(this).attr('idpayement');
+	var id_employe = $(this).attr('idemploye');
+	
+	$.ajax({method : "GET",
+		url : "MVC/View/getConge.php?id_payement=" + id_payement + "&id_week=" + idWeek + "&id_employe=" + id_employe,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		success : function(response) {
 
+			updateTableHour(idWeek, "ongletHeure");
+
+			}
+	
+		});
+});
 
 
 
