@@ -214,6 +214,47 @@ class FastechEmploye extends FastechModel {
 			}
 		}
 	}
+	
+	
+	
+	public function  getObjectListAsStaticTableString() {
+		$table ="";
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		
+		$table  .= "<thead><tr>";
+		$table  .= "<td>Code</td>";
+		$table  .= "<td>Prénom</td>";
+		$table  .= "<td>Nom</td>";
+		$table  .= "<td>Taux horaire</td>";
+		$table  .= "<td>Département</td>";
+		$table  .= "</tr></thead>";
+		$table  .= "<tbody>";
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				
+				$table  .= "<tr class=''>";
+				foreach ( $anObject as $key => $value ) {
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						
+						$table  .= "<td>";
+						$table .= $value . "</td>";
+					}
+				}
+				
+				$table  .= "</tr>";
+			}
+		}
+		$table  .= "</tbody>";
+		
+		$table  .= "<tfoot><tr>";
+		$table  .= "<td>Code</td>";
+		$table  .= "<td>Prénom</td>";
+		$table  .= "<td>Nom</td>";
+		$table  .= "<td>Taux horaire</td>";
+		$table  .= "<td>Département</td>";
+		$table  .= "</tr></tfoot>";
+		return $table;
+	}
 }
 
 /*

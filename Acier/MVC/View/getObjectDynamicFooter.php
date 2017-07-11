@@ -4,18 +4,18 @@ if(!isset($_SESSION))
 session_start();
 
 $anObject = null;
-$windowName = $_GET["objectName"];
+$tableName = $_GET["objectName"];
 
-if($windowName == "ongletSemaine"){
+if($tableName == "ongletSemaine"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
 	$anObject = new FastechPrime();
 	$anObject->getObjectListAsDynamicHeaderFooter(false);
-} else if($windowName == "ongletProjet"){
+} else if($tableName == "ongletProjet"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
 	$anObject = new FastechDepartement();
 	$anObject->getObjectListAsDynamicHeaderFooter(false);
 }
 
-$_SESSION['current_page'] = $windowName;
+$_SESSION['current_page'] = $tableName;
 
 ?>

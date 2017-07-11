@@ -20,30 +20,57 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
-} ";
+} 
+
+thead,tfoot{
+ background-color:#323232;
+color:white;
+}
+";
 
 
 $style = "<style>" . $style . "</style>";
 
-$windowName = $_GET["objectName"];
+$tableName = $_GET["objectName"];
 
-if($windowName== "ongletPrime"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
-	$anObject = new FastechPrime();
-} else if($windowName == "ongletSemaine"){
+
+switch ($tableName) {
+	case "printPrime":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
+		$anObject = new FastechPrime();
+		break;
+	case "printEmploye":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
+		$anObject = new FastechEmploye();
+		break;
+	case "printProject":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
+		$anObject = new FastechProject();
+		break;
+	case "printDepartement":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+		$anObject = new FastechDepartement();
+		break;
+	case "printPrimeCCQ":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq.php';
+		$anObject = new FastechCCQ();
+		break;
+}
+
+
+if($tableName== "ongletPrime"){
+	
+} else if($tableName == "ongletSemaine"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
 	$anObject = new FastechWorkWeek();
 	
-} else if($windowName == "ongletEmploye"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
-	$anObject = new FastechEmploye();
-} else if($windowName == "ongletProjet"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
-	$anObject = new FastechProject();
-} else if($windowName == "ongletDepartement"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
-	$anObject = new FastechDepartement();
-} else if($windowName == "ongletCompte"){
+} else if($tableName == "ongletEmploye"){
+	
+} else if($tableName == "ongletProjet"){
+	
+} else if($tableName == "ongletDepartement"){
+	
+} else if($tableName == "ongletCompte"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_users.php';
 	$anObject = new FastechUser();
 }
