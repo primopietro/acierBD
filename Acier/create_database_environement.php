@@ -558,12 +558,12 @@ echo "<br>";
 
 
 $sql = 'CREATE VIEW banqueHeures as
-SELECT CONCAT(  e.first_name," ",e.family_name ) AS `nom`,   SUM(bank) as heures
-FROM `bankholiday_payement` as b_p
-JOIN payements p on p.id_payement = b_p.id_payement
-JOIN employees e on p.id_employe = e.id_employe
-GROUP BY p.id_employe
-ORDER BY  p.id_employe';
+SELECT CONCAT( e.family_name," ", e.first_name )
+ AS `nom`, SUM( COALESCE(b_p.bank ,0)) as heures FROM employees as e 
+LEFT JOIN payements p on p.id_employe = e.id_employe 
+LEFT JOIN bankholiday_payement as b_p ON p.id_payement = b_p.id_payement
+GROUP BY e.id_employe 
+ORDER BY  e.family_name ';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not create view banqueHeures</span>" ;
