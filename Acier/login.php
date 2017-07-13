@@ -1,4 +1,6 @@
 <?php
+session_start ();
+session_destroy();
 require_once 'system/header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="Css/fastech_style_login.css">

@@ -3,6 +3,10 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+.nav-link.logout{
+	padding-right:25px;
+	color:white;
+}
 #formLogin {
 	background-color: rgb(37, 51, 112);
 	padding: 30px;

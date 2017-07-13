@@ -55,6 +55,7 @@ if(!isset($_SESSION['current_page'])){
 				
 			</ul>
 		</div>
+		<a  class="nav-link logout" href="login.php">Deconnexion</a>
 	</nav>
 
 	<div id="content" class="content-wrapper py-3"></div>
