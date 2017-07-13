@@ -55,26 +55,11 @@ switch ($tableName) {
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq.php';
 		$anObject = new FastechCCQ();
 		break;
+	case "printBank":
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_bankholiday_payement.php';
+		$anObject = new FastechBankHolidayPayement();
+		break;
 }
-
-
-if($tableName== "ongletPrime"){
-	
-} else if($tableName == "ongletSemaine"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
-	$anObject = new FastechWorkWeek();
-	
-} else if($tableName == "ongletEmploye"){
-	
-} else if($tableName == "ongletProjet"){
-	
-} else if($tableName == "ongletDepartement"){
-	
-} else if($tableName == "ongletCompte"){
-	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_users.php';
-	$anObject = new FastechUser();
-}
-
 
 $table = $anObject->getObjectListAsStaticTableString();
 $table= "<table>" . $table. "</table>";

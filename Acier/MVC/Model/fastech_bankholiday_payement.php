@@ -324,10 +324,36 @@ class FastechBankHolidayPayement extends FastechModel {
     	$conn->close ();
     	return null;
     }
+    
+    public function  getObjectListAsStaticTableString() {
+    	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+    	$html ="";
+    	$sql = "SELECT * FROM `banqueheures`";
+    	$result = $conn->query ( $sql );
+    	
+		$html .="<thead><tr ><th>Nom</th><th >Heures en banques</th></tr></thead>";
+    	if ($result->num_rows > 0) {
+    		$anObject = Array ();
+    		while ( $row = $result->fetch_assoc () ) {
+    			$html .= "<tr >";
+    			foreach ( $row as $aRowName => $aValue ) {
+    				if($aRowName == "heures"){
+    					$html .= "<td >$aValue</td>";
+    				} else {
+    					$html .= "<td>$aValue</td>";
+    				}
+    				
+    			}
+    			$html .= "</tr>";
+    		}
+    	
+    	}
+    	$html .="<tfoot><tr ><th>Nom</th><th >Heures en banques</th></tr></tfoot>";
+    	
+    	$conn->close ();
+    	return $html;
+    }
 
 }
-
-$payement = new FastechBankHolidayPayement();
-$payement->updateHoliday(43, 2, 12);
 
 ?>
