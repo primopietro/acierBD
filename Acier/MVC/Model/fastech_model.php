@@ -185,6 +185,10 @@ class FastechModel {
 		
 		$internalAttributes = get_object_vars ( $this );
 		
+		if($this->primary_key == "order"){
+			$this->primary_key = "name";
+		}
+		
 		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE " . $this->primary_key . " = '" .$primary_key ."'";
 		$result = $conn->query ( $sql );
 		
