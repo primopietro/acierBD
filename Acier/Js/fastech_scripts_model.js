@@ -33,10 +33,10 @@ function getContentHtml(windowName){
 		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
@@ -200,10 +200,10 @@ function getContentHtml(windowName){
 		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
@@ -251,10 +251,10 @@ function getContentHtml(windowName){
 		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";

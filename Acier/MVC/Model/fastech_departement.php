@@ -3,8 +3,9 @@ require_once 'fastech_model.php';
 
 class FastechDepartement extends FastechModel {
 	protected $table_name = 'departement';
-	protected $primary_key = "name";
+	protected $primary_key = "order";
 	
+	protected $order =0;
 	protected $name = '';
 	protected $amount = 0;
 	protected $id_state = 1; // 1 equals active by default
@@ -65,6 +66,26 @@ class FastechDepartement extends FastechModel {
         $this->id_state = $id_state;
         return $this;
     }
+    
+    
+    /**
+     * order
+     * @return unkown
+     */
+    public function getOrder(){
+    	return $this->order;
+    }
+    
+    /**
+     * order
+     * @param unkown $order
+     * @return FastechDepartement
+     */
+    public function setOrder($order){
+    	$this->order = $order;
+    	return $this;
+    }
+    
     public function  getObjectListAsStaticTableString() {
     	$table ="";
     	$aListOfObjects = $this->getListOfActiveBDObjects ();
@@ -97,6 +118,9 @@ class FastechDepartement extends FastechModel {
     	$table  .= "</tr></tfoot>";
     	return $table;
     }
+
+ 
+
 }
 
 ?>

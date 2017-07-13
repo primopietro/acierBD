@@ -129,6 +129,9 @@ class FastechModel {
 		$internalAttributes = get_object_vars ( $this );
 		
 		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1";
+		if($this->primary_key =="order"){
+			$sql .= " order by `order`";
+		}
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {
@@ -319,6 +322,9 @@ class FastechModel {
 	}
 	
 	function getActiveObjectsAsSelect($selected = null) {
+		if($this->primary_key == "order"){
+			$this->primary_key = "name";
+		}
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
 		if ($selected == null) {
 			echo "<option value='Choisissez un $this->table_name'>Choisissez un $this->table_name</option>";

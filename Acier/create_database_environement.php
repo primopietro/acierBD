@@ -126,6 +126,7 @@ echo "<br>";
 $sql = 'CREATE TABLE `acier_fastech`.`departement` (
   `name` varchar(50) NOT NULL,
   `amount` double NOT NULL,
+ `order` int UNIQUE NOT NULL,
 `id_state` int NOT NULL,
 PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
 if (!$result = $conn->query($sql)) {
@@ -141,6 +142,7 @@ echo "<br>";
 $sql = 'CREATE TABLE `acier_fastech`.`prime` (
   `name` varchar(25) NOT NULL,
   `amount` double NOT NULL,
+ `order` int UNIQUE NOT NULL,
 `id_state` int NOT NULL,
 PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
 if (!$result = $conn->query($sql)) {
@@ -156,6 +158,7 @@ echo "<br>";
 $sql = 'CREATE TABLE `acier_fastech`.`CCQ` (
   `name` varchar(25) NOT NULL,
   `amount` double NOT NULL,
+ `order` int UNIQUE NOT NULL,
 `id_state` int NOT NULL,
 PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
 if (!$result = $conn->query($sql)) {
@@ -271,6 +274,42 @@ echo "<br>";
 
 
 /**********************************************INDEXES *******************************************/
+
+
+$sql = 'ALTER TABLE `departement` CHANGE `order` `order` INT(11) NOT NULL AUTO_INCREMENT;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add Auto increment to departement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Auto increment created successfully in  departement</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `prime` CHANGE `order` `order` INT(11) NOT NULL AUTO_INCREMENT;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add Auto increment to prime</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Auto increment created successfully in  prime</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `ccq` CHANGE `order` `order` INT(11) NOT NULL AUTO_INCREMENT;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add Auto increment to ccq</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Auto increment created successfully in  ccq</span>\n";
+}
+echo "<br>";
+
+
 
 $sql = 'ALTER TABLE `acier_fastech`.`employees` ADD INDEX `id_dep_emp` (`departement`);';
 if (!$result = $conn->query($sql)) {
