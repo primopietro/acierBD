@@ -30,8 +30,10 @@ $attributes = $anObject->getObjectAsArrayWithOutMetadata ();
 $valuesToBeAdded = $_POST;
 
 foreach ( $valuesToBeAdded as $key => $value ) {
-
 	$attributeName = "set" . ucfirst ( $key );
+	if($key == "bool_ccq"){
+		$value = 2;
+	}
 	$anObject->$attributeName ( $value );
 }
 $anObject->addDBObject ();

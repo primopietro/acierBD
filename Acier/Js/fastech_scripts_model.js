@@ -106,13 +106,14 @@ function getContentHtml(windowName){
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
 		content += "<th>Prénom</th>";
-		content += "<th>Taux horaire</th><th>Département</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot><tr id='footer'>";
 
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
 		content += "<th>Prénom</th>";
 		content += "<th>Taux horaire</th>";
 		content += "<th>Département</th>";
+		content += "<th style='text-align: center'>CCQ</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
@@ -142,6 +143,10 @@ function getContentHtml(windowName){
 		content += "<option value='departement2'>departement2</option>";
 		content += "<option value='departement3'>departement3</option>";
 		content += "<option value='departement4'>departement4</option></select>";
+		content += "</div>";
+		
+		content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
+		content += "<label for='bool_ccq'>CCQ</label><input name='bool_ccq' class='form-control inputMarginTop inputForm' type='checkbox'' id='ccq'></input>";
 		content += "</div>";
 
 		content += "<span id='errorForm'></span>";
@@ -521,9 +526,17 @@ $(document.body).on('change',".editable",function (e) {
 	var windowName = $(".active > a").attr("id");
 	var idObj = self.closest(".edit").attr("idObj");
 	var formName = form.attr("table");
-	
+	var value = self.prop("value").split(' ').join('_');
 
-	var data = "name="+ self.attr("name")+"&value="+ self.prop("value") +"&id=" +idObj;
+	if(self.attr("type") == "checkbox"){
+		if(value == 1){
+			value = 2;
+		} else {
+			value = 1;
+		}
+	}
+	
+	var data = "name="+ self.attr("name")+"&value="+ value +"&id=" +idObj;
 	var rowIndex = self.closest('tr').prevAll().length; 
 	rowIndex+=2;
 	var state ="";
@@ -722,7 +735,8 @@ function updateHeaderFooter(windowName){
 			// TO INSERT - loading animation
 		},
 		success : function(response) {
-			$("#footer").html(response + "<th class='alignRight'>TOTAL</th>");
+			$("#footer").html("");
+			$("#footer").append(response + "<th class='alignRight'>TOTAL</th>");
 
 			}
 	
@@ -747,11 +761,6 @@ $(document).on("click",".clickConge",function(){
 	
 		});
 });
-
-
-
-
-
 
 $(document).on("click",".btnImpression",function(){
 	

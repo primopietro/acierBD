@@ -152,7 +152,7 @@ class FastechEmployekWeekHours extends FastechModel {
 		$this->id_state = $id_state;
 		return $this;
 	}
-	function getObjectList($weekId) {
+	function getObjectList($weekId, $ccq) {
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
 		$full_name = "";
 		$counter = 0;
@@ -168,21 +168,24 @@ class FastechEmployekWeekHours extends FastechModel {
 					// ghetto?
 					if ($key == "id_employe") {
 						array_push ( $totalHours, $this->getEmployeHours ( $value, $weekId ) );
-						echo "<td class='cursorDefault'>" . $value . "</td>";
+						$id = $value;
+						//echo "<td class='cursorDefault'>" . $value . "</td>";
 					}
 					if ($key == "first_name" || $key == "family_name") {
 						$full_name .= $value . " ";
 						$counter ++;
 					}
-					if ($counter == 2) {
+					if ($counter == 2 && $key == "bool_ccq") {
 						// zero's are temporary
-						echo "<td class='cursorDefault'>" . $full_name . "</td><td class='cursorDefault'>0</td><td class='cursorDefault'>0</td><td class='alignRight cursorDefault'>" . $totalHours [$counter1] . "</td>";
+						if($value == $ccq){
+							echo "<td class='cursorDefault'>" . $id . "</td><td class='cursorDefault'>" . $full_name . "</td><td class='cursorDefault'>0</td><td class='cursorDefault'>0</td><td class='alignRight cursorDefault'>" . $totalHours [$counter1] . "</td>";
+							
+							$counter1 ++;
+						}
 						$full_name = "";
 						$counter = 0;
-						$counter1 ++;
 					}
 				}
-				
 				echo "</tr>";
 			}
 		}

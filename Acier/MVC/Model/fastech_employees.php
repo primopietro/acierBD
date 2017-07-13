@@ -8,6 +8,7 @@ class FastechEmploye extends FastechModel {
 	protected $family_name = "";
 	protected $hour_rate = 0;
 	protected $departement = "";
+	protected $bool_ccq = 1;
 	protected $id_state = 1;
 	function __construct() {
 		// Do nothing
@@ -94,6 +95,27 @@ class FastechEmploye extends FastechModel {
 	}
 	
 	/**
+	 * bool_ccq
+	 *
+	 * @return Int
+	 */
+	public function getBool_ccq() {
+		return $this->bool_ccq;
+	}
+	
+	/**
+	 * bool_ccq
+	 *
+	 * @param Int $bool_ccq
+	 * @return FastechEmploye
+	 */
+	public function setBool_ccq($bool_ccq) {
+		$this->bool_ccq= $bool_ccq;
+		return $this;
+	}
+	
+	
+	/**
 	 * id_state
 	 * 
 	 * @return Int
@@ -144,9 +166,16 @@ class FastechEmploye extends FastechModel {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
 						if($key != "departement"){
-							if ($key != "departement") {
+							if ($key != "bool_ccq") {
 								echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
 								echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+							} else{
+								echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+								echo "<input ";
+								if($value == "2"){
+									echo "checked ";
+								}
+								echo  "type='checkbox' class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
 							}
 						}else{
 							$aDepartement = new FastechDepartement();

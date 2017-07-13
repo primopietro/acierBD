@@ -77,6 +77,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`employees` (
   `family_name` varchar(25) NOT NULL,
   `hour_rate` double NOT NULL,
   `departement` varchar(50) NOT NULL,
+  `bool_ccq` int(11) NOT NULL,
   `id_state` int(11) NOT NULL,
 PRIMARY KEY ( `id_employe`)
 ) ENGINE=InnoDB  ';
@@ -616,28 +617,28 @@ else{
 }
 echo "<br>";
 
-$sql = "INSERT INTO `employees` (`id_employe`, `first_name`, `family_name`, `hour_rate`, `departement`, `id_state`)
-VALUES (231, 'Lyne', 'Audet', '10', 'Peinture', '1'), (357, 'Marie-Eve', 'B.Drouin', '25', 'Usine', '1'),
-(12, 'Michel', 'Boulet', '15', 'Peinture', '1'), (31, 'Frédéric', 'Isabel', '23', 'Usine', '1'),
-(88, 'Steeve', 'Bussières', '16', 'Peinture', '1'), (91, 'Sylvaine', 'Therrien', '28', 'Usine', '1'),
-(92, 'Berthier', 'Poulin', '19', 'Peinture', '1'), (94, 'Vincent', 'Maheux', '22', 'Usine', '1'),
-(108, 'André', 'Veilleux', '15', 'Peinture', '1'), (159, 'François', 'Therrien', '23', 'Usine', '1'),
-(180, 'Vincent', 'Fortin', '17', 'Peinture', '1'), (198, 'Alex', 'Fillion Audet', '23', 'Usine', '1'),
-(202, 'Jean-François', 'Poulin', '11', 'Peinture', '1'), (221, 'Jimmy', 'G.L Fortier', '29', 'Usine', '1'),
-(235, 'Lucas', 'Therrien', '26', 'Peinture', '1'), (265, 'François', 'Gilbert', '23.7', 'Usine', '1'),
-(286, 'Cédric', 'Huot', '36', 'Peinture', '1'), (295, 'Paulin', 'Hallé', '23', 'Usine', '1'),
-(310, 'Jacob', 'Therrien', '26', 'Peinture', '1'), (342, 'Alain', 'Richard', '20', 'Usine', '1'),
-(345, 'Yannick', 'Rosa', '3', 'Peinture', '1'), (347, 'Joey', 'G.Veilleux', '23', 'Usine', '1'),
-(353, 'Serge', 'Veilleux', '15.75', 'Peinture', '1'), (354, 'Jean-Pascal', 'Grenier', '23.2', 'Usine', '1'),
-(355, 'Pier-Luc', 'Bouchard', '15', 'Peinture', '1'), (359, 'Cédrick', 'Breton', '22.6', 'Usine', '1'),
-(360, 'Maxime', 'Grégoire', '15.3', 'Peinture', '1'), (362, 'Jason', 'Couture', '21.9', 'Usine', '1'),
-(363, 'Jason', 'Parent', '14.6', 'Peinture', '1'), (364, 'Nancy', 'Bernier', '22.85', 'Usine', '1'),
-(90, 'Branislava', 'Bojanic', '26.3', 'Peinture', '1'), (291, 'Étienne', 'Landry', '20.2', 'Usine', '1'),
-(293, 'David', 'Roy', '22.6', 'Peinture', '1'), (331, 'Kathleen', 'Duquette', '21.56', 'Usine', '1'),
-(348, 'Keven', 'Landry', '15', 'Peinture', '1'), (365, 'M-Antoine', 'Roussin', '23', 'Usine', '1'),
-(133, 'Jacques', 'Dupuis', '15', 'Peinture', '1'), (25, 'Éric', 'Therrien', '23', 'Usine', '1'),
-(33, 'Sylvio', 'Therrien', '15', 'Peinture', '1'), (135, 'Steve', 'Begin', '23', 'Usine', '1'),
-(188, 'Yannick', 'Therrien', '15', 'Peinture', '1'), (241, 'Gaétan', 'Marcotte', '23', 'Usine', '1')";
+$sql = "INSERT INTO `employees` (`id_employe`, `first_name`, `family_name`, `hour_rate`, `departement`, `bool_ccq`, `id_state`)
+VALUES (231, 'Lyne', 'Audet', '10', 'Peinture', '1', '1'), (357, 'Marie-Eve', 'B.Drouin', '25', 'Usine', '1', '1'),
+(12, 'Michel', 'Boulet', '15', 'Peinture', '1', '1'), (31, 'Frédéric', 'Isabel', '23', 'Usine', '1', '1'),
+(88, 'Steeve', 'Bussières', '16', 'Peinture', '1', '1'), (91, 'Sylvaine', 'Therrien', '28', 'Usine', '1', '1'),
+(92, 'Berthier', 'Poulin', '19', 'Peinture', '1', '1'), (94, 'Vincent', 'Maheux', '22', 'Usine', '1', '1'),
+(108, 'André', 'Veilleux', '15', 'Peinture', '1', '1'), (159, 'François', 'Therrien', '23', 'Usine', '1', '1'),
+(180, 'Vincent', 'Fortin', '17', 'Peinture', '1', '1'), (198, 'Alex', 'Fillion Audet', '23', 'Usine', '1', '1'),
+(202, 'Jean-François', 'Poulin', '11', 'Peinture', '1', '1'), (221, 'Jimmy', 'G.L Fortier', '29', 'Usine', '1', '1'),
+(235, 'Lucas', 'Therrien', '26', 'Peinture', '1', '1'), (265, 'François', 'Gilbert', '23.7', 'Usine', '1', '1'),
+(286, 'Cédric', 'Huot', '36', 'Peinture', '1', '1'), (295, 'Paulin', 'Hallé', '23', 'Usine', '1', '1'),
+(310, 'Jacob', 'Therrien', '26', 'Peinture', '1', '1'), (342, 'Alain', 'Richard', '20', 'Usine', '1', '1'),
+(345, 'Yannick', 'Rosa', '3', 'Peinture', '1', '1'), (347, 'Joey', 'G.Veilleux', '23', 'Usine', '1', '1'),
+(353, 'Serge', 'Veilleux', '15.75', 'Peinture', '1', '1'), (354, 'Jean-Pascal', 'Grenier', '23.2', 'Usine', '1', '1'),
+(355, 'Pier-Luc', 'Bouchard', '15', 'Peinture', '1', '1'), (359, 'Cédrick', 'Breton', '22.6', 'Usine', '1', '1'),
+(360, 'Maxime', 'Grégoire', '15.3', 'Peinture', '1', '1'), (362, 'Jason', 'Couture', '21.9', 'Usine', '1', '1'),
+(363, 'Jason', 'Parent', '14.6', 'Peinture', '1', '1'), (364, 'Nancy', 'Bernier', '22.85', 'Usine', '1', '1'),
+(90, 'Branislava', 'Bojanic', '26.3', 'Peinture', '1', '1'), (291, 'Étienne', 'Landry', '20.2', 'Usine', '1', '1'),
+(293, 'David', 'Roy', '22.6', 'Peinture', '1', '1'), (331, 'Kathleen', 'Duquette', '21.56', 'Usine', '1', '1'),
+(348, 'Keven', 'Landry', '15', 'Peinture', '1', '1'), (365, 'M-Antoine', 'Roussin', '23', 'Usine', '1', '1'),
+(133, 'Jacques', 'Dupuis', '15', 'Peinture', '2', '1'), (25, 'Éric', 'Therrien', '23', 'Usine', '2', '1'),
+(33, 'Sylvio', 'Therrien', '15', 'Peinture', '2', '1'), (135, 'Steve', 'Begin', '23', 'Usine', '2', '1'),
+(188, 'Yannick', 'Therrien', '15', 'Peinture', '2', '1'), (241, 'Gaétan', 'Marcotte', '23', 'Usine', '2', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into employees</span>" ;

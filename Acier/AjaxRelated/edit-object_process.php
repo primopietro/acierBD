@@ -26,8 +26,9 @@ if ($typeName == "prime") {
 
 $aName = htmlspecialchars ( $_POST ["name"] );
 $aName =  str_replace(' ', '&nbsp;', $aName);
-$aValue = htmlspecialchars ( $_POST ["value"] );
-$aValue =  str_replace(' ', '&nbsp;', $aValue);
+$aValue = htmlspecialchars($_POST ["value"]);
+$aValue = str_replace('_', ' ', $aValue);
+//$aValue =  str_replace(' ', '&nbsp;', $aValue);
 $anID = trim(htmlspecialchars ( $_POST ["id"] ));
 $anID =  str_replace(' ', '&nbsp;', $anID);
 

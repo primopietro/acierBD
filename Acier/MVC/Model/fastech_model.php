@@ -309,9 +309,8 @@ class FastechModel {
 								}
 							
 						} else {
-							if(is_numeric($value))
+							if(is_numeric($value) && $key == "amount")
 								
-							
 								if($this->table_name == "prime"){
 									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'>". $value ." " .$anObject["amount"].  "$/h</th>";
 								}else{
@@ -341,7 +340,7 @@ class FastechModel {
 				if (preg_replace ( '/\s+/', '', $selected ) == preg_replace ( '/\s+/', '', $anObject [$this->primary_key] )) {
 					echo " selected='selected' ";
 				}
-				echo " class='editable' value=" . $anObject [$this->primary_key] . ">" . $anObject ["name"] . "</option>";
+				echo " class='editable' value='" . $anObject [$this->primary_key] . "'>" . $anObject ["name"] . "</option>";
 			}
 		}
 	}
