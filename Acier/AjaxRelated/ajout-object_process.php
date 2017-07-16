@@ -31,7 +31,7 @@ $valuesToBeAdded = $_POST;
 
 foreach ( $valuesToBeAdded as $key => $value ) {
 	$attributeName = "set" . ucfirst ( $key );
-	if($key == "bool_ccq"){
+	if($key == "bool_ccq" || $key == "bool_production"){
 		$value = 2;
 	}
 	$anObject->$attributeName ( $value );
