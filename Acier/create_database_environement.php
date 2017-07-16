@@ -128,6 +128,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`departement` (
   `name` varchar(50) NOT NULL,
   `amount` double NOT NULL,
  `order` int UNIQUE NOT NULL,
+  `bool_production` int(11) NOT NULL DEFAULT 1,
 `id_state` int NOT NULL,
 PRIMARY KEY (`name`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
 if (!$result = $conn->query($sql)) {
@@ -255,6 +256,21 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Table prime_payement created successfully</span>\n";
+}
+echo "<br>";
+
+$sql = 'CREATE TABLE `acier_fastech`.`ccq_payement`
+ ( `id_prime_payement` INT NOT NULL AUTO_INCREMENT ,
+`id_payement` INT NOT NULL , `ccq` varchar(25) NOT NULL,
+`amount` DOUBLE NOT NULL , `id_state` INT NOT NULL ,
+ PRIMARY KEY (`id_prime_payement`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table ccq_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table ccq_payement created successfully</span>\n";
 }
 echo "<br>";
 
@@ -496,6 +512,17 @@ else{
 }
 echo "<br>";
 
+$sql = 'ALTER TABLE `acier_fastech`.`ccq_payement` ADD INDEX `ccq_payement_c` (`id_payement`) USING BTREE;;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to ccq_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in ccq_payement</span>\n";
+}
+echo "<br>";
+
 $sql = 'ALTER TABLE `acier_fastech`.`bankholiday_payement` ADD INDEX `bankholiday_payement_p` (`id_payement`) USING BTREE;;';
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
@@ -520,6 +547,17 @@ else{
 echo "<br>";
 
 
+$sql = 'ALTER TABLE `acier_fastech`.`ccq_payement` ADD INDEX `ccq_payement_cr` (`ccq`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to ccq_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Index created successfully in ccq_payement</span>\n";
+}
+echo "<br>";
+
 $sql = 'ALTER TABLE `prime_payement` ADD CONSTRAINT `prime_payement_p_fk` FOREIGN KEY (`id_payement`) 
 REFERENCES `payements`(`id_payement`) ON DELETE CASCADE ON UPDATE CASCADE; ';
 if (!$result = $conn->query($sql)) {
@@ -529,6 +567,18 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Delete/upload cascade created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `ccq_payement` ADD CONSTRAINT `ccq_payement_c_fk` FOREIGN KEY (`id_payement`)
+REFERENCES `payements`(`id_payement`) ON DELETE CASCADE ON UPDATE CASCADE; ';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to ccq_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in ccq_payement</span>\n";
 }
 echo "<br>";
 
@@ -552,6 +602,17 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Delete/upload cascade created successfully in prime_payement</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `ccq_payement` ADD CONSTRAINT `ccq_payement_cr_fk` FOREIGN KEY (`ccq`) REFERENCES `ccq`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to ccq_payement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in ccq_payement</span>\n";
 }
 echo "<br>";
 
@@ -606,7 +667,19 @@ echo "<br>";
 $sql = "INSERT INTO `departement` (`name`, `amount`, `id_state`)
  VALUES ('Usine', '26.35', '1'), ('Temps 1/2 usine', '37.34', '1'), ('Peinture', '29.09', '1'), ('Temps 1/2 peinture', '42.98', '1'),
  ('Usine chiffre nuit', '22.84', '1'), ('Peinture chiffre nuit', '22.84', '1'), ('Peinture chiffre nuit T1/2', '33.85', '1'),
- ('Emballage', '27.02', '1'), ('Emballage Temps 1/2', '40.06', '1'), ('Chargé projet dessin', '29.53', '1')";
+ ('Emballage', '27.02', '1'), ('Emballage Temps 1/2', '40.06', '1');"; 
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into departement</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into departement</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `departement` (`name`, `amount`, `bool_production`, `id_state`)
+ VALUES ('Chargé projet dessin', '29.53', '2', '1')";
 if (!$result = $conn->query($sql)) {
 	// Oh no! The query failed.
 	echo "<span style='color:red;'>Could not insert data into departement</span>" ;

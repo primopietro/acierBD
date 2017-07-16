@@ -5,9 +5,14 @@ $anObject = null;
 
 if (isSet ( $_GET )) {
 	
-	require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime_payement.php';
 	
-	$anObject = new FastechPrimePayement();
+	if($_GET['tblId'] == "tblHeure"){
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime_payement.php';
+		$anObject = new FastechPrimePayement();
+	} else{
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq_payement.php';
+		$anObject = new FastechCCQPayement();
+	}
 	$anObject->getObjectListAsDynamicTableTableForWeek($_GET['prime'], $_GET['id_payement']);
 	
 }

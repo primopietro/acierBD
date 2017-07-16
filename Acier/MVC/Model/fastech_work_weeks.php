@@ -115,7 +115,7 @@ class FastechWorkWeek extends FastechModel {
 		
 		$internalAttributes = get_object_vars ( $this );
 		
-		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1";
+		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1 ORDER BY `begin_date` DESC";
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {

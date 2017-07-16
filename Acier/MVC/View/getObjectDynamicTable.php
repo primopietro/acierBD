@@ -40,8 +40,9 @@ if($tableName== "ongletPrime"){
 } else if($tableName == "ongletHeure"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
 	$weekId = $_GET["id"];
+	$isCCQ = $_GET["isCCQ"];
 	$anObject = new FastechEmployekWeekHours();
-	$anObject->getObjectList($weekId, 1);
+	$anObject->getObjectList($weekId, $isCCQ);
 	$tableName = "ongletSemaine";
 } else if($tableName == "ongletProjetHeure"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';

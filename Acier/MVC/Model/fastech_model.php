@@ -289,7 +289,7 @@ class FastechModel {
 	}
 	
 	function getObjectListAsDynamicHeaderFooter($showPrimaryKey = true) {
-		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		$aListOfObjects = $this->getListOfActiveBDObjects();
 		$onlyOnce = 0;
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {

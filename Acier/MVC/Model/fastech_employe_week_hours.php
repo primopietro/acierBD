@@ -160,6 +160,8 @@ class FastechEmployekWeekHours extends FastechModel {
 		$totalHours = array ();
 		$employe = new FastechEmploye ();
 		$aListOfEmployes = $employe->getListOfActiveBDObjects ();
+
+		
 		if ($aListOfEmployes != null) {
 			foreach ( $aListOfEmployes as $anObject ) {
 				
@@ -190,6 +192,62 @@ class FastechEmployekWeekHours extends FastechModel {
 			}
 		}
 	}
+	
+	function getProductionTotal($projectId) {
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		
+		$sql = "SELECT start_date FROM projects WHERE id_project = " . $projectId;
+		$result = $conn->query ( $sql );
+		
+		if ($result->num_rows > 0) {
+			while ( $row = $result->fetch_assoc () ) {
+				foreach ( $row as $aRowName => $aValue ) {
+					$date = $aValue;
+				}
+			}
+			$conn->close ();
+		}
+		
+		$aListOfWeeks = $this->getWeeksAfterDate ( "'" . $aValue . "'" );
+		$totalHours = 0;
+		$i = array ();
+		$counter1 = 0;
+		
+		if ($aListOfWeeks != null) {
+			foreach ( $aListOfWeeks as $aWeek ) {
+				$weekTotalHours = 0;
+				$departement = new FastechDepartement ();
+				$aListOfDepartements = $departement->getListOfActiveBDObjects();
+				if ($aListOfDepartements != null) {
+					$counter = 0;
+					foreach ( $aListOfDepartements as $aDepartement ) {
+						foreach ( $aDepartement as $key1 => $value1 ) {
+							if($aDepartement["bool_production"] == 1){
+								if ($key1 == "name") {
+									$hours = $this->getWeekProjectDepartementHours ( $projectId, $aWeek ['id_work_week'], $value1 );
+									if ($counter1 == 0) {
+										$departementTotalHours [$counter] = 0;
+									}
+									$departementTotalHours [$counter] += $hours;
+									$counter ++;
+									$weekTotalHours += $hours;
+								}
+							}
+						}
+					}
+				}
+				$counter1 ++;
+				$totalHours += $weekTotalHours;
+			}
+	
+			
+		} 
+		
+		return $totalHours;
+	}
+	
 	function getProjectHourList($projectId) {
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';

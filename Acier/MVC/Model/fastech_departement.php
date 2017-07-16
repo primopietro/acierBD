@@ -8,6 +8,7 @@ class FastechDepartement extends FastechModel {
 	protected $order =0;
 	protected $name = '';
 	protected $amount = 0;
+	protected $bool_production = 1;
 	protected $id_state = 1; // 1 equals active by default
 	
 	function __construct() {
@@ -48,6 +49,26 @@ class FastechDepartement extends FastechModel {
         $this->amount = $amount;
         return $this;
     }
+    
+    /**
+     * bool_production
+     *
+     * @return Int
+     */
+    public function getBool_production() {
+    	return $this->bool_production;
+    }
+    
+    /**
+     * bool_production
+     *
+     * @param Int $bool_production
+     * @return FastechEmploye
+     */
+    public function setBool_production($bool_production) {
+    	$this->bool_production= $bool_production;
+    	return $this;
+    }
 
     /**
      * id_state
@@ -84,6 +105,36 @@ class FastechDepartement extends FastechModel {
     public function setOrder($order){
     	$this->order = $order;
     	return $this;
+    }
+    
+    function getObjectListAsDynamicTable($showPrimaryKey = true) {
+    	$aListOfObjects = $this->getListOfActiveBDObjects ();
+    	if ($aListOfObjects != null) {
+    		foreach ( $aListOfObjects as $anObject ) {
+    			
+    			echo "<tr class='tableHover'>";
+    			foreach ( $anObject as $key => $value ) {
+    				
+    				if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+    					$id_object = $anObject ["primary_key"];
+    					$table_name = $anObject ["table_name"];
+    					if ($key != "bool_production") {
+    						echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+    						echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+    					} else{
+    						echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+    						echo "<input ";
+    						if($value == "2"){
+    							echo "checked ";
+    						}
+    						echo  "type='checkbox' class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+    					}
+    				}
+    			}
+    			
+    			echo "</tr>";
+    		}
+    	}
     }
     
     public function  getObjectListAsStaticTableString() {

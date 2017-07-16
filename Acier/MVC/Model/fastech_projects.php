@@ -1,4 +1,4 @@
-W<?php
+<?php
 include 'fastech_model.php';
 class FastechProject extends FastechModel {
 	protected $table_name = 'projects';
@@ -143,14 +143,23 @@ class FastechProject extends FastechModel {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
-						
-						if ($key != "id_project") {
-							echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
-							echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
-						} else {
-							echo "<td style='display:none'><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
-							echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
-						}
+							if ($key != "id_project") {
+								if ($key == "production_total"){
+									require_once 'fastech_employe_week_hours.php';
+									$aWeekHour = new FastechEmployekWeekHours();
+									$value = $aWeekHour->getProductionTotal($anObject[$id_object]);
+									echo $id_object . "<br>";
+									$this->production_total = $value;
+									$this->updateDBObject();
+									echo "<td class='cursorDefault'>$value h</td>";
+								} else {
+									echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+									echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+								}
+							} else {
+								echo "<td style='display:none'><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+								echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+							}
 					}
 				}
 				
@@ -199,4 +208,6 @@ class FastechProject extends FastechModel {
 	}
 }
 
+/*$employe = new FastechProject();
+$employe->getObjectListAsDynamicTable(true);*/
 ?>

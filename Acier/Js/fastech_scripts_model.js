@@ -28,21 +28,8 @@ function getContentHtml(windowName){
 	if(windowName === "ongletPrime"){
 		
 		content += "<div class='container-fluid'>";
-		content += "<h1> Liste des primes </h1>";
-		content += "<div class='table-responsive'>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
-		content += "</tr></tfoot><tbody>";
-
-		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printPrime'>Imprimer</a>";
-
-		content += "<h3 class='formTitleMargin'>Ajout prime</h3>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout prime</h1>";
 		content += "<form id='formPrime'>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
@@ -57,14 +44,44 @@ function getContentHtml(windowName){
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "   typeName='prime'>Ajouter</a></form>";
+		
+		content += "<div class='table-responsive fastechTable'>";
+		content += "<h1> Liste des primes </h1>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printPrime'>Imprimer</a>";
+
 		content += "</div>";
 		
 	} else if(windowName === "ongletSemaine"){
 		
 		content += "<div class='container-fluid'>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout semaine</h1>";
+		content += "<form id='formSemaine'>";
 
+		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<label for='name'>Suffixe</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Suffixe pour la semaine' id='suffixe'></input>";
+		content += "</div>";
+
+		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<label for='begin_date'>Terminant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
+		content += "</div>";
+		
+		content += "<span id='errorForm'></span>";
+
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly' typeName='work_weeks'>Ajouter</a></form>";
+
+		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des semaines </h1>";
-		content += "<div class='table-responsive'>";
 		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
@@ -79,47 +96,14 @@ function getContentHtml(windowName){
 
 		content += "</tbody></table></div>";
 
-		content += "<h3 class='formTitleMargin'>Ajout semaine</h3>";
-		content += "<form id='formSemaine'>";
-
-		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='name'>Suffixe</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Suffixe pour la semaine' id='suffixe'></input>";
-		content += "</div>";
-
-		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='begin_date'>Terminant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
-		content += "</div>";
-
-		content += "<span id='errorForm'></span>";
-
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly' typeName='work_weeks'>Ajouter</a></form>";
 
 		content += "</div>";
 		
 	} else if(windowName === "ongletEmploye"){
 		
 		content += "<div class='container-fluid'>";
-		content += "<h1> Liste des employés </h1>";
-		content += "<div class='table-responsive'>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
-
-		content += "<th>Code</th>";
-		content += "<th>Nom</th>";
-		content += "<th>Prénom</th>";
-		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot><tr id='footer'>";
-
-		content += "<th>Code</th>";
-		content += "<th>Nom</th>";
-		content += "<th>Prénom</th>";
-		content += "<th>Taux horaire</th>";
-		content += "<th>Département</th>";
-		content += "<th style='text-align: center'>CCQ</th>";
-		content += "</tr></tfoot><tbody>";
-
-		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printEmploye'>Imprimer</a>";
-
-		content += "<h3 class='formTitleMargin'>Ajout employé</h3>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout employé</h1>";
 		content += "<form id='formEmploye'>";
 		
 		content += "<div class='form-group formLeft col-lg-2 col-md-2 col-xs-12'>";
@@ -152,32 +136,35 @@ function getContentHtml(windowName){
 		content += "<span id='errorForm'></span>";
 
 		content += "<a data-animation='ripple'  class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo'   typeName='employees'>Ajouter</a></form>";
+		
+		content += "<div class='table-responsive fastechTable'>";
+		content += "<h1> Liste des employés </h1>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
 
-		
-		
+		content += "<th>Code</th>";
+		content += "<th>Nom</th>";
+		content += "<th>Prénom</th>";
+		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Code</th>";
+		content += "<th>Nom</th>";
+		content += "<th>Prénom</th>";
+		content += "<th>Taux horaire</th>";
+		content += "<th>Département</th>";
+		content += "<th style='text-align: center'>CCQ</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printEmploye'>Imprimer</a>";
+
 		content += "</div>";
 	   
 		
 	} else if(windowName === "ongletProjet"){
 		
 		content += "<div class='container-fluid'>";
-		content += "<h1> Liste des projets </h1>";
-		content += "<div class='table-responsive'>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
-
-		content += "<th>Suffixe</th>";
-		content += "<th>Date début</th>";
-		content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot><tr id='footer'>";
-
-		content += "<th>Suffixe</th>";
-		content += "<th>Date début</th>";
-		content += "<th>Cumulatif production</th><th>Budget</th>";
-		content += "</tr></tfoot><tbody>";
-
-		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printProject'>Imprimer</a>";
-
-		content += "<h3 class='formTitleMargin'>Ajout projet</h3>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout projet</h1>";
 		content += "<form id='formProjet'>";
 
 		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
@@ -195,40 +182,64 @@ function getContentHtml(windowName){
 		content += "<span id='errorForm'></span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'  typeName='projects'>Ajouter</a></form>";
+		
+		content += "<div class='table-responsive fastechTable'>";
+		content += "<h1> Liste des projets </h1>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Suffixe</th>";
+		content += "<th>Date début</th>";
+		content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Suffixe</th>";
+		content += "<th>Date début</th>";
+		content += "<th>Cumulatif production</th><th>Budget</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printProject'>Imprimer</a>";
+
+		
 		content += "</div>";
 		
 	} else if(windowName === "ongletDepartement"){
 		
 		content += "<div class='container-fluid'>";
-		content += "<h1> Liste des départements </h1>";
-		content += "<div class='table-responsive'>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
-		content += "</tr></tfoot><tbody>";
-
-		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printDepartement'>Imprimer</a>";
-
-		content += "<h3 class='formTitleMargin'>Ajout département</h3>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout département</h1>";
 		content += "<form id='formDepartement'>";
 
-		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
 		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom du département' id='nom'></input>";
 		content += "</div>";
 
-		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
 		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du département' id='taux'></input>";
+		content += "</div>";
+		
+		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+		content += "<label for='bool_production'>Cumulatif Production</label><input name='bool_production' class='form-control inputMarginTop inputForm' type='checkbox'' id='ccq'></input>";
 		content += "</div>";
 
 		content += "<span id='errorForm'></span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "  typeName='departement'>Ajouter</a></form>";
+		
+		content += "<div class='table-responsive fastechTable'>";
+		content += "<h1> Liste des départements </h1>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th><th>Cumulatif production</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th><th>Cumulatif production</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printDepartement'>Imprimer</a>";
+
 		content += "</div>";
 		
 	} else if(windowName === "ongletCompte"){
@@ -251,21 +262,8 @@ function getContentHtml(windowName){
 	} else if(windowName === "ongletCCQ"){
 		
 		content += "<div class='container-fluid'>";
-		content += "<h1> Liste des primes CCQ </h1>";
-		content += "<div class='table-responsive'>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
-
-		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
-		content += "</tr></tfoot><tbody>";
-
-		content += "</tbody></table></div>";
-		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printPrimeCCQ'>Imprimer</a>";
-
-		content += "<h3 class='formTitleMargin'>Ajout prime CCQ</h3>";
+		
+		content += "<h1 class='formTitleMargin'>Ajout prime CCQ</h1>";
 		content += "<form id='formCCQ'>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
@@ -280,6 +278,21 @@ function getContentHtml(windowName){
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "   typeName='ccq'>Ajouter</a></form>";
+		
+		content += "<div class='table-responsive fastechTable'>";
+		content += "<h1> Liste des primes CCQ </h1>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Nom</th>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printPrimeCCQ'>Imprimer</a>";
+
 		content += "</div>";
 		
 	} else if(windowName === "ongletBanque"){
@@ -342,7 +355,7 @@ $(document)
 							if (response == "success" || response =="Wsuccess") {
 								if(formName == "employe_week_hours"){
 									 originalId = $("table").attr('idweek');
-									updateTableHour(originalId, "ongletHeure");
+									updateTableHour(originalId, "ongletHeure", "tblHeure");
 								} else{
 									updateTable(windowName);
 								}
@@ -391,11 +404,17 @@ function updateTable(windowName){
 	
 }
 
-function updateTableHour(id, windowName){
+function updateTableHour(id, windowName, tableId){
+	var isCCQ = 1;
+	if(tableId == "ccqs"){
+		isCCQ = 2;	
+	}
+	
 	$
 	.ajax({
 		method : "GET",
-		url : "MVC/View/getObjectDynamicTable.php?objectName=" + windowName + "&id=" + id,
+		
+		url : "MVC/View/getObjectDynamicTable.php?isCCQ="+isCCQ+"&objectName=" + windowName + "&id=" + id,
 		beforeSend : function() {
 			// TO INSERT - loading animation
 		},
@@ -406,12 +425,12 @@ function updateTableHour(id, windowName){
 		},
 		success : function(response) {
 			//$('#download').remove();
-			$('.tblObject tbody').html("");
-			$('.tblObject tbody').append(response);
+			$("#" + tableId + " tbody").html("");
+			$("#" + tableId + " tbody").append(response);
 			
 			if(windowName == "ongletHeure"){
 			var idWeek = $("#tblHeure").attr("idWeek");
-			var employes = $("td:first-child");
+			var employes = $("#" + tableId + " td:first-child");
 			var employesArray = new Array();
 			
 			employes.each(function( index ) {
@@ -432,20 +451,23 @@ function updateTableHour(id, windowName){
 				success : function(response) {
 					//$('#download').remove();
 					tr.append(response);
-					
+					var primes ="";
+					if(tableId == "tblHeure"){
+						 primes = $("#" + tableId + " thead [typeheader = 'prime']");
+					}else{
+						 primes = $("#" + tableId + " thead [typeheader = 'ccq']");
+					}
 				
-					var primes = $("thead [typeheader = 'prime']");
-					
 					var lengthPrimes = primes.length;
 					var counter = 1;
 					primes.each(function( index ) {
 						var prime = $(this).attr("attrval");
-						var id_payement= tr.find("[table='payements']").first().attr("idobj");
+						var id_payement= tr.find(" [table='payements']").first().attr("idobj");
 						//console.log(tr.find("[table='payements']").first().attr("idobj"));
 						$
 						.ajax({
 							method : "GET",
-							url : "MVC/View/getPayedPrime.php?prime=" + prime+"&id_payement="+ id_payement,
+							url : "MVC/View/getPayedPrime.php?prime=" + prime +"&id_payement="+ id_payement+"&tblId=" + tableId,
 						beforeSend : function() {
 							// TO INSERT - loading animation
 						},
@@ -472,7 +494,7 @@ function updateTableHour(id, windowName){
 													"<span id='download'>Telechargement..</span>");*/
 								},
 								success : function(response) {
-									tr.append(response + "<td><a class='cursor clickConge underlineBtn' idpayement='" + id_payement + "' idemploye='" + id_employe + "'>Calcul congé</a></td>");
+									tr.append(response + "<td><a class='cursor clickConge underlineBtn' idpayement='" + id_payement + "' idemploye='" + id_employe + "'>Congé</a></td>");
 								}
 								});	
 							} 
@@ -484,6 +506,8 @@ function updateTableHour(id, windowName){
 						});	
 						
 					});
+				
+					
 				
 				}
 				
@@ -553,7 +577,7 @@ $(document.body).on('change',".editable",function (e) {
 					
 					if(formName=="payements" || formName == "prime_payement"){
 						var idOriginal = $("#tblHeure").attr('idweek');
-						updateTableHour(idOriginal ,"ongletHeure");
+						updateTableHour(idOriginal ,"ongletHeure", "tblHeure");
 					}
 					else{
 						updateTable(windowName);
@@ -613,21 +637,10 @@ $(document)
 					var semaine = $(this).attr('id');
 					var arr = semaine.split('_');
 					content += "<div class='container-fluid'>";
-	
-					// ******TABLEAU******
-					content += "<div class='table-responsive'>";
 					
-					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
-					content += "</tr></thead><tfoot><tr id='footer'>";
-					content += "</tr></tfoot><tbody>";
-					content += "</tbody></table></div>";
-					
-					
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printTemp'>Imprimer</a>";
-	
 					// ******AJOUT HEURE*******
 					content += "<div class='formMargin'>";
-					content += "<h3 class='h3Form'>Ajout heure(s)</h3>";
+					content += "<h1>Ajout heure(s)</h1>";
 					content += "<form id='formHeureSemaine'>";
 	
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12' style='display:none'>";
@@ -657,22 +670,55 @@ $(document)
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm addInfo' typeName='employe_week_hours'>Ajouter</a></form>";
 					content += "<span id='errorForm'></span>";
 					content += "</div>";
+					
+	
+					// ******TABLEAU******
+					content += "<div class='table-responsive fastechTable'>";
+					
+					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
+					content += "</tr></thead><tfoot><tr id='footer'>";
+					content += "</tr></tfoot><tbody>";
+					content += "</tbody></table></div>";
+					
+					
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printTemp'>Imprimer</a>";
+	
+					
 	
 					content += "</div>";
+
+					
+					updateTableHour(arr[0], "ongletHeure", "tblHeure");
 					
 					$.ajax({method : "GET",
-						url : "MVC/View/getObjectDynamicHeader.php?objectName=" + windowName,
+						url : "MVC/View/getObjectDynamicHeader.php?idObj="+arr[1]+"&objectName=" + windowName,
 						beforeSend : function() {
 							// TO INSERT - loading animation
 						},
 						success : function(response) {
-							$("#header").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>Congé</th><th>BANQUE</th>");
-							$("#footer").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>Congé</th><th>BANQUE</th>");
-							}
+							$("#header").html(response);
+						//	$("#footer").html("<th>code</th><th>" + arr[1] + "</th><th>ENTR. MÉCAN</th><th>AUTRE</th><th>TOTAL</th><th>PAYÉ</th><th>RÉG.</th><th>TEMPS 1/2</th>" + response + "<th>Congé</th><th>BANQUE</th>");
+							$("#ccqs").remove();
+							$("<table id='ccqs' class='table table-bordered tblObject' width='100%' cellspacing='0'class='table table-bordered tblObject' width='100%' cellspacing='0'><thead id='headerccqs'></thead><tbody></tbody></table>").insertAfter($("#tblHeure"));
+							
+							$.ajax({method : "GET",
+								url : "MVC/View/getObjectDynamicFooter.php?idObj="+arr[1]+"&objectName=" + windowName,
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								success : function(response) {
+									$("#headerccqs").html("");
+									$("#headerccqs").html(response);
+									}
+							
+								});
+							
+							
+							
+							updateTableHour(arr[0], "ongletHeure", "ccqs");
+						}
 					
 						});
-					
-					updateTableHour(arr[0], "ongletHeure");
 					
 					
 					$("#content").html(content);
@@ -707,7 +753,7 @@ $(document)
 					
 					updateHeaderFooter(windowName);
 					
-					updateTableHour(arr[0], "ongletProjetHeure");
+					updateTableHour(arr[0], "ongletProjetHeure", "tblHeureProjet");
 
 
 					$("#content").html(content);
@@ -755,7 +801,7 @@ $(document).on("click",".clickConge",function(){
 		},
 		success : function(response) {
 
-			updateTableHour(idWeek, "ongletHeure");
+			updateTableHour(idWeek, "ongletHeure", "tblHeure");
 
 			}
 	

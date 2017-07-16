@@ -1,13 +1,13 @@
 <?php
 require_once 'fastech_model.php';
 
-class FastechPrimePayement extends FastechModel {
-	protected $table_name = 'prime_payement';
+class FastechCCQPayement extends FastechModel {
+	protected $table_name = 'ccq_payement';
 	protected $primary_key = "id_prime_payement";
 	
 	protected $id_prime_payement= 0;
 	protected $id_payement= 0;
-	protected $prime = 0;
+	protected $ccq = 0;
 	protected $amount= 0;
 	protected $id_state = 1; // 1 equals active by default
 	
@@ -52,20 +52,20 @@ class FastechPrimePayement extends FastechModel {
     }
 
     /**
-     * prime
+     * ccq
      * @return unkown
      */
-    public function getPrime(){
-        return $this->prime;
+    public function getCcq(){
+    	return $this->ccq;
     }
 
     /**
-     * prime
-     * @param unkown $prime
+     * ccq
+     * @param unkown $ccq
      * @return FastechPrime
      */
-    public function setPrime($prime){
-        $this->prime = $prime;
+    public function setCcq($ccq){
+    	$this->ccq= $ccq;
         return $this;
     }
 
@@ -105,12 +105,12 @@ class FastechPrimePayement extends FastechModel {
         return $this;
     }
     
-    public function getPayementPrimeFromDB($prime, $id_payement) {
+    public function getPayementCcqFromDB($ccq, $id_payement) {
     	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
     	
     	$internalAttributes = get_object_vars ( $this );
     	
-    	$sql = "SELECT * FROM `" . $this->table_name . "` WHERE prime ='" . $prime . "' AND id_payement = $id_payement";
+    	$sql = "SELECT * FROM `" . $this->table_name . "` WHERE ccq ='" . $ccq. "' AND id_payement = $id_payement";
     	//echo $sql . "<br>";
     	$result = $conn->query ( $sql );
     	
@@ -131,9 +131,9 @@ class FastechPrimePayement extends FastechModel {
     	return null;
     }
     
-    public function getObjectListAsDynamicTableTableForWeek($prime, $id_payement) {
-    	require_once 'fastech_prime.php';
-    	$anObject = $this->getPayementPrimeFromDB($prime, $id_payement);
+    public function getObjectListAsDynamicTableTableForWeek($ccq, $id_payement) {
+    	require_once 'fastech_ccq.php';
+    	$anObject = $this->getPayementCcqFromDB($ccq, $id_payement);
     	if ($anObject != null) {
     		/*$localPayed=0;
     		$localRegular = 0;
@@ -145,12 +145,12 @@ class FastechPrimePayement extends FastechModel {
     				$table_name = $anObject ["table_name"];
     				
     				
-    				$aPrime = new FastechPrime();
-    				$aPrime->getObjectFromDB($prime);
+    				$aCcq = new FastechCCQ();
+    				$aCcq->getObjectFromDB($ccq);
     				
     				
     				echo "<td><form style='display:table;float:left;' table='" . $table_name . "' class='edit col-lg-6' idObj='" . $anObject [$id_object] . " '>";
-    				echo "<input class='editable' name='" . $key . "' value='" . $value . "'></form> / <span class='col-lg-6 cursorDefault'>" . $value * $aPrime->getAmount() . " $</span></td>";
+    				echo "<input class='editable' name='" . $key . "' value='" . $value . "'></form></td>";
     			}
     		}
     		
@@ -160,27 +160,27 @@ class FastechPrimePayement extends FastechModel {
     		echo "<td>$locaHalf</td>";*/
     	} else {
     		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
-    		$aPrimePayement = new FastechPrimePayement();
-    		$aPrimePayement->setId_prime_payement(null);
-    		$aPrimePayement->setId_payement($id_payement);
-    		$aPrimePayement->setAmount('0');
-    		$aPrimePayement->setPrime($prime);
+    		$aCcqPayement = new FastechCCQPayement();
+    		$aCcqPayement->setId_prime_payement(null);
+    		$aCcqPayement->setId_payement($id_payement);
+    		$aCcqPayement->setAmount('0');
+    		$aCcqPayement->setCcq($ccq);
     		
     		
     		//print_r($aPayement);
     		//if prime normal
     		
-    		$aPrimePayement->addDBObject();
+    		$aCcqPayement->addDBObject();
     		
     		$conn->close ();
     		
-    		$this->getObjectListAsDynamicTableTableForWeek ( $prime, $id_payement);
+    		$this->getObjectListAsDynamicTableTableForWeek ($ccq, $id_payement);
     	}
     }
 
 }
 
-/*$payement = new FastechPrimePayement();
-$payement->getObjectListAsDynamicTableTableForWeek("Peinture", 1);*/
+/*$payement = new FastechCCQPayement();
+$payement->getObjectListAsDynamicTableTableForWeek("CCQx", 37);*/
 
 ?>
