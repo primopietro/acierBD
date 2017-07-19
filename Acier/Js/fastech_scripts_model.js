@@ -336,9 +336,9 @@ $(document)
 				 originalId = $("table").attr('idweek');
 				dataToSend+="&id_work_week="+originalId ;
 			}
-			console.log(dataToSend);
+			/*console.log(dataToSend);
 			console.log(formName);
-			console.log(windowName);
+			console.log(windowName);*/
 			$
 					.ajax({
 						method : "POST",
@@ -356,6 +356,7 @@ $(document)
 								if(formName == "employe_week_hours"){
 									 originalId = $("table").attr('idweek');
 									updateTableHour(originalId, "ongletHeure", "tblHeure");
+									updateTableHour(originalId, "ongletHeure", "ccqs");
 								} else{
 									updateTable(windowName);
 								}
@@ -463,7 +464,6 @@ function updateTableHour(id, windowName, tableId){
 					primes.each(function( index ) {
 						var prime = $(this).attr("attrval");
 						var id_payement= tr.find(" [table='payements']").first().attr("idobj");
-						//console.log(tr.find("[table='payements']").first().attr("idobj"));
 						$
 						.ajax({
 							method : "GET",
@@ -564,7 +564,6 @@ $(document.body).on('change',".editable",function (e) {
 	var rowIndex = self.closest('tr').prevAll().length; 
 	rowIndex+=2;
 	var state ="";
-	console.log(data);
 	$.ajax({method : "POST",
 		url : "AjaxRelated/edit-object_process.php?typeName=" + formName,
 		data : data,
@@ -575,9 +574,10 @@ $(document.body).on('change',".editable",function (e) {
 			
 				if(response== "success" || response =="Wsuccess"){
 					
-					if(formName=="payements" || formName == "prime_payement"){
+					if(formName=="payements" || formName == "prime_payement" || formName == "ccq_payement"){
 						var idOriginal = $("#tblHeure").attr('idweek');
-						updateTableHour(idOriginal ,"ongletHeure", "tblHeure");
+						updateTableHour(idOriginal , "ongletHeure", "tblHeure");
+						updateTableHour(idOriginal , "ongletHeure", "ccqs");
 					}
 					else{
 						updateTable(windowName);
@@ -802,6 +802,7 @@ $(document).on("click",".clickConge",function(){
 		success : function(response) {
 
 			updateTableHour(idWeek, "ongletHeure", "tblHeure");
+			updateTableHour(idWeek, "ongletHeure", "ccqs");
 
 			}
 	

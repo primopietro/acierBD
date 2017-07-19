@@ -445,6 +445,17 @@ else{
 }
 echo "<br>";
 
+$sql = 'ALTER TABLE `employe_week_hours` ADD CONSTRAINT `ewh_e_fk` FOREIGN KEY (`id_employe`) REFERENCES `employees`(`id_employe`) ON DELETE CASCADE ON UPDATE CASCADE';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to detail_week</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in detail_week</span>\n";
+}
+echo "<br>";
+
 
 $sql = 'ALTER TABLE `employe_week_hours` ADD CONSTRAINT `ewh_d_fk` FOREIGN KEY (`departement`) REFERENCES `departement`(`name`) ON DELETE CASCADE ON UPDATE CASCADE;';
 if (!$result = $conn->query($sql)) {

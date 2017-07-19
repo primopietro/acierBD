@@ -145,8 +145,8 @@ class FastechCCQPayement extends FastechModel {
     				$table_name = $anObject ["table_name"];
     				
     				
-    				$aCcq = new FastechCCQ();
-    				$aCcq->getObjectFromDB($ccq);
+    				/*$aCcq = new FastechCCQ();
+    				$aCcq->getObjectFromDB($ccq);*/
     				
     				
     				echo "<td><form style='display:table;float:left;' table='" . $table_name . "' class='edit col-lg-6' idObj='" . $anObject [$id_object] . " '>";

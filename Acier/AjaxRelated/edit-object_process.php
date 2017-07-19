@@ -22,6 +22,8 @@ if ($typeName == "prime") {
 	$anObject = new FastechPrimePayement();
 } else if ($typeName == "ccq") {
 	$anObject = new FastechCCQ();
+} else if ($typeName == "ccq_payement") {
+	$anObject = new FastechCCQPayement();
 }
 
 $aName = htmlspecialchars ( $_POST ["name"] );
