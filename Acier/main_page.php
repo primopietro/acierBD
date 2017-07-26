@@ -39,8 +39,8 @@ if(!isset($_SESSION['current_page'])){
 					"Projet"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
 					"Departement"=>"<i class='fa fa-industry' aria-hidden='true'></i>",
 					"Prime"=> "<i class='fa fa-file-powerpoint-o' aria-hidden='true'></i>",
-					"CCQ"=> "<i class='fa fa-file-powerpoint-o' aria-hidden='true'></i>",
-					"Banque"=> "<i class='fa fa-file-powerpoint-o' aria-hidden='true'></i>",
+					"CCQ"=> "<i class='fa fa-user' aria-hidden='true'></i>",
+					"Banque"=> "<i class='fa fa-bank' aria-hidden='true'></i>",
 					"Compte"=> "<i class='fa fa-address-card-o' aria-hidden='true'></i>");
 			foreach($pages as $key => $value){
 				
