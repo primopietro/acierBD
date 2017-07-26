@@ -736,17 +736,17 @@ $(document)
 					content += "<div class='container-fluid'>";
 					
 					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[1] + "</h2>";
-					content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
+					//content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
 
 					// ******TABLEAU******
 					content += "<div class='table-responsive'>";
-					content += "<table class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
+					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "</tr></thead><tfoot><tr id='footer'>";
 
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printTemp'>Imprimer</a>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printSpecificProject'>Imprimer</a>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
 					
 					content += "</div>";
@@ -812,7 +812,9 @@ $(document).on("click",".clickConge",function(){
 $(document).on("click",".btnImpression",function(){
 	
 	var windowName = $(this).attr("id");
-	
+	if($(this).attr("id") == "printSpecificProject"){
+		windowName+= "&projectID=" + $("#tblHeureProjet").attr("idobj");
+	}
   window.open("pdfRelated/createPdf.php?"+"objectName="+windowName);
   
 });

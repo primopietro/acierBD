@@ -38,30 +38,42 @@ switch ($tableName) {
 	case "printPrime":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
 		$anObject = new FastechPrime();
+		$table = $anObject->getObjectListAsStaticTableString();
 		break;
 	case "printEmploye":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
 		$anObject = new FastechEmploye();
+		$table = $anObject->getObjectListAsStaticTableString();
 		break;
 	case "printProject":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
 		$anObject = new FastechProject();
+		$table = $anObject->getObjectListAsStaticTableString();
+		break;
+	case "printSpecificProject":
+		$projectID = $_GET['projectID'];
+		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
+		$anObject = new FastechEmployekWeekHours();
+		$table = $anObject->getProjectHourListAsString($projectID);
 		break;
 	case "printDepartement":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
 		$anObject = new FastechDepartement();
+		$table = $anObject->getObjectListAsStaticTableString();
 		break;
 	case "printPrimeCCQ":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_ccq.php';
 		$anObject = new FastechCCQ();
+		$table = $anObject->getObjectListAsStaticTableString();
 		break;
 	case "printBank":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_bankholiday_payement.php';
 		$anObject = new FastechBankHolidayPayement();
+		$table = $anObject->getObjectListAsStaticTableString();
 		break;
 }
 
-$table = $anObject->getObjectListAsStaticTableString();
+
 $table= "<table>" . $table. "</table>";
 
 

@@ -151,7 +151,9 @@ class FastechDepartement extends FastechModel {
     			
     			$table  .= "<tr class=''>";
     			foreach ( $anObject as $key => $value ) {
-    				if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+    				if ($key != "table_name" && $key != "primary_key" 
+    						&& $key != "id_state" && $key != "order" 
+    						&& $key != "bool_production") {
     					
     					$table  .= "<td>";
     					$table .= $value . "</td>";

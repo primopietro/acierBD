@@ -323,6 +323,44 @@ class FastechModel {
 			}
 		}
 	}
+	function getObjectListAsStaticHeaderFooterString($showPrimaryKey = true) {
+		$aListOfObjects = $this->getListOfActiveBDObjects();
+		$onlyOnce = 0;
+		$table = "<tr>";
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				foreach ( $anObject as $key => $value ) {
+					if($key == "table_name" && $value == "departement" && $onlyOnce == 0){
+						$table .="<th></th>";
+						$onlyOnce++;
+					}
+					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+						if($showPrimaryKey == true){
+							if(!is_numeric($value))
+								
+								if($this->table_name == "prime"){
+									$table .="<th  class='alignRight'  >". $value ." " .$anObject["amount"].  "$/h</th>";
+							}else{
+								$table .="<th  class='alignRight' >". $value . "</th>";
+							}
+							
+						} else {
+							if(is_numeric($value) && $key == "amount")
+								
+								if($this->table_name == "prime"){
+									$table .="<th  class='alignRight'>". $value ." " .$anObject["amount"].  "$/h</th>";
+							}else{
+								$table .="<th  class='alignRight'>". $value . " $/h</th>";
+							}
+						}
+					}
+				}
+				
+			}
+		}
+		$table .= "<th>Total</th></tr>";
+		return $table;
+	}
 	
 	function getActiveObjectsAsSelect($selected = null) {
 		if($this->primary_key == "order"){

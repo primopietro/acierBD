@@ -256,6 +256,7 @@ class FastechEmploye extends FastechModel {
 		$table  .= "<td>Nom</td>";
 		$table  .= "<td>Taux horaire</td>";
 		$table  .= "<td>Département</td>";
+		$table  .= "<td>Role</td>";
 		$table  .= "</tr></thead>";
 		$table  .= "<tbody>";
 		if ($aListOfObjects != null) {
@@ -266,7 +267,17 @@ class FastechEmploye extends FastechModel {
 					if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
 						
 						$table  .= "<td>";
-						$table .= $value . "</td>";
+						if($key =="bool_ccq"){
+							if($value == 1 || $value =="1"){
+								$table .=  "</td>";
+							}
+							else{
+								$table .=  " CCQ </td>";
+							}
+						}else{
+							$table .= $value . "</td>";
+						}
+						
 					}
 				}
 				
@@ -281,6 +292,7 @@ class FastechEmploye extends FastechModel {
 		$table  .= "<td>Nom</td>";
 		$table  .= "<td>Taux horaire</td>";
 		$table  .= "<td>Département</td>";
+		$table  .= "<td>Role</td>";
 		$table  .= "</tr></tfoot>";
 		return $table;
 	}

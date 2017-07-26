@@ -308,6 +308,73 @@ class FastechEmployekWeekHours extends FastechModel {
 			echo "<tr><td>Aucune semaine n'a été trouvé</td></tr>";
 		}
 	}
+	
+	function getProjectHourListAsString($projectId) {
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		$depHeaderFooter= new FastechDepartement();
+		$depHeader = $depHeaderFooter->getObjectListAsStaticHeaderFooterString(true);
+		$depFooter = $depHeaderFooter->getObjectListAsStaticHeaderFooterString(false);
+		
+		$sql = "SELECT start_date FROM projects WHERE id_project = " . $projectId;
+		$result = $conn->query ( $sql );
+		$table = "";
+		if ($result->num_rows > 0) {
+			while ( $row = $result->fetch_assoc () ) {
+				foreach ( $row as $aRowName => $aValue ) {
+					$date = $aValue;
+				}
+			}
+			$conn->close ();
+		}
+		
+		$aListOfWeeks = $this->getWeeksAfterDate ( "'" . $aValue . "'" );
+		$totalHours = 0;
+		$i = array ();
+		$counter1 = 0;
+		
+		if ($aListOfWeeks != null) {
+			foreach ( $aListOfWeeks as $aWeek ) {
+			
+				$weekTotalHours = 0;
+				$table .= "<tr class='tableHover cursorDefault'><td>" . $aWeek ['name'] . "</td>";
+				$departement = new FastechDepartement ();
+				$aListOfDepartements = $departement->getListOfActiveBDObjects ();
+				if ($aListOfDepartements != null) {
+					$counter = 0;
+					foreach ( $aListOfDepartements as $aDepartement ) {
+						foreach ( $aDepartement as $key1 => $value1 ) {
+							if ($key1 == "name") {
+								$hours = $this->getWeekProjectDepartementHours ( $projectId, $aWeek ['id_work_week'], $value1 );
+								$table .="<td class='alignRight'>" . $hours . "</td>";
+								if ($counter1 == 0) {
+									$departementTotalHours [$counter] = 0;
+								}
+								$departementTotalHours [$counter] += $hours;
+								$counter ++;
+								$weekTotalHours += $hours;
+							}
+						}
+					}
+				}
+				$counter1 ++;
+				$totalHours += $weekTotalHours;
+				$table .="<td class='alignRight'>$weekTotalHours</td></tr>";
+			}
+			$table .="<tr><td>TOTAL:</td>";
+			for($i = 0; $i < $counter; $i ++) {
+				$table .="<td class='alignRight'>$departementTotalHours[$i]</td>";
+			}
+			$table .="<td class='alignRight'>$totalHours</td></tr>";
+		} else {
+			$table .="<tr><td>Aucune semaine n'a été trouvé</td></tr>";
+		}
+		$table = "<thead>" .$depHeader . "</thead><tbody>" . $table . "</tbody><tfoot>" .$depFooter . "</tfoot>";
+		
+		return $table;
+	}
+	
 	function getEmployeHours($id_employe, $id_work_week) {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
