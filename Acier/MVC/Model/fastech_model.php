@@ -383,6 +383,43 @@ class FastechModel {
 		}
 	}
 
+
+    /**
+     * table_name
+     * @return unkown
+     */
+    public function getTable_name(){
+        return $this->table_name;
+    }
+
+    /**
+     * table_name
+     * @param unkown $table_name
+     * @return FastechModel
+     */
+    public function setTable_name($table_name){
+        $this->table_name = $table_name;
+        return $this;
+    }
+
+    /**
+     * primary_key
+     * @return unkown
+     */
+    public function getPrimary_key(){
+        return $this->primary_key;
+    }
+
+    /**
+     * primary_key
+     * @param unkown $primary_key
+     * @return FastechModel
+     */
+    public function setPrimary_key($primary_key){
+        $this->primary_key = $primary_key;
+        return $this;
+    }
+
 }
 
 ?>

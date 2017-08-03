@@ -399,7 +399,7 @@ class FastechEmployekWeekHours extends FastechModel {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		$sql = "SELECT id_work_week, name FROM work_weeks WHERE begin_date >= " . $date;
-		// echo $sql . "<br>";
+		//echo $sql . "<br>";
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {

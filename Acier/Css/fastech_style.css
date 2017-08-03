@@ -76,7 +76,7 @@ input {
 .btnRevient{
 	background-color: rgb(37, 51, 112);
 	color: white;
-	float: left;
+	float: right;
 	height: 42px;
 	padding-top: 13px !important;
 }
@@ -271,6 +271,9 @@ h1, h2, h3, h4, h5 {
 
 .fastechTable{
 	margin-top: 150px;
+}
+.fastechTableProjetHeure{
+	margin-top: 250px;
 }
 #ccqs{
 	margin-top: -16px;

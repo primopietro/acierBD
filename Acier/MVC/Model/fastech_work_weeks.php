@@ -13,7 +13,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * id_work_week
-	 * 
+	 *
 	 * @return Int
 	 */
 	public function getId_work_week() {
@@ -22,7 +22,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * id_work_week
-	 * 
+	 *
 	 * @param Int $id_work_week        	
 	 * @return FastechWorkWeek
 	 */
@@ -33,7 +33,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * beginDay
-	 * 
+	 *
 	 * @return Int
 	 */
 	public function getBeginDay() {
@@ -42,7 +42,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * beginDay
-	 * 
+	 *
 	 * @param Int $beginDay        	
 	 * @return FastechWorkWeek
 	 */
@@ -53,7 +53,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * name
-	 * 
+	 *
 	 * @return String
 	 */
 	public function getName() {
@@ -62,7 +62,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * name
-	 * 
+	 *
 	 * @param String $name        	
 	 * @return FastechWorkWeek
 	 */
@@ -73,7 +73,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * begin_date
-	 * 
+	 *
 	 * @return Date
 	 */
 	public function getBegin_date() {
@@ -82,7 +82,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * begin_date
-	 * 
+	 *
 	 * @param Date $begin_date        	
 	 * @return FastechWorkWeek
 	 */
@@ -93,7 +93,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * id_state
-	 * 
+	 *
 	 * @return Int
 	 */
 	public function getId_state() {
@@ -102,7 +102,7 @@ class FastechWorkWeek extends FastechModel {
 	
 	/**
 	 * id_state
-	 * 
+	 *
 	 * @param Int $id_state        	
 	 * @return FastechWorkWeek
 	 */
@@ -153,7 +153,7 @@ class FastechWorkWeek extends FastechModel {
 						$id_object = $anObject ["primary_key"];
 						$table_name = $anObject ["table_name"];
 						
-						if($key != "id_work_week"){
+						if ($key != "id_work_week") {
 							echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
 							echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
 						} else {
@@ -167,11 +167,53 @@ class FastechWorkWeek extends FastechModel {
 			}
 		}
 	}
+	function getActiveObjectsAsSelectSpecific($startDate) {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
+		
+		$anEmployeWeekHours = new FastechEmployekWeekHours ();
+		
+		$aListOfObjects = $anEmployeWeekHours->getWeeksAfterDate ( "'" . $startDate . "'" );
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				echo "<option class='editable' value='" . $anObject [$this->primary_key] . "'>" . $anObject ["name"] . "</option>";
+			}
+		}
+	}
+	function getPrixRevientAsDynamicTable($dateBegin, $dateEnd) {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		
+		$tempArrayResponse = array();
+		$compteurTotal = 0;
+		 $aDep = new FastechDepartement ();
+		$aListOfDeps = $aDep->getListOfActiveBDObjects ();
+		
+		foreach ( $aListOfDeps as $anObject ) {
+			$aName = $anObject ['name'];
+			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
+				FROM employe_week_hours ewh
+				JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
+				JOIN departement d on ewh.departement = d.name
+				WHERE id_project =1 AND  d.name = '".$aName."'
+				AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
+			$result = $conn->query ( $query);
+			if ($result->num_rows > 0) {
+				while ( $row = $result->fetch_assoc () ) {
+					$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
+					$tempArrayResponse[$row['depName']]['valueTotal']  = $row['valueTotal'];
+					$compteurTotal+= $row['valueTotal'];
+				}
+			}
+		}
+		return $tempArrayResponse;
+	}
 }
 
-/*
- * $aWorkWeek = new FastechWorkWeek();
- * $aWorkWeek->getListOfAllDBObjects();
- */
+
+  $aWorkWeek = new FastechWorkWeek();
+ $temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
+  echo "<pre>";
+  print_r ($temp);
+  echo "</pre>";
 
 ?>

@@ -529,7 +529,9 @@ function addConsultButtons(windowName){
 		var idInitial = id;
 		if(windowName == "ongletProjet"){
 			id += "_" + $(this).find("input").eq(1).val();
-			id += "_" + $(this).find("input").eq(4).val();
+			id += "_" + $(this).find("input").eq(2).val();
+			id += "_" + $(this).find("input").eq(3).val();
+			
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
 		}
@@ -736,10 +738,29 @@ $(document)
 					content += "<div class='container-fluid'>";
 					
 					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[1] + "</h2>";
-					//content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
+					content += "<h5 style='margin-bottom: 10px;'>" + arr[3] + "$</h5>";
 
 					// ******TABLEAU******
-					content += "<div class='table-responsive'>";
+
+					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+					content += "<label for='debut'>Début</label><select id='startListWeek' name='debut' class='form-control formLeft inputMarginTop inputForm'></select>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+					content += "<label for='fin'>Fin</label><select id='endListWeek' name='fin' class='form-control formLeft inputMarginTop inputForm'></select>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+					content += "<label for='achatCumul'>Achats cumul</label><input name='achatCumul' class='form-control inputMarginTop inputForm' type='number'></input>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
+					content += "<label for='facturationCumul'>Facturation cumul</label><input name='facturationCumul' class='form-control inputMarginTop inputForm' type='number'></input>";
+					content += "</div>";
+					
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
+					
+					content += "<div class='table-responsive fastechTableProjetHeure'>";
 					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "</tr></thead><tfoot><tr id='footer'>";
@@ -747,7 +768,6 @@ $(document)
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printSpecificProject'>Imprimer</a>";
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
 					
 					content += "</div>";
 					
@@ -757,6 +777,10 @@ $(document)
 
 
 					$("#content").html(content);
+					
+
+					$("#startListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
+					$("#endListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
 				}
 				
 			}
