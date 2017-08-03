@@ -188,6 +188,7 @@ class FastechWorkWeek extends FastechModel {
 		 $aDep = new FastechDepartement ();
 		$aListOfDeps = $aDep->getListOfActiveBDObjects ();
 		
+		
 		foreach ( $aListOfDeps as $anObject ) {
 			$aName = $anObject ['name'];
 			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
