@@ -314,6 +314,23 @@ function getContentHtml(windowName){
 
 		content += "</div>";
 		
+	} else if(windowName == "ongletPrix revient"){
+		content += "<div class='container-fluid'>";
+		content += "<h1> Liste des prix de revient</h1>";
+		content += "<div class='table-responsive'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+
+		content += "<th>Suffixe</th>";
+		content += "<th>Projet</th><th>Date début</th><th>Date fin</th><th>Achats cumul</th><th>Facturation cumul</th></tr></thead><tfoot><tr id='footer'>";
+
+		content += "<th>Suffixe</th>";
+		content += "<th>Projet</th><th>Date début</th><th>Date fin</th><th>Achats cumul</th><th>Facturation cumul</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
+		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printBank'>Imprimer</a>";
+
+		content += "</div>";
 	}
 
 	
@@ -334,11 +351,14 @@ $(document)
 			var formName = $(this).attr("typename");
 			if($(this).attr("typename") == 'employe_week_hours'){
 				 originalId = $("table").attr('idweek');
-				dataToSend+="&id_work_week="+originalId ;
+				 dataToSend+="&id_work_week="+originalId ;
+			} else if($(this).attr("typename") == 'prix_revient'){
+				originalId = $("table").attr('idObj');
+				dataToSend+="&id_project=" + originalId;
 			}
-			/*console.log(dataToSend);
+			console.log(dataToSend);
 			console.log(formName);
-			console.log(windowName);*/
+			//console.log(windowName);
 			$
 					.ajax({
 						method : "POST",
@@ -354,10 +374,10 @@ $(document)
 							// response = response.replace(/\s/g, '');
 							if (response == "success" || response =="Wsuccess") {
 								if(formName == "employe_week_hours"){
-									 originalId = $("table").attr('idweek');
+									originalId = $("table").attr('idweek');
 									updateTableHour(originalId, "ongletHeure", "tblHeure");
 									updateTableHour(originalId, "ongletHeure", "ccqs");
-								} else{
+								} else if (formName != "prix_revient"){
 									updateTable(windowName);
 								}
 
@@ -397,7 +417,7 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
-			if(windowName == "ongletSemaine" || windowName == "ongletProjet"){
+			if(windowName == "ongletSemaine" || windowName == "ongletProjet" || windowName == "ongletPrix revient"){
 				addConsultButtons(windowName);
 			}
 		}
@@ -742,24 +762,29 @@ $(document)
 
 					// ******TABLEAU******
 
+					content += "<form id='formPrixRevient'>";
+					content += "<div class='form-group formLeft col-lg-12 col-md-12 col-xs-12'>";
+					content += "<label for='suffixe'>Suffixe</label><input name='suffixe' class='form-control formLeft inputMarginTop inputForm' placeholder='Suffixe pour le prix de revient'></input>";
+					content += "</div>";
+
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='debut'>Début</label><select id='startListWeek' name='debut' class='form-control formLeft inputMarginTop inputForm'></select>";
+					content += "<label for='start_date'>Début</label><select id='startListWeek' name='start_date' class='form-control formLeft inputMarginTop inputForm'></select>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='fin'>Fin</label><select id='endListWeek' name='fin' class='form-control formLeft inputMarginTop inputForm'></select>";
+					content += "<label for='end_date'>Fin</label><select id='endListWeek' name='end_date' class='form-control formLeft inputMarginTop inputForm'></select>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='achatCumul'>Achats cumul</label><input name='achatCumul' class='form-control inputMarginTop inputForm' type='number'></input>";
+					content += "<label for='achats_cumul'>Achats cumul</label><input name='achats_cumul' class='form-control inputMarginTop inputForm' type='number'></input>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-					content += "<label for='facturationCumul'>Facturation cumul</label><input name='facturationCumul' class='form-control inputMarginTop inputForm' type='number'></input>";
+					content += "<label for='facturation_cumul'>Facturation cumul</label><input name='facturation_cumul' class='form-control inputMarginTop inputForm' type='number'></input>";
 					content += "</div>";
 					
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient' readonly='readonly' id='btnPrixRevient'>Prix de revient</a>";
-					
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient addInfo' readonly='readonly' id='btnPrixRevient' typeName='prix_revient'>Prix de revient</a>";
+					content += "</form>"
 					content += "<div class='table-responsive fastechTableProjetHeure'>";
 					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 

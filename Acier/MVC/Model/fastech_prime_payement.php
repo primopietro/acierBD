@@ -149,8 +149,11 @@ class FastechPrimePayement extends FastechModel {
     				$aPrime->getObjectFromDB($prime);
     				
     				
-    				echo "<td><form style='display:table;float:left;' table='" . $table_name . "' class='edit col-lg-6' idObj='" . $anObject [$id_object] . " '>";
-    				echo "<input class='editable' name='" . $key . "' value='" . $value . "'></form> / <span class='col-lg-6 cursorDefault'>" . $value * $aPrime->getAmount() . " $</span></td>";
+    				/*echo "<td><form style='display:table;float:left;' table='" . $table_name . "' class='edit col-lg-6' idObj='" . $anObject [$id_object] . " '>";
+    				echo "<input class='editable' name='" . $key . "' value='" . $value . "'></form> / <span class='col-lg-6 cursorDefault'>" . $value * $aPrime->getAmount() . " $</span></td>";*/
+    				
+    				echo "<td><form style='display:table;' table='" . $table_name . "' class='edit col-lg-4' idObj='" . $anObject [$id_object] . " '>";
+    				echo "<input class='editable' name='" . $key . "' value='" . $value . "'></form></td><td style='min-width: 100px;' class='cursorDefault'>" . $value * $aPrime->getAmount() . " $</td>";
     			}
     		}
     		

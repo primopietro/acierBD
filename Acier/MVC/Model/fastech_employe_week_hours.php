@@ -3,6 +3,7 @@ require_once 'fastech_model.php';
 class FastechEmployekWeekHours extends FastechModel {
 	protected $table_name = 'employe_week_hours';
 	protected $primary_key = "id_employe_hour";
+	
 	protected $id_employe_hour = 0;
 	protected $id_work_week = '0';
 	protected $id_employe = '0';
@@ -398,7 +399,7 @@ class FastechEmployekWeekHours extends FastechModel {
 	function getWeeksAfterDate($date) {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
-		$sql = "SELECT id_work_week, name FROM work_weeks WHERE begin_date >= " . $date;
+		$sql = "SELECT id_work_week, name, begin_date FROM work_weeks WHERE begin_date >= " . $date;
 		//echo $sql . "<br>";
 		$result = $conn->query ( $sql );
 		

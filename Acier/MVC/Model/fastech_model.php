@@ -303,7 +303,7 @@ class FastechModel {
 							if(!is_numeric($value))
 								
 								if($this->table_name == "prime"){
-									echo "<th attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'  >". $value ." " .$anObject["amount"].  "$/h</th>";
+									echo "<th attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'  colspan='2'>". $value ." " .$anObject["amount"].  "$/h</th>";
 								}else{
 									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight' >". $value . "</th>";
 								}
@@ -312,7 +312,7 @@ class FastechModel {
 							if(is_numeric($value) && $key == "amount")
 								
 								if($this->table_name == "prime"){
-									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'>". $value ." " .$anObject["amount"].  "$/h</th>";
+									echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight' colspan='2'>". $value ." " .$anObject["amount"].  "$/h</th>";
 								}else{
 									echo "<th   attrval='$value' class='alignRight'>". $value . " $/h</th>";
 								}

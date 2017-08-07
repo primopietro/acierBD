@@ -175,7 +175,7 @@ class FastechWorkWeek extends FastechModel {
 		$aListOfObjects = $anEmployeWeekHours->getWeeksAfterDate ( "'" . $startDate . "'" );
 		if ($aListOfObjects != null) {
 			foreach ( $aListOfObjects as $anObject ) {
-				echo "<option class='editable' value='" . $anObject [$this->primary_key] . "'>" . $anObject ["name"] . "</option>";
+				echo "<option class='editable' value='" . $anObject ["begin_date"] . "'>" . $anObject ["name"] . "</option>";
 			}
 		}
 	}
@@ -211,10 +211,10 @@ class FastechWorkWeek extends FastechModel {
 }
 
 
-  $aWorkWeek = new FastechWorkWeek();
+  /*$aWorkWeek = new FastechWorkWeek();
  $temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
   echo "<pre>";
   print_r ($temp);
-  echo "</pre>";
+  echo "</pre>";*/
 
 ?>

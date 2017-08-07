@@ -3,12 +3,14 @@ include 'fastech_model.php';
 class FastechProject extends FastechModel {
 	protected $table_name = 'projects';
 	protected $primary_key = "id_project";
+	
 	protected $id_project = 0;
 	protected $name = ' ';
 	protected $start_date = '';
 	protected $budget = 0;
 	protected $production_total = 0;
 	protected $id_state = 1; // 1 equals active by default
+	
 	function __construct() {
 		$this->production_total = "0";
 		$this->id_state = 1;

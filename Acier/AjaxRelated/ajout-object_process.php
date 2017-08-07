@@ -23,6 +23,8 @@ if ($typeName == "prime") {
 	$anObject->setId_state(1);
 } else if ($typeName == "ccq"){
 	$anObject = new FastechCCQ();
+} else if($typeName == "prix_revient"){
+	$anObject = new FastechPrixRevient();
 }
 
 $attributes = $anObject->getObjectAsArrayWithOutMetadata ();
@@ -33,6 +35,11 @@ foreach ( $valuesToBeAdded as $key => $value ) {
 	$attributeName = "set" . ucfirst ( $key );
 	if($key == "bool_ccq" || $key == "bool_production"){
 		$value = 2;
+	}
+	if($key == "end_date" && $typeName == "prix_revient"){
+		$value= strtotime($value);
+		$value= strtotime("+7 day", $value);
+		$value = date('Y-m-d', $value);
 	}
 	$anObject->$attributeName ( $value );
 }
