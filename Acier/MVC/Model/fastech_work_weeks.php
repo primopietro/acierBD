@@ -229,16 +229,13 @@ class FastechWorkWeek extends FastechModel {
 						}
 					}
 				}
-			}else if ($bool == 3){
-				echo "<td></td>";
 			}
 		}
 		
 		if ($bool == 4){
 			//36.42 to be changed (variable)
-			for($i = 0;$i<count($aListOfDeps)-4;$i++){
-				echo "<td></td>";
-			}
+			$count = count($aListOfDeps)-4;
+			echo "<td colspan='$count'></td>";
 			echo "<td>total MO & achats</td><td></td><td>" . $compteurProduction . "</td><td>36.42</td><td></td><td>" . $compteurProduction*36.42 . "$</td>";
 			return $compteurProduction*36.42;
 		} else if ($bool == 1){
@@ -249,16 +246,15 @@ class FastechWorkWeek extends FastechModel {
 			echo "<td>" . round($compteurTotal, 2) . "$</td>";
 			return round($compteurTotal, 2) ;
 		} else if ($bool == 3){
-			echo "<td></td>";
+			$count = count($aListOfDeps);
+			echo "<td colspan='$count'></td><td></td>";
 		} else if($bool == 5){
-			for($i = 0;$i<count($aListOfDeps)-4;$i++){
-				echo "<td></td>";
-			}
+			$count = count($aListOfDeps)-4;
+			echo "<td colspan='$count'></td>";
 			
 		} else if ($bool == 6 || $bool == 7){
-			for($i = 0;$i<=count($aListOfDeps);$i++){
-				echo "<td></td>";
-			}
+			$count = count($aListOfDeps);
+			echo "<td colspan='" . $count . "'></td><td></td>";
 		}
 		return 0;
 	}

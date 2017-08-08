@@ -272,9 +272,7 @@ class FastechPrixRevient extends FastechModel {
 				}
 				if ($i == 5){
 					echo "<td>" . $majoration . "$</td>";
-					for($i = 0; $i<5;$i++){
-						echo "<td></td>";
-					}
+					echo "<td colspan='3'></td><td></td><td></td>";
 				}
 				if ($i == 6){
 					echo "<td>" . $aPrixRevient['facturation_cumul'] . "$</td>";
