@@ -171,6 +171,62 @@ class FastechDepartement extends FastechModel {
     	$table  .= "</tr></tfoot>";
     	return $table;
     }
+    
+    function getObjectListAsDynamicHeader($showPrimaryKey = true, $idrevient) {
+    	$aListOfObjects = $this->getListOfActiveBDObjects();
+    	$onlyOnce = 0;
+    	if ($aListOfObjects != null) {
+    		foreach ( $aListOfObjects as $anObject ) {
+    			foreach ( $anObject as $key => $value ) {
+    				if($key == "table_name" && $value == "departement" && $onlyOnce == 0){
+    					echo "<th class='borderThick'>" . $this->findSuffixe($idrevient) . "</th>";
+    					$onlyOnce++;
+    				}
+    				if ($key != "table_name" && $key != "primary_key" && $key != "id_state") {
+    					if($showPrimaryKey == true){
+    						if(!is_numeric($value))
+    							
+    							if($this->table_name == "prime"){
+    								echo "<th attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight'  colspan='2'>". $value ." " .$anObject["amount"].  "$/h</th>";
+    						}else{
+    							echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight' >". $value . "</th>";
+    						}
+    						
+    					} else {
+    						if(is_numeric($value) && $key == "amount")
+    							
+    							if($this->table_name == "prime"){
+    								echo "<th  attrval='$value' typeHeader='" . $this->table_name . "' class='alignRight' colspan='2'>". $value ." " .$anObject["amount"].  "$/h</th>";
+    						}else{
+    							echo "<th   attrval='$value' class='alignRight'>". $value . " $/h</th>";
+    						}
+    					}
+    				}
+    			}
+    			
+    		}
+    		echo "<th></th><th>total</th>";
+    	}
+    }
+    
+    function findSuffixe($idrevient){
+    	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+    	$name = '';
+    	
+    	$sql = "SELECT suffixe FROM prix_revient WHERE id_prix_revient = " . $idrevient;
+    	$result = $conn->query ( $sql );
+    	
+    	if ($result->num_rows > 0) {
+    		while ( $row = $result->fetch_assoc () ) {
+    			foreach ( $row as $aRowName => $aValue ) {
+    				$name = $aValue;
+    			}
+    		}
+    		$conn->close ();
+    	}
+    	
+    	return $name;
+    }
 
  
 

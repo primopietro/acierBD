@@ -554,6 +554,9 @@ function addConsultButtons(windowName){
 			
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
+		} else if (windowName == "ongletPrix revient"){
+			id += "_" + $(this).find("input").eq(2).val();
+			id += "_" + $(this).find("input").eq(3).val();
 		}
 		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
 	});
@@ -806,6 +809,55 @@ $(document)
 
 					$("#startListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
 					$("#endListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
+				} else if(windowName == "ongletPrix revient"){
+					var toSplit = $(this).attr('id');
+					var arr = toSplit.split('_');
+					
+					content += "<div class='container-fluid'>";
+					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[1] + "</h2>";
+					content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
+					
+					content += "<div class='table-responsive'>";
+					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
+
+					content += "</tr></thead><tfoot><tr id='footer'>";
+
+					content += "</tr></tfoot><tbody>";
+					content += "</tbody></table></div>";
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printSpecificProject'>Imprimer</a>";
+					
+					content += "</div>";
+					
+					$.ajax({method : "GET",
+						url : "MVC/View/getObjectDynamicHeader.php?idObj="+arr[0]+"&objectName=" + windowName,
+						beforeSend : function() {
+							// TO INSERT - loading animation
+						},
+						success : function(response) {
+							$("#header").html(response);
+							
+							$.ajax({
+								method : "GET",
+								url : "MVC/View/getObjectDynamicTable.php?objectName=ongletConsultRevient&idRevient=" + arr[0],
+								beforeSend : function() {
+									// TO INSERT - loading animation
+								},
+								beforeSend : function() {
+									/*$('.tblObject tbody')
+											.append(
+													"<span id='download'>Telechargement..</span>");*/
+								},
+								success : function(response) {
+									//$('#download').remove();
+									$('.tblObject tbody').html("");
+									$('.tblObject tbody').append(response);
+								}
+							});
+						}
+					});
+					
+					
+					$("#content").html(content);
 				}
 				
 			}

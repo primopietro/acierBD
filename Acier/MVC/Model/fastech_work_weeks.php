@@ -168,7 +168,7 @@ class FastechWorkWeek extends FastechModel {
 		}
 	}
 	function getActiveObjectsAsSelectSpecific($startDate) {
-		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employe_week_hours.php';
 		
 		$anEmployeWeekHours = new FastechEmployekWeekHours ();
 		
@@ -179,40 +179,95 @@ class FastechWorkWeek extends FastechModel {
 			}
 		}
 	}
-	function getPrixRevientAsDynamicTable($dateBegin, $dateEnd) {
-		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
+	function getPrixRevientAsDynamicTable($dateBegin, $dateEnd, $id_project, $bool) {
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		
 		$tempArrayResponse = array();
 		$compteurTotal = 0;
-		 $aDep = new FastechDepartement ();
+		$compteurProduction = 0;
+		$aDep = new FastechDepartement ();
 		$aListOfDeps = $aDep->getListOfActiveBDObjects ();
 		
 		
 		foreach ( $aListOfDeps as $anObject ) {
-			$aName = $anObject ['name'];
-			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
-				FROM employe_week_hours ewh
-				JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
-				JOIN departement d on ewh.departement = d.name
-				WHERE id_project =1 AND  d.name = '".$aName."'
-				AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
-			$result = $conn->query ( $query);
-			if ($result->num_rows > 0) {
-				while ( $row = $result->fetch_assoc () ) {
-					$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
-					$tempArrayResponse[$row['depName']]['valueTotal']  = $row['valueTotal'];
-					$compteurTotal+= $row['valueTotal'];
+			if ($bool == 4){
+				$aName = $anObject ['name'];
+				$query = "SELECT SUM(hours) as hoursTotal
+					FROM employe_week_hours ewh
+					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
+					JOIN departement d on ewh.departement = d.name
+					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
+					AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."' AND d.bool_production != 2";
+				$result = $conn->query ( $query);
+				if ($result->num_rows > 0) {
+					while ( $row = $result->fetch_assoc () ) {
+						//$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
+						$compteurProduction+= $row['hoursTotal'];
+					}
 				}
+				$result = $conn->query ( $query);
+			} else if($bool == 1 || $bool == 2){
+				$aName = $anObject ['name'];
+				$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
+					FROM employe_week_hours ewh
+					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
+					JOIN departement d on ewh.departement = d.name
+					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
+					AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
+				$result = $conn->query ( $query);
+				if ($result->num_rows > 0) {
+					while ( $row = $result->fetch_assoc () ) {
+						//$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
+						//$tempArrayResponse[$row['depName']]['valueTotal']  = $row['valueTotal'];
+						if($bool == 1){
+							$compteurTotal+= $row['hoursTotal'];
+							echo "<td>" . $row['hoursTotal'] . "</td>";
+						} else{
+							$compteurTotal+= $row['valueTotal'];
+							echo "<td>" . round($row['valueTotal'], 2) . "</td>";
+						}
+					}
+				}
+			}else if ($bool == 3){
+				echo "<td></td>";
 			}
 		}
-		return $tempArrayResponse;
+		
+		if ($bool == 4){
+			//36.42 to be changed (variable)
+			for($i = 0;$i<count($aListOfDeps)-4;$i++){
+				echo "<td></td>";
+			}
+			echo "<td>total MO & achats</td><td></td><td>" . $compteurProduction . "</td><td>36.42</td><td></td><td>" . $compteurProduction*36.42 . "$</td>";
+			return $compteurProduction*36.42;
+		} else if ($bool == 1){
+			echo "<td></td>";
+			echo "<td>" . round($compteurTotal, 2) . "h</td>";
+		} else if ($bool == 2){
+			echo "<td></td>";
+			echo "<td>" . round($compteurTotal, 2) . "$</td>";
+			return round($compteurTotal, 2) ;
+		} else if ($bool == 3){
+			echo "<td></td>";
+		} else if($bool == 5){
+			for($i = 0;$i<count($aListOfDeps)-4;$i++){
+				echo "<td></td>";
+			}
+			
+		} else if ($bool == 6 || $bool == 7){
+			for($i = 0;$i<=count($aListOfDeps);$i++){
+				echo "<td></td>";
+			}
+		}
+		return 0;
 	}
 }
 
 
   /*$aWorkWeek = new FastechWorkWeek();
- $temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
+  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-08', '2017-07-06', 1, 4);
+ /*$temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
   echo "<pre>";
   print_r ($temp);
   echo "</pre>";*/

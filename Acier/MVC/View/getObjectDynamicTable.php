@@ -62,6 +62,11 @@ if($tableName== "ongletPrime"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prix_revient.php';
 	$anObject = new FastechPrixRevient();
 	$anObject->getDynamicTable();
+} else if($tableName == "ongletConsultRevient"){
+	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prix_revient.php';
+	$id = $_GET["idRevient"];
+	$anObject = new FastechPrixRevient();
+	$anObject->getDynamicConsultTable($id);
 }
 
 $_SESSION['current_page'] = $tableName;
