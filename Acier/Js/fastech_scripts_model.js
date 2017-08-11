@@ -47,10 +47,10 @@ function getContentHtml(windowName){
 		
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des primes </h1>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr class='cursorDefault' id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
@@ -82,12 +82,12 @@ function getContentHtml(windowName){
 
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des semaines </h1>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Terminant le</th>";
 		content += "<th>Payable le</th>";
-		content += "</tr></thead><tfoot><tr id='footer'>";
+		content += "</tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Terminant le</th>";
@@ -139,12 +139,12 @@ function getContentHtml(windowName){
 		
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des employés </h1>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%'  cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
 		content += "<th>Prénom</th>";
-		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
@@ -185,11 +185,11 @@ function getContentHtml(windowName){
 		
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des projets </h1>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Date début</th>";
-		content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Date début</th>";
@@ -228,10 +228,10 @@ function getContentHtml(windowName){
 		
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des départements </h1>";
-		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class=' table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th><th>Cumulatif production</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th><th>Cumulatif production</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th><th>Cumulatif production</th>";
@@ -247,10 +247,10 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Informations du compte </h1>";
 		
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Nom d'utilisateur</th>";
-		content += "<th>Mot de passe</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Mot de passe</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Nom d'utilisateur</th>";
 		content += "<th>Mot de passe</th>";
@@ -281,10 +281,10 @@ function getContentHtml(windowName){
 		
 		content += "<div class='table-responsive fastechTable'>";
 		content += "<h1> Liste des primes CCQ </h1>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Nom</th>";
 		content += "<th>Taux ($/h)</th><th>Ordre de Tri</th>";
@@ -300,10 +300,10 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des heures en banques</h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Nom</th>";
-		content += "<th style='text-align:center'>Heures en banques</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th style='text-align:center'>Heures en banques</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Nom</th>";
 		content += "<th style='text-align:center'>Heures en banques</th>";
@@ -318,10 +318,10 @@ function getContentHtml(windowName){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des prix de revient</h1>";
 		content += "<div class='table-responsive'>";
-		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead><tr id='header'>";
+		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Suffixe</th>";
-		content += "<th>Projet</th><th>Date début</th><th>Date fin</th><th>Achats cumul</th><th>Facturation cumul</th></tr></thead><tfoot><tr id='footer'>";
+		content += "<th>Projet</th><th>Date début</th><th>Date fin</th><th>Achats cumul</th><th>Facturation cumul</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Projet</th><th>Date début</th><th>Date fin</th><th>Achats cumul</th><th>Facturation cumul</th>";
@@ -329,6 +329,20 @@ function getContentHtml(windowName){
 
 		content += "</tbody></table></div>";
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printBank'>Imprimer</a>";
+
+		content += "</div>";
+	} else if(windowName == "ongletTaux revient"){
+		content += "<div class='container-fluid'>";
+		content += "<div class='table-responsive'>";
+		content += "<table class='table-responsive table table-bordered tblObject' style='width:20%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
+
+		content += "<th>Taux</th>";
+		content += "</tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
+
+		content += "<th>Taux</th>";
+		content += "</tr></tfoot><tbody>";
+
+		content += "</tbody></table></div>";
 
 		content += "</div>";
 	}
@@ -700,8 +714,8 @@ $(document)
 					// ******TABLEAU******
 					content += "<div class='table-responsive fastechTable'>";
 					
-					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead><tr id='header'>";
-					content += "</tr></thead><tfoot><tr id='footer'>";
+					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
+					content += "</tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
 					
@@ -789,9 +803,9 @@ $(document)
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-3 cursor btnRevient addInfo' readonly='readonly' id='btnPrixRevient' typeName='prix_revient'>Prix de revient</a>";
 					content += "</form>"
 					content += "<div class='table-responsive fastechTableProjetHeure'>";
-					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
+					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
-					content += "</tr></thead><tfoot><tr id='footer'>";
+					content += "</tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
@@ -818,7 +832,7 @@ $(document)
 					content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
 					
 					content += "<div class='table-responsive'>";
-					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
+					content += "<table idObj='" + arr[0] + "'  class='table table-bordered tblObject cursorDefault' width='100%' id='tblHeureProjet' cellspacing='0'><thead><tr id='header'>";
 
 					content += "</tr></thead><tfoot><tr id='footer'>";
 

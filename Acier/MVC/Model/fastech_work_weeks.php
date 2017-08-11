@@ -234,10 +234,15 @@ class FastechWorkWeek extends FastechModel {
 		
 		if ($bool == 4){
 			//36.42 to be changed (variable)
-			$count = count($aListOfDeps)-4;
-			echo "<td colspan='$count'></td>";
-			echo "<td>total MO & achats</td><td></td><td>" . $compteurProduction . "</td><td>36.42</td><td></td><td>" . $compteurProduction*36.42 . "$</td>";
-			return $compteurProduction*36.42;
+			require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_taux_revient.php';
+			$aTaux= new FastechTauxRevient();
+			$aTauxList = $aTaux->getListOfActiveBDObjects();
+			foreach ( $aTauxList as $anObject ) {
+				$count = count($aListOfDeps)-4;
+				echo "<td colspan='$count'></td>";
+				echo "<td>total MO & achats</td><td></td><td>" . $compteurProduction . "</td><td>" . $anObject['taux'] . "</td><td></td><td>" . $compteurProduction*$anObject['taux']. "$</td>";
+				return $compteurProduction*$anObject['taux'];
+			}
 		} else if ($bool == 1){
 			echo "<td></td>";
 			echo "<td>" . round($compteurTotal, 2) . "h</td>";

@@ -306,6 +306,19 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`taux_revient`
+ ( `taux` DOUBLE NOT NULL , `id_state` INT NOT NULL ,
+ PRIMARY KEY (`taux`)) ENGINE = InnoDB;';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table taux_revient</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table taux_revient created successfully</span>\n";
+}
+echo "<br>";
+
 
 /**********************************************INDEXES *******************************************/
 
@@ -698,6 +711,17 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>Data inserted successfully into users</span>\n";
+}
+echo "<br>";
+
+$sql = "INSERT INTO `taux_revient` (`taux`, `id_state`) VALUES (36.42, 1)";
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not insert data into taux_revient</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Data inserted successfully into taux_revient</span>\n";
 }
 echo "<br>";
 
