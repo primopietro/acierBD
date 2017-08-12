@@ -39,15 +39,15 @@ if(!isset($_SESSION['current_page'])){
 			$icons = array("Semaine"=> "<i class='fa fa-calendar' aria-hidden='true'></i>",
 					"Employe"=>"<i class='fa fa-users' aria-hidden='true'></i>",
 					"Projet"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
-					"Prix revient"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
-					"Taux revient"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
+					"Prixrevient"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
+					"Tauxrevient"=> "<i class='fa fa-pencil-square-o' aria-hidden='true'></i>",
 					"Departement"=>"<i class='fa fa-industry' aria-hidden='true'></i>",
 					"Prime"=> "<i class='fa fa-file-powerpoint-o' aria-hidden='true'></i>",
 					"CCQ"=> "<i class='fa fa-user' aria-hidden='true'></i>",
 					"Banque"=> "<i class='fa fa-bank' aria-hidden='true'></i>",
 					"Compte"=> "<i class='fa fa-address-card-o' aria-hidden='true'></i>");
 			foreach($pages as $key => $value){
-				
+				$key= str_replace(' ', '', $key);
 				echo" <li id='class$key' class='nav-item ";
 				if($key == $_SESSION['current_page']){
 					echo " active";

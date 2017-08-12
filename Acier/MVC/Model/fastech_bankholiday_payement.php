@@ -237,7 +237,7 @@ class FastechBankHolidayPayement extends FastechModel {
     
     function getBankAsDynamicTable(){
     	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
-    	
+    	$compt=0;
     	$sql = "SELECT * FROM `banqueheures`";
     	$result = $conn->query ( $sql );
     	
@@ -248,7 +248,10 @@ class FastechBankHolidayPayement extends FastechModel {
     			foreach ( $row as $aRowName => $aValue ) {
     				if($aRowName == "heures"){
     					echo "<td style='text-align:center'>$aValue</td>";
-    				} else {
+    				} else if ($aRowName == "isCCQ" && $aValue==2 && $compt==0){ 
+    					echo "</tr><tr><th colspan='3' style='text-align:center'>CCQ</th></tr>";
+    					$compt++;
+    				}else if ($aRowName != "isCCQ"){
     					echo "<td>$aValue</td>";
     				}
     				//echo $aRowName . " " . $aValue . "<br>";
@@ -330,26 +333,36 @@ class FastechBankHolidayPayement extends FastechModel {
     	$html ="";
     	$sql = "SELECT * FROM `banqueheures`";
     	$result = $conn->query ( $sql );
-    	
-		$html .="<thead><tr ><th>Nom</th><th >Heures en banques</th></tr></thead>";
+    	$table = "";
+		$html .="<thead><tr ><th>Code</th><th>Nom</th><th >Heures en banques</th></tr></thead>";
+		$table  .="<thead><tr ><th>Code</th><th>Nom</th><th >Heures en banques</th></tr></thead>";
     	if ($result->num_rows > 0) {
     		$anObject = Array ();
     		while ( $row = $result->fetch_assoc () ) {
     			$html .= "<tr >";
+    			$table .= "<tr >";
     			foreach ( $row as $aRowName => $aValue ) {
-    				if($aRowName == "heures"){
-    					$html .= "<td >$aValue</td>";
-    				} else {
-    					$html .= "<td>$aValue</td>";
+    				if($aRowName != "isCCQ"){
+    					if($aRowName == "heures"){
+    						$html .= "<td >$aValue</td>";
+    						$table.= "<td>$aValue</td>";
+    					} else {
+    						$html .= "<td>$aValue</td>";
+    						$table.= "<td>$aValue</td>";
+    					}
     				}
+    				
     				
     			}
     			$html .= "</tr>";
+    			$table.= "<tr >";
     		}
     	
     	}
-    	$html .="<tfoot><tr ><th>Nom</th><th >Heures en banques</th></tr></tfoot>";
     	
+    	$html .="<tfoot><tr ><th>Code</th><th>Nom</th><th >Heures en banques</th></tr></tfoot>";
+    	$table.="<tfoot><tr ><th>Code</th><th>Nom</th><th >Heures en banques</th></tr></tfoot>";
+    	$_SESSION['tblPDF'] = $table;
     	$conn->close ();
     	return $html;
     }

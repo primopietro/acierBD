@@ -26,6 +26,9 @@ thead,tfoot{
  background-color:#323232;
 color:white;
 }
+*{
+font-size:10px;
+}
 ";
 
 
@@ -33,7 +36,7 @@ $style = "<style>" . $style . "</style>";
 
 $tableName = $_GET["objectName"];
 
-
+/*
 switch ($tableName) {
 	case "printPrime":
 		require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
@@ -71,15 +74,15 @@ switch ($tableName) {
 		$anObject = new FastechBankHolidayPayement();
 		$table = $anObject->getObjectListAsStaticTableString();
 		break;
-}
+}*/
 
 
-$table= "<table>" . $table. "</table>";
+$table= "<table>" . $_SESSION['tblPDF'] . "</table>";
 
 
 $dompdf->loadHtml($style . $table);
 // (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A4', 'landscape');
+$dompdf->setPaper('A4', 'letter');
 
 // Render the HTML as PDF
 $dompdf->render();

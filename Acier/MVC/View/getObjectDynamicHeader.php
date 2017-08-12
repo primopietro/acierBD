@@ -17,7 +17,7 @@ if($tableName == "ongletSemaine"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
 	$anObject = new FastechDepartement();
 	$anObject->getObjectListAsDynamicHeaderFooter(true);
-} else if($tableName == "ongletPrix revient"){
+} else if($tableName == "ongletPrixrevient"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_departement.php';
 	$id = $_GET["idObj"];
 	$anObject = new FastechDepartement();

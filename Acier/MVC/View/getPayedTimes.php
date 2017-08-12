@@ -9,5 +9,5 @@ if (isSet ( $_GET )) {
 	
 	$anObject = new FastechPayements();
 	$anObject->getObjectListAsDynamicTableTableForWeek($_GET['id_employe'], $_GET['id_work_week']);
-	
+
 }

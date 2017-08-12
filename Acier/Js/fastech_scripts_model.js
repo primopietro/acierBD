@@ -302,9 +302,11 @@ function getContentHtml(windowName){
 		content += "<div class='table-responsive'>";
 		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
+		content += "<th>Code employé</th>";
 		content += "<th>Nom</th>";
 		content += "<th style='text-align:center'>Heures en banques</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
+		content += "<th>Code employé</th>";
 		content += "<th>Nom</th>";
 		content += "<th style='text-align:center'>Heures en banques</th>";
 		content += "</tr></tfoot><tbody>";
@@ -314,7 +316,7 @@ function getContentHtml(windowName){
 
 		content += "</div>";
 		
-	} else if(windowName == "ongletPrix revient"){
+	} else if(windowName == "ongletPrixrevient"){
 		content += "<div class='container-fluid'>";
 		content += "<h1> Liste des prix de revient</h1>";
 		content += "<div class='table-responsive'>";
@@ -331,7 +333,7 @@ function getContentHtml(windowName){
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printBank'>Imprimer</a>";
 
 		content += "</div>";
-	} else if(windowName == "ongletTaux revient"){
+	} else if(windowName == "ongletTauxrevient"){
 		content += "<div class='container-fluid'>";
 		content += "<div class='table-responsive'>";
 		content += "<table class='table-responsive table table-bordered tblObject' style='width:20%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
@@ -431,7 +433,7 @@ function updateTable(windowName){
 			//$('#download').remove();
 			$('.tblObject tbody').html("");
 			$('.tblObject tbody').append(response);
-			if(windowName == "ongletSemaine" || windowName == "ongletProjet" || windowName == "ongletPrix revient"){
+			if(windowName == "ongletSemaine" || windowName == "ongletProjet" || windowName == "ongletPrixrevient"){
 				addConsultButtons(windowName);
 			}
 		}
@@ -441,6 +443,7 @@ function updateTable(windowName){
 
 function updateTableHour(id, windowName, tableId){
 	var isCCQ = 1;
+
 	if(tableId == "ccqs"){
 		isCCQ = 2;	
 	}
@@ -467,7 +470,7 @@ function updateTableHour(id, windowName, tableId){
 			var idWeek = $("#tblHeure").attr("idWeek");
 			var employes = $("#" + tableId + " td:first-child");
 			var employesArray = new Array();
-			
+		
 			employes.each(function( index ) {
 				var id_employe = $(this).text();
 				var tr = $( this ).closest("tr");
@@ -498,6 +501,7 @@ function updateTableHour(id, windowName, tableId){
 					primes.each(function( index ) {
 						var prime = $(this).attr("attrval");
 						var id_payement= tr.find(" [table='payements']").first().attr("idobj");
+					
 						$
 						.ajax({
 							method : "GET",
@@ -568,7 +572,7 @@ function addConsultButtons(windowName){
 			
 		} else if (windowName == "ongletSemaine"){
 			id += "_" + $(this).find("input").eq(1).val();
-		} else if (windowName == "ongletPrix revient"){
+		} else if (windowName == "ongletPrixrevient"){
 			id += "_" + $(this).find("input").eq(2).val();
 			id += "_" + $(this).find("input").eq(3).val();
 		}
@@ -823,7 +827,7 @@ $(document)
 
 					$("#startListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
 					$("#endListWeek").load("MVC/view/getWeeksSelect.php?begin_date=" + arr[2]);
-				} else if(windowName == "ongletPrix revient"){
+				} else if(windowName == "ongletPrixrevient"){
 					var toSplit = $(this).attr('id');
 					var arr = toSplit.split('_');
 					

@@ -198,7 +198,7 @@ class FastechWorkWeek extends FastechModel {
 					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
 					JOIN departement d on ewh.departement = d.name
 					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-					AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."' AND d.bool_production != 2";
+					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."' AND d.bool_production != 2";
 				$result = $conn->query ( $query);
 				if ($result->num_rows > 0) {
 					while ( $row = $result->fetch_assoc () ) {
@@ -214,7 +214,7 @@ class FastechWorkWeek extends FastechModel {
 					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
 					JOIN departement d on ewh.departement = d.name
 					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-					AND ww.begin_date > '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
+					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
 				$result = $conn->query ( $query);
 				if ($result->num_rows > 0) {
 					while ( $row = $result->fetch_assoc () ) {

@@ -58,7 +58,7 @@ if($tableName== "ongletPrime"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_bankholiday_payement.php';
 	$anObject = new FastechBankHolidayPayement();
 	$anObject->getBankAsDynamicTable();
-} else if($tableName == "ongletPrix revient"){
+} else if($tableName == "ongletPrixrevient"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prix_revient.php';
 	$anObject = new FastechPrixRevient();
 	$anObject->getDynamicTable();
@@ -67,7 +67,8 @@ if($tableName== "ongletPrime"){
 	$id = $_GET["idRevient"];
 	$anObject = new FastechPrixRevient();
 	$anObject->getDynamicConsultTable($id);
-} else if($tableName == "ongletTaux revient"){
+	$tableName = "ongletPrixrevient";
+} else if($tableName == "ongletTauxrevient"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_taux_revient.php';
 	$anObject = new FastechTauxRevient();
 	$anObject->getObjectListAsDynamicTable(true);
