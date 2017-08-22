@@ -33,7 +33,7 @@ $valuesToBeAdded = $_POST;
 
 foreach ( $valuesToBeAdded as $key => $value ) {
 	$attributeName = "set" . ucfirst ( $key );
-	if($key == "bool_ccq" || $key == "bool_production"){
+	if($key == "bool_ccq" || $key == "bool_production" || $key == "bool_autre"){
 		$value = 2;
 	}
 	if($key == "end_date" && $typeName == "prix_revient"){

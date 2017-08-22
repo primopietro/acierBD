@@ -1,5 +1,5 @@
 <?php
-include 'fastech_model.php';
+require_once 'fastech_model.php';
 class FastechProject extends FastechModel {
 	protected $table_name = 'projects';
 	protected $primary_key = "id_project";
@@ -9,6 +9,7 @@ class FastechProject extends FastechModel {
 	protected $start_date = '';
 	protected $budget = 0;
 	protected $production_total = 0;
+	protected $bool_autre = 1;
 	protected $id_state = 1; // 1 equals active by default
 	
 	function __construct() {
@@ -117,6 +118,26 @@ class FastechProject extends FastechModel {
 	}
 	
 	/**
+	 * bool_autre
+	 *
+	 * @return Int
+	 */
+	public function getBool_autre() {
+		return $this->bool_production;
+	}
+	
+	/**
+	 * bool_autre
+	 *
+	 * @param Int $bool_autre
+	 * @return FastechProject
+	 */
+	public function setBool_autre($bool_autre) {
+		$this->bool_autre= $bool_autre;
+		return $this;
+	}
+	
+	/**
 	 * id_state
 	 * 
 	 * @return unkown
@@ -154,9 +175,17 @@ class FastechProject extends FastechModel {
 									$this->production_total = $value;
 									$this->updateDBObject();
 									echo "<td class='cursorDefault'>$value h</td>";
-								} else {
+								} else if($key != "bool_autre"){
 									echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
 									echo "<input  class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
+								}
+								else{
+									echo "<td><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
+									echo "<input ";
+									if($value == "2"){
+										echo "checked ";
+									}
+									echo  "type='checkbox' class='editable'  name='" . $key . "' value='" . $value . "'> </form></td>";
 								}
 							} else {
 								echo "<td style='display:none'><form table='" . $table_name . "' class='edit' idobj='" . $anObject [$id_object] . " '>";
@@ -169,6 +198,21 @@ class FastechProject extends FastechModel {
 			}
 		}
 	}
+	
+	function getAutreHeader(){
+		$aListOfObjects = $this->getListOfActiveBDObjects ();
+		if ($aListOfObjects != null) {
+			foreach ( $aListOfObjects as $anObject ) {
+				foreach ( $anObject as $key => $value ) {
+					if($key == "bool_autre" && $value == 2){
+						echo "<th   attrval='" . $anObject['name'] . "' class='alignRight'>". $anObject['name']. "</th>";
+						//echo "<th>" . $anObject['name'] . "</th>";
+					}
+				}
+			}
+		}
+	}
+	
 	public function getObjectListAsStaticTableString() {
 		$table = "";
 		$aListOfObjects = $this->getListOfActiveBDObjects ();
@@ -211,5 +255,7 @@ class FastechProject extends FastechModel {
 }
 
 /*$employe = new FastechProject();
-$employe->getObjectListAsDynamicTable(true);*/
+echo "<table><thead><tr>";
+$employe->getAutreHeader();
+echo "</tr></thead></table>";*/
 ?>

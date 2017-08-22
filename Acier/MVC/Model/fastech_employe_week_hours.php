@@ -155,6 +155,7 @@ class FastechEmployekWeekHours extends FastechModel {
 	}
 	function getObjectList($weekId, $ccq) {
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
 		$full_name = "";
 		$counter = 0;
 		$counter1 = 0;
@@ -182,7 +183,22 @@ class FastechEmployekWeekHours extends FastechModel {
 					if ($counter == 2 && $key == "bool_ccq") {
 						// zero's are temporary
 						if($value == $ccq){
-							echo "<td class='cursorDefault'>" . $id . "</td><td class='cursorDefault'>" . $full_name . "</td><td class='cursorDefault'>0</td><td class='cursorDefault'>0</td><td class='alignRight cursorDefault'>" . $totalHours [$id] . "</td>";
+							echo "<td class='cursorDefault'>" . $id . "</td><td class='cursorDefault'>" . $full_name . "</td>";
+							
+							$aProject = new FastechProject();
+							$aListOfProjects = $aProject->getListOfActiveBDObjects();
+							
+							if ($aListOfProjects != null){ 
+								foreach ( $aListOfProjects as $aProject) {
+									foreach ( $aProject as $key1 => $value1 ) {
+										if($key1 == "bool_autre" && $value1 == 2){
+											echo "<td class='cursorDefault'>" . $this->getProjectHours($id, $aProject['id_project'], $weekId) . "</td>";
+										}
+									}
+								}
+							}
+							
+							echo "<td class='alignRight cursorDefault'>" . $totalHours [$id] . "</td>";
 							
 							$counter1 ++;
 						}
@@ -394,6 +410,28 @@ class FastechEmployekWeekHours extends FastechModel {
 			return $hoursTotal;
 		}
 		$conn->close ();
+		return 0;
+	}
+	
+	function getProjectHours($id_employe, $id_project, $id_work_week) {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		
+		$sql = "SELECT hours FROM `" . $this->table_name . "` WHERE id_employe = " . $id_employe. " AND id_project = " . $id_project . " AND id_work_week = " . $id_work_week;
+		$result = $conn->query ( $sql );
+		
+		if ($result->num_rows > 0) {
+			$hoursTotal = 0;
+			while ( $row = $result->fetch_assoc () ) {
+				foreach ( $row as $aRowName => $aValue ) {
+					$hoursTotal += $aValue;
+				}
+			}
+			
+			$conn->close ();
+			return $hoursTotal;
+		}
+		$conn->close ();
+		
 		return 0;
 	}
 	function getWeeksAfterDate($date) {

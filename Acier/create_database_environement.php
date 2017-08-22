@@ -97,6 +97,7 @@ $sql = 'CREATE TABLE `acier_fastech`.`projects` (
   `start_date` date NOT NULL,
   `production_total` int NOT NULL,
   `budget` double NOT NULL,
+`bool_autre` int(11) NOT NULL DEFAULT 1,
 `id_state` int NOT NULL,
 PRIMARY KEY ( `id_project`)
 ) ENGINE=InnoDB';

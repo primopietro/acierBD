@@ -167,16 +167,20 @@ function getContentHtml(windowName){
 		content += "<h1 class='formTitleMargin'>Ajout projet</h1>";
 		content += "<form id='formProjet'>";
 
-		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+		content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
 		content += "<label for='name'>Suffixe</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Code utilisé pour le projet' id='suffixeProjet'></input>";
 		content += "</div>";
 
-		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+		content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
 		content += "<label for='start_date'>Date début</label><input name='start_date' class='form-control inputMarginTop inputForm' type='date' id='debutProjet'></input>";
 		content += "</div>";
 
-		content += "<div class='form-group formLeft col-lg-4 col-md-4 col-xs-12'>";
+		content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
 		content += "<label for='budget'>Budget</label><input name='budget' class='form-control inputMarginTop inputForm' placeholder='Budget pour le projet' type='number' id='budget'></input>";
+		content += "</div>";
+		
+		content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+		content += "<label for='bool_autre'>Autres</label><input name='bool_autre' class='form-control inputMarginTop inputForm' type='checkbox'' ></input>";
 		content += "</div>";
 
 		content += "<span id='errorForm'></span>";
@@ -189,11 +193,11 @@ function getContentHtml(windowName){
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Date début</th>";
-		content += "<th>Cumulatif production</th><th>Budget</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
+		content += "<th>Cumulatif production</th><th>Budget</th><th>Autres</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Suffixe</th>";
 		content += "<th>Date début</th>";
-		content += "<th>Cumulatif production</th><th>Budget</th>";
+		content += "<th>Cumulatif production</th><th>Budget</th><th>Autres</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
