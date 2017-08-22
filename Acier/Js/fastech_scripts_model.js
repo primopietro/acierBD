@@ -580,7 +580,14 @@ function addConsultButtons(windowName){
 			id += "_" + $(this).find("input").eq(2).val();
 			id += "_" + $(this).find("input").eq(3).val();
 		}
-		$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
+		
+		if(windowName != "ongletProjet"){
+			$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
+		} else {
+			if($(this).find("input").eq(4).val() != 2){
+				$(this).append("<td><a idweek='"+idInitial+"' class='cursor clickWeek underlineBtn' id='" + id + "'>Consulter</a></td>");
+			}
+		}
 	});
 	//$('.tblObject tfoot tr').append("<th></th>");
 }
