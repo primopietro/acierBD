@@ -25,6 +25,8 @@ if ($typeName == "prime") {
 	$anObject = new FastechCCQ();
 } else if($typeName == "prix_revient"){
 	$anObject = new FastechPrixRevient();
+} else if($typeName == "taux_departement_revient"){
+	$anObject = new FastechTauxDepartemenRevient();
 }
 
 $attributes = $anObject->getObjectAsArrayWithOutMetadata ();

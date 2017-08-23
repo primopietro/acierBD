@@ -320,6 +320,25 @@ else{
 }
 echo "<br>";
 
+$sql = 'CREATE TABLE `acier_fastech`.`taux_departement_revient` (
+  `id_taux_departement_revient` int(11) NOT NULL AUTO_INCREMENT,
+  `id_prix_revient` int(11) NOT NULL,
+  `departement` varchar(50) NOT NULL,
+  `begin_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `taux` DOUBLE NOT NULL,
+  `id_state` int(11) NOT NULL,
+PRIMARY KEY ( `id_taux_departement_revient`)
+) ENGINE=InnoDB  ';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not create table taux_departement_revient</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Table taux_departement_revient created successfully</span>\n";
+}
+echo "<br>";
 
 /**********************************************INDEXES *******************************************/
 
@@ -449,6 +468,50 @@ if (!$result = $conn->query($sql)) {
 }
 else{
 	echo "<span style='color:green;'>index created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `acier_fastech`.`taux_departement_revient` ADD INDEX `id_prix_revient_tdr` (`id_prix_revient`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to taux_departement_revient</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in  taux_departement_revient</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `acier_fastech`.`taux_departement_revient` ADD INDEX `id_dep_tdr` (`departement`);';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add index to taux_departement_revient</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>index created successfully in  taux_departement_revient</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `taux_departement_revient` ADD CONSTRAINT `tdr_pr_fk` FOREIGN KEY (`id_prix_revient`) REFERENCES `prix_revient`(`id_prix_revient`) ON DELETE CASCADE ON UPDATE CASCADE';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in employe_week_hours</span>\n";
+}
+echo "<br>";
+
+$sql = 'ALTER TABLE `taux_departement_revient` ADD CONSTRAINT `tdr_dep_fk` FOREIGN KEY (`departement`) REFERENCES `departement`(`name`) ON DELETE CASCADE ON UPDATE CASCADE';
+if (!$result = $conn->query($sql)) {
+	// Oh no! The query failed.
+	echo "<span style='color:red;'>Could not add delete/upload cascade to employe_week_hours</span>" ;
+	exit;
+}
+else{
+	echo "<span style='color:green;'>Delete/upload cascade created successfully in employe_week_hours</span>\n";
 }
 echo "<br>";
 
