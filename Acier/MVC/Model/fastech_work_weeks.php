@@ -187,29 +187,26 @@ class FastechWorkWeek extends FastechModel {
 		$tempArrayResponse = array();
 		$compteurTotal = 0;
 		$compteurProduction = 0;
+		
 		$aDep = new FastechDepartement ();
 		$aListOfDeps = $aDep->getListOfActiveBDObjects ();
-		$originalBeginDate = $dateBegin;
 		
+		$aTauxDepartementRevient = new FastechTauxDepartemenRevient();
+		$aListOfTDR = $aTauxDepartementRevient->getListOfActiveBDObjectsWithId($idRevient);
+		
+		$originalBeginDate = $dateBegin;
+		$newAmount = 0;
 		
 		foreach ( $aListOfDeps as $anObject ) {
 		    if ($bool == 4){
 		        $aName = $anObject ['name'];
 			    
-			    $aTauxDepartementRevient = new FastechTauxDepartemenRevient();
-			    $aListOfTDR = $aTauxDepartementRevient->getListOfActiveBDObjectsWithId($idRevient);
 			    if($aListOfTDR != null){
 			        foreach ( $aListOfTDR as $aTDR ) {
-			            $query = "SELECT SUM(hours) as hoursTotal
-    					FROM employe_week_hours ewh
-    					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
-    					JOIN departement d on ewh.departement = d.name
-    					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-    					AND ww.begin_date >= '". $aTDR['begin_date'] ."' AND ww.begin_date  <= '". $aTDR['end_date'] ."' AND d.bool_production != 2";
+			        	$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
 			            $result = $conn->query ( $query);
 			            if ($result->num_rows > 0) {
 			                while ( $row = $result->fetch_assoc () ) {
-			                    //$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
 			                    $compteurProduction+= $row['hoursTotal'];
 			                }
 			            }
@@ -217,38 +214,45 @@ class FastechWorkWeek extends FastechModel {
 			        }
 			    }
 			    
-			    $query = "SELECT SUM(hours) as hoursTotal
-    					FROM employe_week_hours ewh
-    					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
-    					JOIN departement d on ewh.departement = d.name
-    					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-    					AND ww.begin_date >= '" . $originalBeginDate . "' AND ww.begin_date  <= '".$dateEnd."' AND d.bool_production != 2";
+			    $query = $this->getQuery($id_project, $originalBeginDate, $dateEnd, $aName, $newAmount);
 			    $result = $conn->query ( $query);
 			    if ($result->num_rows > 0) {
 			        while ( $row = $result->fetch_assoc () ) {
-			            //$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
 			            $compteurProduction+= $row['hoursTotal'];
 			        }
 			    }
 			} else if($bool == 1 || $bool == 2){
 				$aName = $anObject ['name'];
-				$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
-					FROM employe_week_hours ewh
-					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
-					JOIN departement d on ewh.departement = d.name
-					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
+				$totalTDRHours = 0;
+				$totalTDRValue = 0;
+				if($aListOfTDR != null){
+					foreach ( $aListOfTDR as $aTDR ) {
+						$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
+						$result = $conn->query ( $query);
+						if ($result->num_rows > 0) {
+							while ( $row = $result->fetch_assoc () ) {
+								if($bool == 1){
+									$compteurTotal += $row['hoursTotal'];
+									$totalTDRHours += $row['hoursTotal'];
+								} else{
+									$compteurTotal += $row['valueTotal'];
+									$totalTDRValue += $row['valueTotal'];
+								}
+							}
+						}
+						$originalBeginDate = $aTDR['end_date'];
+					}
+				}
+				$query = $this->getQuery($id_project, $originalBeginDate, $dateEnd, $aName, $newAmount);
 				$result = $conn->query ( $query);
 				if ($result->num_rows > 0) {
 					while ( $row = $result->fetch_assoc () ) {
-						//$tempArrayResponse[$row['depName']]['hoursTotal']  = $row['hoursTotal'];
-						//$tempArrayResponse[$row['depName']]['valueTotal']  = $row['valueTotal'];
 						if($bool == 1){
 							$compteurTotal+= $row['hoursTotal'];
-							echo "<td>" . $row['hoursTotal'] . "</td>";
+							echo "<td>" . ($row['hoursTotal'] + $totalTDRHours) . "</td>";
 						} else{
 							$compteurTotal+= $row['valueTotal'];
-							echo "<td>" . round($row['valueTotal'], 2) . "</td>";
+							echo "<td>" . round($row['valueTotal'] + $totalTDRValue, 2) . "</td>";
 						}
 					}
 				}
@@ -256,7 +260,6 @@ class FastechWorkWeek extends FastechModel {
 		}
 		
 		if ($bool == 4){
-			//36.42 to be changed (variable)
 			require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_taux_revient.php';
 			$aTaux= new FastechTauxRevient();
 			$aTauxList = $aTaux->getListOfActiveBDObjects();
@@ -286,11 +289,34 @@ class FastechWorkWeek extends FastechModel {
 		}
 		return 0;
 	}
+	
+	function getQuery($id_project, $dateBegin, $dateEnd, $aName, $newAmount){
+		$query = '';
+		if($newAmount == 0){
+			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, d.amount *SUM(hours) as valueTotal
+						FROM employe_week_hours ewh
+						JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
+						JOIN departement d on ewh.departement = d.name
+						WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
+						AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
+		} else {
+			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, " . $newAmount . "*SUM(hours) as valueTotal
+					FROM employe_week_hours ewh
+					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
+					JOIN departement d on ewh.departement = d.name
+					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
+					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
+		}
+		echo $query;
+		return $query;
+	}
 }
 
 
   /*$aWorkWeek = new FastechWorkWeek();
-  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-08', '2017-07-06', 1, 4);
+  for ($i = 1; $i < 8; $i++){
+  	$aWorkWeek->getPrixRevientAsDynamicTable('2017-06-29', '2017-07-06', 1, 3, $i);
+  }*/
  /*$temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
   echo "<pre>";
   print_r ($temp);
