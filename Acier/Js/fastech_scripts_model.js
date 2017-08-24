@@ -977,7 +977,7 @@ $(document).on("click",".btnImpression",function(){
 	if($(this).attr("id") == "printSpecificProject"){
 		windowName+= "&projectID=" + $("#tblHeureProjet").attr("idobj");
 	}
-  window.open("pdfRelated/createPdf.php?"+"objectName="+windowName);
+  //window.open("pdfRelated/createPdf.php?"+"objectName="+windowName);
   
 });
 
