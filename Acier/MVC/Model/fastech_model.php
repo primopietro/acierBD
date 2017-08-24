@@ -123,6 +123,20 @@ class FastechModel {
 		
 		$conn->close ();
 	}
+	function deleteDBObject($anID) {
+	    $sql = "DELETE FROM `" . $this->table_name . "`
+		WHERE `" . $this->primary_key . "` = '" . $anID . "'";
+	    
+	    include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+	    
+	    if ($conn->query ( $sql ) === TRUE) {
+	        return "success";
+	    } else {
+	        return "fail";
+	    }
+	    
+	    $conn->close ();
+	}
 	function getListOfActiveBDObjects() {
 		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 		

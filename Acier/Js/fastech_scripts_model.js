@@ -401,6 +401,9 @@ $(document)
 									originalId = $("table").attr('idweek');
 									updateTableHour(originalId, "ongletHeure", "tblHeure");
 									updateTableHour(originalId, "ongletHeure", "ccqs");
+								} else if(formName == "taux_departement_revient"){
+									var idRevient = $("table").attr('idRevient');
+									updateSpec(idRevient);
 								} else if (formName != "prix_revient"){
 									updateTable(windowName);
 								}
@@ -848,32 +851,7 @@ $(document)
 					
 					content += "<div class='container-fluid'>";
 					
-					content += "<h1 class='formTitleMargin'>Spécification taux départements</h1>";
-					
-					content += "<form id='formTauxDep'>";
-
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='departement'>Département</label><select id='selectDepartement' name='departement' class='form-control formLeft inputMarginTop inputForm'></select>";
-					content += "</div>";
-					
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='begin_date'>Débutant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
-					content += "</div>";
-					
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='end_date'>Terminant le</label><input name='end_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
-					content += "</div>";
-					
-					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='taux'>Taux</label><input name='taux' class='form-control inputMarginTop inputForm' placeholder='Nouveau taux'></input>";
-					content += "</div>";
-
-					content += "<span id='errorForm'></span>";
-
-					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
-							+ "   typeName='taux_departement_revient'>Créer</a></form>";
-					
-					content += "<h2 style='margin-bottom: 2px;' class='fastechTable'>Projet: " + arr[1] + "</h2>";
+					content += "<h2 style='margin-bottom: 2px;'>Projet: " + arr[1] + "</h2>";
 					content += "<h5 style='margin-bottom: 10px;'>" + arr[2] + "$</h5>";
 					
 					content += "<div class='table-responsive'>";
@@ -885,7 +863,6 @@ $(document)
 					content += "</tbody></table></div>";
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printSpecificProject'>Imprimer</a>";
 					
-					content += "</div>";
 					
 					$.ajax({method : "GET",
 						url : "MVC/View/getObjectDynamicHeader.php?idObj="+arr[0]+"&objectName=" + windowName,
@@ -915,6 +892,55 @@ $(document)
 						}
 					});
 					
+					content += "<div class='fastechSpecDep'>";
+					content += "<h2 class='formTitleMargin'>Spécification taux départements</h2>";
+					
+					content += "<form id='formTauxDep'>";
+
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='departement'>Département</label><select id='selectDepartement' name='departement' class='form-control formLeft inputMarginTop inputForm'></select>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='begin_date'>Débutant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='end_date'>Terminant le</label><input name='end_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
+					content += "</div>";
+					
+					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
+					content += "<label for='taux'>Taux</label><input name='taux' class='form-control inputMarginTop inputForm' placeholder='Nouveau taux'></input>";
+					content += "</div>";
+
+					content += "<span id='errorForm'></span>";
+
+					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
+							+ "   typeName='taux_departement_revient'>Créer</a></form>";
+					content += "</div>";
+					
+					content += "<div class='fastechTable'>";
+					content += "<h2 style='margin-bottom: 2px;'>Tableau des spécifications</h2>";
+					content += "<div class='table-responsive'>";
+					content += "<table  class='table table-bordered tblSpec cursorDefault' width='100%' id='' cellspacing='0'><thead><tr id='header'>";
+
+					content += "<th>Département</th>";
+					content += "<th>Date début</th>";
+					content += "<th>Date fin</th>";
+					content += "<th>Taux</th>";
+					content += "</tr></thead><tfoot><tr id='footer'>";
+
+					content += "<th>Département</th>";
+					content += "<th>Date début</th>";
+					content += "<th>Date fin</th>";
+					content += "<th>Taux</th>";
+					content += "</tr></tfoot><tbody>";
+					content += "</tbody></table></div>";
+					content += "</div>";
+					content += "</div>";
+					
+					updateSpec(arr[0]);
+					
 					
 					$("#content").html(content);
 					
@@ -923,6 +949,49 @@ $(document)
 				
 			}
 		});
+$(document)
+.on(
+		"click",
+		".clickDeleteSpec",
+		function() {
+			var idToDelete = $(this).attr('idItem');
+			var idRevient = $(this).attr('idRevient');
+			
+			$.ajax({
+				method : "POST",
+				url : "ajaxRelated/delete-object_process.php?idItem=" + idToDelete,
+				beforeSend : function() {
+					/*$(this)
+							.html(
+									'<span class="glyphicon glyphicon-transfer"></span> &nbsp;Ajout...');
+					$(this).prop("disabled", true);*/
+				},
+				success : function(response) {
+					updateSpec(idRevient);
+				}
+			});
+			
+		});
+
+function updateSpec(id){
+	$.ajax({
+		method : "GET",
+		url : "MVC/View/getObjectDynamicTable.php?objectName=tableSpec&idRevient=" + id,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		beforeSend : function() {
+			/*$('.tblObject tbody')
+					.append(
+							"<span id='download'>Telechargement..</span>");*/
+		},
+		success : function(response) {
+			//$('#download').remove();
+			$('.tblSpec tbody').html("");
+			$('.tblSpec tbody').append(response);
+		}
+	});
+}
 
 function updateHeaderFooter(windowName){
 	$.ajax({method : "GET",

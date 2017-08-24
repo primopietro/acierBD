@@ -122,6 +122,54 @@ class FastechTauxDepartemenRevient extends FastechModel {
         $this->id_state = $id_state;
         return $this;
     }
+    
+    
+    public function getObjectListAsDynamicTableForRevient($id) {
+        $aListOfObjects = $this->getListOfActiveBDObjects ();
+        if ($aListOfObjects != null) {
+            foreach ( $aListOfObjects as $anObject ) {
+                if($anObject['id_prix_revient'] == $id){
+                    echo "<tr class='tableHover'>";
+                    foreach ( $anObject as $key => $value ) {
+                        
+                        if ($key != "table_name" && $key != "primary_key" && $key != "id_state" && $key != "id_prix_revient" && $key != "id_taux_departement_revient") {
+                            echo "<td>" . $value . "</td>";
+                        }
+                    }
+                    
+                    echo "<td class='tdDeleteSpec'><a idItem='" . $anObject['id_taux_departement_revient'] . "' class='cursor clickDeleteSpec underlineBtn' idRevient='" . $anObject['id_prix_revient'] . "' typeName='deleteSpec'>Supprimer</a></td></tr>";
+                }
+            }
+        }
+    }
+    
+    function getListOfActiveBDObjectsWithId($id) {
+        include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+        
+        $internalAttributes = get_object_vars ( $this );
+        
+        $sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1 AND id_prix_revient = '" . $id . "'";
+        $result = $conn->query ( $sql );
+        
+        if ($result->num_rows > 0) {
+            $fastechObjects = array ();
+            while ( $row = $result->fetch_assoc () ) {
+                $anObject = Array ();
+                $anObject ["primary_key"] = $this->primary_key;
+                $anObject ["table_name"] = $this->table_name;
+                foreach ( $row as $aRowName => $aValue ) {
+                    $anObject [$aRowName] = $aValue;
+                }
+                
+                $fastechObjects [$row [$this->primary_key]] = $anObject;
+            }
+            
+            $conn->close ();
+            return $fastechObjects;
+        }
+        $conn->close ();
+        return null;
+    }
 
 }
 

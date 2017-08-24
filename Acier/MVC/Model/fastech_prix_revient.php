@@ -264,7 +264,7 @@ class FastechPrixRevient extends FastechModel {
 			for($i = 1; $i < 8; $i ++) {
 				echo "<tr class='tableHover'>";
 				echo "<td>$arrayOfTitles[$i]</td>";
-				$majoration += $aWorkWeek->getPrixRevientAsDynamicTable($aPrixRevient['start_date'], $aPrixRevient['end_date'], $aPrixRevient['id_project'], $i);
+				$majoration += $aWorkWeek->getPrixRevientAsDynamicTable($aPrixRevient['start_date'], $aPrixRevient['end_date'], $aPrixRevient['id_project'], $aPrixRevient['id_prix_revient'], $i);
 				if ($i == 3){
 					echo "<td>" . $aPrixRevient['achats_cumul']. "$</td>";
 					$majoration += $aPrixRevient['achats_cumul'];

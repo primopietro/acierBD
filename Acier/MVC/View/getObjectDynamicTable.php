@@ -72,6 +72,10 @@ if($tableName== "ongletPrime"){
 	require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_taux_revient.php';
 	$anObject = new FastechTauxRevient();
 	$anObject->getObjectListAsDynamicTable(true);
+} else if ($tableName == "tableSpec"){
+    require_once  $_SERVER["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_taux_departement_revient.php';
+    $anObject = new FastechTauxDepartemenRevient();
+    $anObject->getObjectListAsDynamicTableForRevient($_GET['idRevient']);
 }
 
 $_SESSION['current_page'] = $tableName;

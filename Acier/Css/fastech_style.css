@@ -275,7 +275,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .fastechTable{
-	margin-top: 150px;
+	margin-top: 150px!important;
 }
 .fastechTableProjetHeure{
 	margin-top: 300px;
@@ -286,4 +286,10 @@ h1, h2, h3, h4, h5 {
 }
 #tblHeure{
 	font-size: 13px;
+}
+.fastechSpecDep{
+	margin-top: 75px!important;
+}
+.tdDeleteSpec{
+	width: 70px;
 }
