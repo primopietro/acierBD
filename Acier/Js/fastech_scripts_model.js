@@ -267,15 +267,15 @@ function getContentHtml(windowName){
 		
 		content += "<div class='container-fluid'>";
 		
-		content += "<h1 class='formTitleMargin'>Ajout prime CCQ</h1>";
+		content += "<h1 class='formTitleMargin'>Ajout métier CCQ</h1>";
 		content += "<form id='formCCQ'>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom de la prime CCQ'></input>";
+		content += "<label for='name'>Nom</label><input name='name' class='form-control inputMarginTop inputForm' placeholder='Nom du métier CCQ'></input>";
 		content += "</div>";
 
 		content += "<div class='form-group formLeft col-lg-6 col-md-6 col-xs-12'>";
-		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux de la prime CCQ'></input>";
+		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du métier CCQ'></input>";
 		content += "</div>";
 
 		content += "<span id='errorForm'></span>";
@@ -284,7 +284,7 @@ function getContentHtml(windowName){
 				+ "   typeName='ccq'>Ajouter</a></form>";
 		
 		content += "<div class='table-responsive fastechTable'>";
-		content += "<h1> Liste des primes CCQ </h1>";
+		content += "<h1> Liste des métiers CCQ </h1>";
 		content += "<table class='table-responsive table table-bordered tblObject' width='100%' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 
 		content += "<th>Nom</th>";
@@ -736,7 +736,7 @@ $(document)
 					// ******TABLEAU******
 					content += "<div class='table-responsive fastechTable'>";
 					
-					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='100%' id='tblHeure' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
+					content += "<table idweek='"+arr[0]+"' class='table table-bordered tblObject' width='150%' id='tblHeure' cellspacing='0'><thead class='cursorDefault'><tr id='header'>";
 					content += "</tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 					content += "</tr></tfoot><tbody>";
 					content += "</tbody></table></div>";
