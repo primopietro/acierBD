@@ -191,7 +191,9 @@ class FastechPrixRevient extends FastechModel {
 						} else if ($key == "id_project") {
 							$budget = $this->findProjectBudget ( $value );
 							$value = $this->findProjectName ( $value );
-							echo "<td class='cursorDefault' style='min-width:150px;'>" . $value . "</td>";
+							//echo "<td class='cursorDefault'style='min-width:150px;'>" . $value . "</td>";
+							echo "<td class='cursorDefault'><form table='" . $table_name . "' class='' idrevient='" . $anObject [$id_object] . " '>";
+							echo "<input value='" . $value. "'> </form></td>";
 							
 							echo "<td style='display:none;'><form table='" . $table_name . "' class='edit' idrevient='" . $anObject [$id_object] . " '>";
 							echo "<input value='" . $budget . "'> </form></td>";

@@ -2,6 +2,8 @@ body {
 	background-color: white;
 	font-family: 'Roboto', sans-serif;
 }
+
+
 .nav-link.logout{
 	padding-right:25px;
 	color:white;
@@ -23,7 +25,8 @@ body {
 }
 
 #errorForm {
-	color: rgb(37, 51, 112);
+	color: white;
+	float: left;
 }
 .editable:hover {
     text-decoration: underline;

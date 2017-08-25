@@ -40,7 +40,7 @@ function getContentHtml(windowName){
 		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux de la prime'></input>";
 		content += "</div>";
 
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "   typeName='prime'>Ajouter</a></form>";
@@ -76,7 +76,7 @@ function getContentHtml(windowName){
 		content += "<label for='begin_date'>Terminant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
 		content += "</div>";
 		
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly' typeName='work_weeks'>Ajouter</a></form>";
 
@@ -133,7 +133,7 @@ function getContentHtml(windowName){
 		content += "<label for='bool_ccq'>CCQ</label><input name='bool_ccq' class='form-control inputMarginTop inputForm' type='checkbox'' id='ccq'></input>";
 		content += "</div>";
 
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple'  class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo'   typeName='employees'>Ajouter</a></form>";
 		
@@ -183,7 +183,7 @@ function getContentHtml(windowName){
 		content += "<label for='bool_autre'>Autres</label><input name='bool_autre' class='form-control inputMarginTop inputForm' type='checkbox'' ></input>";
 		content += "</div>";
 
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'  typeName='projects'>Ajouter</a></form>";
 		
@@ -225,7 +225,7 @@ function getContentHtml(windowName){
 		content += "<label for='bool_production'>Cumulatif Production</label><input name='bool_production' class='form-control inputMarginTop inputForm' type='checkbox'' id='ccq'></input>";
 		content += "</div>";
 
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "  typeName='departement'>Ajouter</a></form>";
@@ -278,7 +278,7 @@ function getContentHtml(windowName){
 		content += "<label for='amount'>Taux </label><input name='amount' class='form-control inputMarginTop inputForm' type='number' placeholder='Taux du métier CCQ'></input>";
 		content += "</div>";
 
-		content += "<span id='errorForm'></span>";
+		content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 				+ "   typeName='ccq'>Ajouter</a></form>";
@@ -402,23 +402,19 @@ $(document)
 									updateTableHour(originalId, "ongletHeure", "tblHeure");
 									updateTableHour(originalId, "ongletHeure", "ccqs");
 								} else if(formName == "taux_departement_revient"){
-									var idRevient = $("table").attr('idRevient');
+									var idRevient = $(".clickDeleteSpec").attr('idRevient');
+									
 									updateSpec(idRevient);
+									updateRevient(windowName, originalId);
 								} else if (formName != "prix_revient"){
 									updateTable(windowName);
 								}
 
 								$(document).find("form").find("input").val("");
+								$("#errorForm").css("color", "white");
 
 							} else {
-								$("#errorForm")
-										.fadeIn(
-												3000,
-												function() {
-													$(this)
-															.html(
-																	'<span class="glyphicon glyphicon-log-in"></span> &nbsp; Veuillez remplir tous les champs');
-												});
+								$("#errorForm").css("color", "rgb(37, 51, 112)");
 							}
 
 							$(this).prop("disabled", false);
@@ -586,6 +582,8 @@ function addConsultButtons(windowName){
 		} else if (windowName == "ongletPrixrevient"){
 			id += "_" + $(this).find("input").eq(2).val();
 			id += "_" + $(this).find("input").eq(3).val();
+			id += "_" + $(this).find("input").eq(4).val();
+			id += "_" + $(this).find("input").eq(5).val();
 		}
 		
 		if(windowName != "ongletProjet"){
@@ -729,7 +727,7 @@ $(document)
 					content += "</div>";
 	
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 btnForm addInfo' typeName='employe_week_hours'>Ajouter</a></form>";
-					content += "<span id='errorForm'></span>";
+					content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 					content += "</div>";
 					
 	
@@ -848,6 +846,7 @@ $(document)
 				} else if(windowName == "ongletPrixrevient"){
 					var toSplit = $(this).attr('id');
 					var arr = toSplit.split('_');
+					console.log(arr);
 					
 					content += "<div class='container-fluid'>";
 					
@@ -864,33 +863,7 @@ $(document)
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printSpecificProject'>Imprimer</a>";
 					
 					
-					$.ajax({method : "GET",
-						url : "MVC/View/getObjectDynamicHeader.php?idObj="+arr[0]+"&objectName=" + windowName,
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						success : function(response) {
-							$("#header").html(response);
-							
-							$.ajax({
-								method : "GET",
-								url : "MVC/View/getObjectDynamicTable.php?objectName=ongletConsultRevient&idRevient=" + arr[0],
-								beforeSend : function() {
-									// TO INSERT - loading animation
-								},
-								beforeSend : function() {
-									/*$('.tblObject tbody')
-											.append(
-													"<span id='download'>Telechargement..</span>");*/
-								},
-								success : function(response) {
-									//$('#download').remove();
-									$('.tblObject tbody').html("");
-									$('.tblObject tbody').append(response);
-								}
-							});
-						}
-					});
+					updateRevient(windowName, arr[0]);
 					
 					content += "<div class='fastechSpecDep'>";
 					content += "<h2 class='formTitleMargin'>Spécification taux départements</h2>";
@@ -902,18 +875,18 @@ $(document)
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='begin_date'>Débutant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
+					content += "<label for='begin_date'>Débutant le</label><input name='begin_date' class='form-control inputMarginTop' type='date' id='debut' min='"+ arr[3] +"' max='"+ arr[4] +"'></input>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
-					content += "<label for='end_date'>Terminant le</label><input name='end_date' class='form-control inputMarginTop' type='date' id='debut'></input>";
+					content += "<label for='end_date'>Terminant le</label><input name='end_date' class='form-control inputMarginTop' type='date' id='debut' min='"+ arr[3] +"' max='"+ arr[4] +"'></input>";
 					content += "</div>";
 					
 					content += "<div class='form-group formLeft col-lg-3 col-md-3 col-xs-12'>";
 					content += "<label for='taux'>Taux</label><input name='taux' class='form-control inputMarginTop inputForm' placeholder='Nouveau taux'></input>";
 					content += "</div>";
 
-					content += "<span id='errorForm'></span>";
+					content += "<span id='errorForm'>Veuillez remplir tous les champs</span>";
 
 					content += "<a data-animation='ripple' class='btn btn-default col-lg-3 col-md-3 col-xs-12 cursor btnForm addInfo' readonly='readonly'"
 							+ "   typeName='taux_departement_revient'>Créer</a></form>";
@@ -956,6 +929,8 @@ $(document)
 		function() {
 			var idToDelete = $(this).attr('idItem');
 			var idRevient = $(this).attr('idRevient');
+			var originalId = $("table").attr('idObj');
+			var windowName = $(".active > a").attr("id");
 			
 			$.ajax({
 				method : "POST",
@@ -968,6 +943,7 @@ $(document)
 				},
 				success : function(response) {
 					updateSpec(idRevient);
+					updateRevient(windowName, originalId);
 				}
 			});
 			
@@ -989,6 +965,36 @@ function updateSpec(id){
 			//$('#download').remove();
 			$('.tblSpec tbody').html("");
 			$('.tblSpec tbody').append(response);
+		}
+	});
+}
+
+function updateRevient(windowName, id){
+	$.ajax({method : "GET",
+		url : "MVC/View/getObjectDynamicHeader.php?idObj="+id+"&objectName=" + windowName,
+		beforeSend : function() {
+			// TO INSERT - loading animation
+		},
+		success : function(response) {
+			$("#header").html(response);
+			
+			$.ajax({
+				method : "GET",
+				url : "MVC/View/getObjectDynamicTable.php?objectName=ongletConsultRevient&idRevient=" + id,
+				beforeSend : function() {
+					// TO INSERT - loading animation
+				},
+				beforeSend : function() {
+					/*$('.tblObject tbody')
+							.append(
+									"<span id='download'>Telechargement..</span>");*/
+				},
+				success : function(response) {
+					//$('#download').remove();
+					$('.tblObject tbody').html("");
+					$('.tblObject tbody').append(response);
+				}
+			});
 		}
 	});
 }

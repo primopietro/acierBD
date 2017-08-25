@@ -194,23 +194,27 @@ class FastechWorkWeek extends FastechModel {
 		$aTauxDepartementRevient = new FastechTauxDepartemenRevient();
 		$aListOfTDR = $aTauxDepartementRevient->getListOfActiveBDObjectsWithId($idRevient);
 		
-		$originalBeginDate = $dateBegin;
+		
 		$newAmount = 0;
 		
 		foreach ( $aListOfDeps as $anObject ) {
+			$originalBeginDate = $dateBegin;
+			$aName = $anObject ['name'];
 		    if ($bool == 4){
-		        $aName = $anObject ['name'];
 			    
 			    if($aListOfTDR != null){
-			        foreach ( $aListOfTDR as $aTDR ) {
-			        	$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
-			            $result = $conn->query ( $query);
-			            if ($result->num_rows > 0) {
-			                while ( $row = $result->fetch_assoc () ) {
-			                    $compteurProduction+= $row['hoursTotal'];
-			                }
-			            }
-			            $originalBeginDate = $aTDR['end_date'];
+			    	foreach ( $aListOfTDR as $aTDR ) {
+			    		if($aTDR['departement'] == $aName){
+				        	$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
+				            $result = $conn->query ( $query);
+				            if ($result->num_rows > 0) {
+				                while ( $row = $result->fetch_assoc () ) {
+				                	if($anObject['bool_production'] != 2)
+				                    	$compteurProduction+= $row['hoursTotal'];
+				                }
+				            }
+				            $originalBeginDate = $aTDR['end_date'];
+			       		}
 			        }
 			    }
 			    
@@ -218,29 +222,33 @@ class FastechWorkWeek extends FastechModel {
 			    $result = $conn->query ( $query);
 			    if ($result->num_rows > 0) {
 			        while ( $row = $result->fetch_assoc () ) {
-			            $compteurProduction+= $row['hoursTotal'];
+			        	if($anObject['bool_production'] != 2)
+			            	$compteurProduction+= $row['hoursTotal'];
 			        }
 			    }
 			} else if($bool == 1 || $bool == 2){
-				$aName = $anObject ['name'];
 				$totalTDRHours = 0;
 				$totalTDRValue = 0;
 				if($aListOfTDR != null){
 					foreach ( $aListOfTDR as $aTDR ) {
-						$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
-						$result = $conn->query ( $query);
-						if ($result->num_rows > 0) {
-							while ( $row = $result->fetch_assoc () ) {
-								if($bool == 1){
-									$compteurTotal += $row['hoursTotal'];
-									$totalTDRHours += $row['hoursTotal'];
-								} else{
-									$compteurTotal += $row['valueTotal'];
-									$totalTDRValue += $row['valueTotal'];
+						if($aTDR['departement'] == $aName){
+							$query = $this->getQuery($id_project, $aTDR['begin_date'], $aTDR['end_date'], $aName, $aTDR['taux']);
+							$result = $conn->query ( $query);
+							if ($result->num_rows > 0) {
+								while ( $row = $result->fetch_assoc () ) {
+									if($bool == 1){
+										$compteurTotal += $row['hoursTotal'];
+										$totalTDRHours += $row['hoursTotal'];
+										//echo "<td>" . ($totalTDRHours) . "</td>";
+									} else{
+										$compteurTotal += $row['valueTotal'];
+										$totalTDRValue += $row['valueTotal'];
+										//echo "<td>" . ($totalTDRValue) . "</td>";
+									}
 								}
 							}
+							$originalBeginDate = $aTDR['end_date'];
 						}
-						$originalBeginDate = $aTDR['end_date'];
 					}
 				}
 				$query = $this->getQuery($id_project, $originalBeginDate, $dateEnd, $aName, $newAmount);
@@ -298,25 +306,30 @@ class FastechWorkWeek extends FastechModel {
 						JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
 						JOIN departement d on ewh.departement = d.name
 						WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-						AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
+						AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
 		} else {
 			$query = "SELECT d.name as depName, SUM(hours) as hoursTotal, " . $newAmount . "*SUM(hours) as valueTotal
 					FROM employe_week_hours ewh
 					JOIN work_weeks ww on ww.id_work_week  = ewh.id_work_week
 					JOIN departement d on ewh.departement = d.name
 					WHERE id_project = " . $id_project . " AND  d.name = '".$aName."'
-					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  <= '".$dateEnd."'";
+					AND ww.begin_date >= '".$dateBegin."' AND ww.begin_date  < '".$dateEnd."'";
+			
+			echo $aName. " ". $newAmount ."<br><br>";
 		}
-		echo $query;
 		return $query;
 	}
 }
 
 
-  /*$aWorkWeek = new FastechWorkWeek();
+ /*$aWorkWeek = new FastechWorkWeek();
+  echo "<table style='border: 1px solid black'>";
   for ($i = 1; $i < 8; $i++){
-  	$aWorkWeek->getPrixRevientAsDynamicTable('2017-06-29', '2017-07-06', 1, 3, $i);
-  }*/
+  	echo "<tr style='border: 1px solid black'>";
+  	$aWorkWeek->getPrixRevientAsDynamicTable('2017-06-15', '2017-07-06', 1, 3, $i);
+  	echo "</tr>";
+  }
+  echo "</table>";*/
  /*$temp =  $aWorkWeek->getPrixRevientAsDynamicTable('2017-06-17','2017-07-17');
   echo "<pre>";
   print_r ($temp);
