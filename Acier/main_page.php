@@ -81,6 +81,14 @@ if(!isset($_SESSION['current_page'])){
 		echo $_SESSION['current_page'];
 	?>").trigger("click");
 	</script>
+	<style>
+	
+.forceBorder td,.forceBorder tr,
+.forceBorder table, .forceBorder thead,
+.forceBorde tfoob{
+	border:1px solid black !important;
+}
+	</style>
 </body>
 
 
