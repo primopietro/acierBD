@@ -85,7 +85,8 @@ if(!isset($_SESSION['current_page'])){
 	
 .forceBorder td,.forceBorder tr,
 .forceBorder table, .forceBorder thead,
-.forceBorde tfoob{
+.forceBorde tfoot, .forceBorder table tfoot td,
+.forceBorder table thead td{
 	border:1px solid black !important;
 }
 	</style>
