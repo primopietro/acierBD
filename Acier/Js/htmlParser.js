@@ -6,7 +6,7 @@ $(document).on("click",".btnImpression",function(){
 	var displayBefore = $(".cursor.clickWeek.underlineBtn").css("display");
 	var displayParentBefore = $(".cursor.clickWeek.underlineBtn").closest("td").css("display");
 	var displayParentBeforeConge = $(".cursor.clickConge.underlineBtn").closest("td").css("display");
-	$(this).prev().addClass("forceBorder");
+	//$(this).prev().addClass("forceBorder");
 	
 	$(".cursor.clickWeek.underlineBtn").css("display","none");
 	$(".cursor.clickWeek.underlineBtn").closest("td").css("display","none");
