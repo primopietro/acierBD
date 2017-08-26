@@ -6,15 +6,23 @@ $anObject = null;
 if (isSet ( $_GET )) {
 	include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
 	
-	$query = "SELECT SUM(ewh.hours) as totalHours
-			FROM employe_week_hours ewh
-			JOIN projects p on p.id_project = ewh.id_project
-			WHERE ewh.id_work_week = '" . $_GET['weekId'] . "' AND p.bool_autre = 2";
-	$result = $conn->query ($query);
-	if ($result->num_rows > 0) {
-		echo "<tr class='tableHover cursorDefault'><td>TOTAL</td><td></td>";
-		while ( $row = $result->fetch_assoc () ) {
-			echo "<td>" . $row['totalHours'] . "</td>";
+	require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
+	$aProject = new FastechProject();
+	$aListOfProject = $aProject->getListOfActiveBDObjects ();
+	echo "<tr class='tableHover cursorDefault'><td>TOTAL</td><td></td>";
+	
+	foreach ( $aListOfProject as $anObject ) {
+		if($anObject['bool_autre'] == 2){
+			$query = "SELECT SUM(ewh.hours) as totalHours
+					FROM employe_week_hours ewh
+					JOIN projects p on p.id_project = ewh.id_project
+					WHERE ewh.id_work_week = '" . $_GET['weekId'] . "' AND p.name = '" . $anObject['name'] . "'";
+			$result = $conn->query ($query);
+			if ($result->num_rows > 0) {
+				while ( $row = $result->fetch_assoc () ) {
+					echo "<td>" . $row['totalHours'] . "</td>";
+				}
+			}
 		}
 	}
 	
