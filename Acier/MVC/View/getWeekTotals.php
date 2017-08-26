@@ -12,7 +12,7 @@ if (isSet ( $_GET )) {
 			WHERE ewh.id_work_week = '" . $_GET['weekId'] . "' AND p.bool_autre = 2";
 	$result = $conn->query ($query);
 	if ($result->num_rows > 0) {
-		echo "<tr class='tableHover'><td>TOTAL</td><td></td>";
+		echo "<tr class='tableHover cursorDefault'><td>TOTAL</td><td></td>";
 		while ( $row = $result->fetch_assoc () ) {
 			echo "<td>" . $row['totalHours'] . "</td>";
 		}
