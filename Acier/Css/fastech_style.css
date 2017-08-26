@@ -6,6 +6,7 @@ body {
 td {
     min-width: 58px;
 }
+
 .nav-link.logout{
 	padding-right:25px;
 	color:white;

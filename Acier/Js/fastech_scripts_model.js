@@ -564,7 +564,7 @@ function updateTableHour(id, windowName, tableId){
 				$
 				.ajax({
 					method : "GET",
-					url : "MVC/View/getWeekTotals.php?weekId=" + id,
+					url : "MVC/View/getWeekTotals.php?weekId=" + id + "&tableId=" + tableId,
 					beforeSend : function() {
 						// TO INSERT - loading animation
 					},
@@ -574,7 +574,7 @@ function updateTableHour(id, windowName, tableId){
 										"<span id='download'>Telechargement..</span>");*/
 					},
 					success : function(response) {
-						$("#ccqs tbody").append(response);
+						$("#" + tableId + " tbody").append(response);
 					}
 				});	
 			

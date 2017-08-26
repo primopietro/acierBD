@@ -38,6 +38,8 @@ if (isSet ( $_GET )) {
 	$totalT2 = 0;
 	$totalHoliday = 0;
 	$totalBank = 0;
+	$compteur = 1;
+	$primeStuff = '';
 	
 	foreach ( $aListOfPrimes as $anObject ) {
 		$query = "SELECT SUM(p.payed) as totalPayed, SUM(p.regular) as totalRegular, SUM(p.payed)-SUM(p.regular) as totalT2, SUM(pp.amount) as totalHoursPrime, SUM(pp.amount)*pr.amount as totalPricePrime, SUM(bhp.holiday) as totalHoliday, SUM(bhp.bank) as totalBank
@@ -54,6 +56,9 @@ if (isSet ( $_GET )) {
 				$totalT2= $row['totalT2'];
 				$totalHoliday= $row['totalHoliday'];
 				$totalBank= $row['totalBank'];
+				
+				if ($_GET['tableId'] == "tblHeure")
+					$primeStuff .= "<td>" . $row['totalHoursPrime'] . "h</td><td>" . $row['totalPricePrime'] . "$</td>";
 			}
 		}
 	}
@@ -77,14 +82,18 @@ if (isSet ( $_GET )) {
 				if($compteur == 1){
 					$compteur++;
 					echo "<td>" . ($totalPayed + $row['totalPayed']) . "</td><td>" . ($totalRegular + $row['totalRegular']) . "</td><td>" . ($totalT2 + $row['totalT2']) . "</td>";
+					if ($_GET['tableId'] != "ccqs")
+						echo  $primeStuff;
 					$totalHoliday+= $row['totalHoliday'];
 					$totalBank+= $row['totalBank'];
 				}
-				echo "<td>" . $row['totalHoursCCQ'] . "</td>";
+				if ($_GET['tableId'] == "ccqs")
+					echo "<td>" . $row['totalHoursCCQ'] . "</td>";
 			}
 		}
 	}
 	
 	echo "<td>" . $totalHoliday. "$</td><td>" . $totalBank. "h</td>";
+	
 	echo "</tr>";
 }
