@@ -561,8 +561,6 @@ function updateTableHour(id, windowName, tableId){
 				
 			});
 			
-
-			$("#ccqs tbody").append("<tr class='tableHover'><td>TOTAL</td><td></td>");
 				$
 				.ajax({
 					method : "GET",
