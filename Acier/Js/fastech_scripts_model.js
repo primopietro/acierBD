@@ -555,12 +555,31 @@ function updateTableHour(id, windowName, tableId){
 					
 				
 				}
-				
-					
+
 				
 				});
 				
 			});
+			
+
+			$("#ccqs tbody").append("<tr class='tableHover'><td>TOTAL</td><td></td>");
+				$
+				.ajax({
+					method : "GET",
+					url : "MVC/View/getWeekTotals.php?weekId=" + id,
+					beforeSend : function() {
+						// TO INSERT - loading animation
+					},
+					beforeSend : function() {
+						/*$('.tblObject tbody')
+								.append(
+										"<span id='download'>Telechargement..</span>");*/
+					},
+					success : function(response) {
+						$("#ccqs tbody").append(response);
+					}
+				});	
+			
 			}
 			
 		}
@@ -1055,8 +1074,6 @@ $(document).on("click",".btnImpression",function(){
   //window.open("pdfRelated/createPdf.php?"+"objectName="+windowName);
   
 });
-
-
 
 
 

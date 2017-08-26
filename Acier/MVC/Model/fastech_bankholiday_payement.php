@@ -247,12 +247,12 @@ class FastechBankHolidayPayement extends FastechModel {
     			echo "<tr class='tableHover'>";
     			foreach ( $row as $aRowName => $aValue ) {
     				if($aRowName == "heures"){
-    					echo "<td style='text-align:center'>$aValue</td>";
+    					echo "<td class='cursorDefault' style='text-align:center'>$aValue</td>";
     				} else if ($aRowName == "isCCQ" && $aValue==2 && $compt==0){ 
-    					echo "</tr><tr><th colspan='3' style='text-align:center'>CCQ</th></tr>";
+    					echo "</tr><tr class='cursorDefault'><th colspan='3' style='text-align:center'>CCQ</th></tr>";
     					$compt++;
     				}else if ($aRowName != "isCCQ"){
-    					echo "<td>$aValue</td>";
+    					echo "<td class='cursorDefault'>$aValue</td>";
     				}
     				//echo $aRowName . " " . $aValue . "<br>";
     			}
