@@ -126,7 +126,7 @@ class FastechPayements extends FastechModel {
 		
 		$internalAttributes = get_object_vars ( $this );
 		
-		$sql = "SELECT * FROM `" . $this->table_name . "`  WHERE id_employe = $id_employe  AND id_work_week = $id_work_week ";
+		$sql = "SELECT id_payement, payed, regular FROM `" . $this->table_name . "`  WHERE id_employe = $id_employe  AND id_work_week = $id_work_week ";
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {

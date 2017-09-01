@@ -473,18 +473,10 @@ function updateTableHour(id, windowName, tableId){
 			$("#" + tableId + " tbody").html("");
 			$("#" + tableId + " tbody").append(response);
 			
-			if(windowName == "ongletHeure"){
-			var idWeek = $("#tblHeure").attr("idWeek");
-			var employes = $("#" + tableId + " td:first-child");
-			var employesArray = new Array();
-		
-			employes.each(function( index ) {
-				var id_employe = $(this).text();
-				var tr = $( this ).closest("tr");
-				$
-				.ajax({
-					method : "GET",
-					url : "MVC/View/getPayedTimes.php?id_work_week=" + idWeek+"&id_employe="+id_employe,
+			$
+			.ajax({
+				method : "GET",
+				url : "MVC/View/getWeekTotals.php?weekId=" + id + "&tableId=" + tableId,
 				beforeSend : function() {
 					// TO INSERT - loading animation
 				},
@@ -494,92 +486,10 @@ function updateTableHour(id, windowName, tableId){
 									"<span id='download'>Telechargement..</span>");*/
 				},
 				success : function(response) {
-					//$('#download').remove();
-					tr.append(response);
-					var primes ="";
-					if(tableId == "tblHeure"){
-						 primes = $("#" + tableId + " thead [typeheader = 'prime']");
-					}else{
-						 primes = $("#" + tableId + " thead [typeheader = 'ccq']");
-					}
-				
-					var lengthPrimes = primes.length;
-					var counter = 1;
-					primes.each(function( index ) {
-						var prime = $(this).attr("attrval");
-						var id_payement= tr.find(" [table='payements']").first().attr("idobj");
-					
-						$
-						.ajax({
-							method : "GET",
-							url : "MVC/View/getPayedPrime.php?prime=" + prime +"&id_payement="+ id_payement+"&tblId=" + tableId,
-						beforeSend : function() {
-							// TO INSERT - loading animation
-						},
-						beforeSend : function() {
-							/*$('.tblObject tbody')
-									.append(
-											"<span id='download'>Telechargement..</span>");*/
-						},
-						success : function(response) {
-							tr.append(response);
-							//$('#download').remove();
-							if(lengthPrimes == counter){
-								
-								$
-								.ajax({
-									method : "GET",
-									url : "MVC/View/getBankHoliday.php?id_payement="+ id_payement,
-								beforeSend : function() {
-									// TO INSERT - loading animation
-								},
-								beforeSend : function() {
-									/*$('.tblObject tbody')
-											.append(
-													"<span id='download'>Telechargement..</span>");*/
-								},
-								success : function(response) {
-									tr.append(response + "<td><a class='cursor clickConge underlineBtn' idpayement='" + id_payement + "' idemploye='" + id_employe + "'>Congé</a></td>");
-								}
-								});	
-							} 
-							counter++;
-						}
-						
-							
-						
-						});	
-						
-					});
-				
-					
-				
+					$("#" + tableId + " tbody").append(response);
 				}
-
-				
-				});
-				
-			});
-			
-				$
-				.ajax({
-					method : "GET",
-					url : "MVC/View/getWeekTotals.php?weekId=" + id + "&tableId=" + tableId,
-					beforeSend : function() {
-						// TO INSERT - loading animation
-					},
-					beforeSend : function() {
-						/*$('.tblObject tbody')
-								.append(
-										"<span id='download'>Telechargement..</span>");*/
-					},
-					success : function(response) {
-						$("#" + tableId + " tbody").append(response);
-					}
-				});	
-			
-			}
-			
+			});	
+		
 		}
 	});
 }

@@ -153,14 +153,117 @@ class FastechEmployekWeekHours extends FastechModel {
 		$this->id_state = $id_state;
 		return $this;
 	}
-	function getObjectList($weekId, $ccq) {
+	
+	function getObjectList($weekId, $ccq){
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
+		//require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_payements.php';
+		//require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
+		
+		$employe = new FastechEmploye();
+		$aListOfEmployes = $employe->getListOfActiveBDObjects ();
+		
+		$prime = new FastechPrime();
+		
+		if ($aListOfEmployes != null) {
+			foreach ( $aListOfEmployes as $anObject ) {
+				$completeInfo = $this->getEmployeCompleteInfo($anObject['id_employe'], $weekId, 1);
+				echo "<tr class='tableHover'>";
+				if ($completeInfo != null){
+					foreach ( $completeInfo as  $key => $value) {
+						if ($anObject['bool_ccq'] == $ccq){
+							if(strpos($key, 'Prime_') !== false){
+								$pieces = explode("_", $key);
+								$piecesValue = explode("_", $value);
+								$thePrime = $prime->getObjectFromDB( $pieces[1] );
+								
+								echo "<td><form style='display:table;' table='prime_payement' class='edit col-lg-4' idObj='". $piecesValue[1] ."'>";
+								echo "<input class='editable' name='amount' value='" . $piecesValue[0] . "'></form></td><td style='min-width: 100px;' class='cursorDefault'>" . $piecesValue[0] * $thePrime['amount'] . " $</td>";
+							} else{
+								echo "<td class='cursorDefault'>" . $value . "</td>";
+							}
+						}
+					}
+				}
+				echo "</tr>";
+			}
+		}
+	}
+	
+	function getEmployeCompleteInfo($id_employe, $id_work_week, $id_payement) {
+		include $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/database_connect.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_prime.php';
+		
+		$aPrime = new FastechPrime();
+		$aPrimeList = $aPrime->getListOfActiveBDObjects();
+		
+		$primeQuerry = "";
+		
+		if($aPrimeList != null){
+			foreach ($aPrimeList as $anObject){
+				$primeQuerry .= " CONCAT(SUM(pp" . $anObject['name'] . ".amount), '_', SUM(pp" . $anObject['name'] . ".id_prime_payement)) as Prime_" . $anObject['name'] . ",";
+			}
+		}
+		
+		$sql = "SELECT e.id_employe, CONCAT(e.first_name, ' ', e.family_name) as Nom, SUM(ewh.hours) as total, SUM(p.payed) as paye, SUM(p.regular) as REG, (SUM(p.payed) - SUM(p.regular)) as T," .
+				$primeQuerry
+				. " SUM(bhp.holiday) as Conge, SUM(bhp.bank) as banque
+				FROM employe_week_hours ewh
+				JOIN payements p ON p.id_work_week = ewh.id_work_week
+				JOIN employees e ON e.id_employe = ewh.id_employe ";
+		
+		if($aPrimeList != null){
+			foreach ($aPrimeList as $anObject){
+				$sql .=" JOIN prime_payement pp" . $anObject['name'] . " ON pp" . $anObject['name'] . ".id_payement = p.id_payement AND  pp" . $anObject['name'] . ".prime = '" . $anObject['name'] . "' ";
+				$sql .="JOIN prime pr" . $anObject['name'] . " ON pr" . $anObject['name'] . ".name = pp" . $anObject['name'] . ".prime";
+			}
+		}
+	
+		$sql .=" 
+				 JOIN bankholiday_payement bhp ON bhp.id_payement = p.id_payement
+				 WHERE ewh.id_employe = '" . $id_employe . "' AND ewh.id_work_week = '" . $id_work_week. "' AND p.id_payement = '" . $id_payement. "'
+				 GROUP BY ewh.id_employe, p.id_payement ;";
+				
+				
+				
+		
+		$result = $conn->query ( $sql );
+		//echo $sql . "<br><br><br>";
+		
+		if (($result = $conn->query($sql)) === false) {
+			echo 'error: '.$conn->error;
+		} else if ($result->num_rows > 0) {
+			$anObject = Array ();
+			while ( $row = $result->fetch_assoc () ) {
+				foreach ( $row as $aRowName => $aValue ) {
+					$anObject [$aRowName] = $aValue;
+					$this->$aRowName = $aValue;
+				}
+			}
+			
+			$conn->close ();
+			return $anObject;
+		}
+		$conn->close ();
+		return null;
+	}
+	
+	/*function getObjectListold($weekId, $ccq) {
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_employees.php';
+		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_payements.php';
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_projects.php';
 		$full_name = "";
 		$counter = 0;
 		$counter1 = 0;
+		
+		$name = "";
+		
 		$totalHours = array ();
-		$employe = new FastechEmploye ();
+		$employePayements = array();
+		
+		$employe = new FastechEmploye();
+		$payements = new FastechPayements();
+		
 		$aListOfEmployes = $employe->getListOfActiveBDObjects ();
 
 		
@@ -174,7 +277,18 @@ class FastechEmployekWeekHours extends FastechModel {
 						//array_push ( $totalHours, $this->getEmployeHours ( $value, $weekId ) );
 						$totalHours[$value] = $this->getEmployeHours ( $value, $weekId );
 						$id = $value;
-						//echo "<td class='cursorDefault'>" . $value . "</td>";
+						$employePayements = $payements->getPayementFromDB($value, $weekId);
+						if ($employePayements == null){
+							for($i = 0; $i < 2; $i++) {
+								if($i = 0)
+									$name = "payed";
+								else{
+									$name = "regular";
+								}
+								echo "<td><form table='payements' class='edit' idObj='0'>";
+								echo "<input class='editable' name='" . $name . "' value='0'> </form></td>";
+							//}
+						}
 					}
 					if ($key == "first_name" || $key == "family_name") {
 						$full_name .= $value . " ";
@@ -209,7 +323,7 @@ class FastechEmployekWeekHours extends FastechModel {
 				echo "</tr>";
 			}
 		}
-	}
+	}*/
 	
 	function getProductionTotal($projectId) {
 		require_once $_SERVER ["DOCUMENT_ROOT"] . '/AcierBD/Acier/MVC/Model/fastech_work_weeks.php';
@@ -480,6 +594,9 @@ class FastechEmployekWeekHours extends FastechModel {
 	}
 }
 
+
+/*$anEmploye = new FastechEmployekWeekHours();
+$anEmploye->getObjectList(4, 1);*/
 /*
  * for($i=2;$i<5;++$i){
  * $anEmploye = new FastechEmployekWeekHours();
