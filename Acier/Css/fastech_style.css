@@ -2,7 +2,9 @@ body {
 	background-color: white;
 	font-family: 'Roboto', sans-serif;
 }
-
+td,th{
+	border:2px solid black !important;
+}
 td {
     min-width: 58px;
 }

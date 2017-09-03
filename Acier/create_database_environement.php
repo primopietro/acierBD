@@ -72,13 +72,14 @@ else{
 echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`employees` (
-  `id_employe` int(11) NOT NULL AUTO_INCREMENT,
+  `id_employe` int(11) UNIQUE NOT NULL ,
   `first_name` varchar(25) NOT NULL,
   `family_name` varchar(25) NOT NULL,
   `hour_rate` double NOT NULL,
   `departement` varchar(50) NOT NULL,
   `bool_ccq` int(11) NOT NULL,
   `id_state` int(11) NOT NULL,
+  `order`  int UNIQUE NOT NULL AUTO_INCREMENT,
 PRIMARY KEY ( `id_employe`)
 ) ENGINE=InnoDB  ';
 if (!$result = $conn->query($sql)) {
@@ -277,7 +278,7 @@ echo "<br>";
 
 $sql = 'CREATE TABLE `acier_fastech`.`bankholiday_payement`
  ( `id_bankholiday_payement` INT NOT NULL AUTO_INCREMENT ,
-`id_payement` INT NOT NULL , `holiday` DOUBLE NOT NULL,
+`id_payement` INT NOT NULL , `holiday` DOUBLE ,
 `bank` DOUBLE NOT NULL , `id_state` INT NOT NULL ,
  PRIMARY KEY (`id_bankholiday_payement`)) ENGINE = InnoDB;';
 if (!$result = $conn->query($sql)) {
@@ -375,6 +376,7 @@ else{
 	echo "<span style='color:green;'>Auto increment created successfully in  ccq</span>\n";
 }
 echo "<br>";
+
 
 
 

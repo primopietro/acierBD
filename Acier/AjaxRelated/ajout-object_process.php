@@ -28,6 +28,9 @@ if ($typeName == "prime") {
 } else if($typeName == "taux_departement_revient"){
 	$anObject = new FastechTauxDepartemenRevient();
 }
+else if($typeName == "bankholiday_payement"){
+	$anObject = new FastechTauxDepartemenRevient();
+}
 
 $attributes = $anObject->getObjectAsArrayWithOutMetadata ();
 

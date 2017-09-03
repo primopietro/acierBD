@@ -144,14 +144,14 @@ function getContentHtml(windowName){
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
 		content += "<th>Prénom</th>";
-		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
+		content += "<th>Taux horaire</th><th>Département</th><th style='text-align: center'>CCQ</th><th>Tri</th></tr></thead><tfoot class='cursorDefault'><tr id='footer'>";
 
 		content += "<th>Code</th>";
 		content += "<th>Nom</th>";
 		content += "<th>Prénom</th>";
 		content += "<th>Taux horaire</th>";
 		content += "<th>Département</th>";
-		content += "<th style='text-align: center'>CCQ</th>";
+		content += "<th style='text-align: center'>CCQ</th><th>Tri</th>";
 		content += "</tr></tfoot><tbody>";
 
 		content += "</tbody></table></div>";
@@ -318,6 +318,9 @@ function getContentHtml(windowName){
 		content += "</tbody></table></div>";
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printBank'>Imprimer</a>";
 
+	
+		
+		
 		content += "</div>";
 		
 	} else if(windowName == "ongletPrixrevient"){

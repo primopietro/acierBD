@@ -143,7 +143,7 @@ class FastechModel {
 		$internalAttributes = get_object_vars ( $this );
 		
 		$sql = "SELECT * FROM `" . $this->table_name . "` WHERE id_state = 1";
-		if($this->primary_key =="order"){
+		if( $this->table_name =="employees"){
 			$sql .= " order by `order`";
 		}
 		$result = $conn->query ( $sql );
@@ -173,6 +173,10 @@ class FastechModel {
 		$internalAttributes = get_object_vars ( $this );
 		
 		$sql = "SELECT * FROM `" . $this->table_name . "` ";
+	
+		if($this->table_name == "employees"){
+			$sql .= " ORDER BY order ";
+		}
 		$result = $conn->query ( $sql );
 		
 		if ($result->num_rows > 0) {

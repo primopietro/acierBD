@@ -10,6 +10,7 @@ class FastechEmploye extends FastechModel {
 	protected $departement = "";
 	protected $bool_ccq = 1;
 	protected $id_state = 1;
+	protected $order = 0;
 	function __construct() {
 		// Do nothing
 	}
@@ -152,6 +153,25 @@ class FastechEmploye extends FastechModel {
 	 */
 	public function setId_employe($id_employe) {
 		$this->id_employe = $id_employe;
+		return $this;
+	}
+	
+	
+	/**
+	 * order
+	 * @return unkown
+	 */
+	public function getOrder(){
+		return $this->order;
+	}
+	
+	/**
+	 * order
+	 * @param unkown $order
+	 * @return FastechEmploye
+	 */
+	public function setOrder($order){
+		$this->order = $order;
 		return $this;
 	}
 	
@@ -306,7 +326,9 @@ class FastechEmploye extends FastechModel {
  $anEmploye->setDepartement("Usine");
  $anEmploye->setHour_rate(15);
  $anEmploye->addDBObject();
- }
+ 
+
+}
  $employe = new FastechEmploye();
  $employe->getObjectFromDB(1);
  print_r($employe);
