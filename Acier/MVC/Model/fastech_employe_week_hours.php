@@ -184,6 +184,8 @@ class FastechEmployekWeekHours extends FastechModel {
 							}
 						}
 					}
+				} else{
+					//TO DO WHEN NULL
 				}
 				echo "</tr>";
 			}
