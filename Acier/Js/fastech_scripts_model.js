@@ -318,9 +318,7 @@ function getContentHtml(windowName){
 		content += "</tbody></table></div>";
 		content += "<a data-animation='ripple' class='btn btn-default col-lg-2 col-md-2 col-xs-2 cursor btnForm btnImpression' readonly='readonly' id='printBank'>Imprimer</a>";
 
-	
-		
-		
+			
 		content += "</div>";
 		
 	} else if(windowName == "ongletPrixrevient"){
